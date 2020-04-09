@@ -9,8 +9,21 @@ class item {
           effect TEXT
       )`;
   }
-}
-item.tableName = 'item';
+  static insertToItem (json){
+    const result = await PostGresStore.pool.query ({
+      text : 
+      `
+      INSERT INTO ${item.tableName}
+      (name,effect)
+      VALUES($1,$2)
 
+      `,
+      values: [json.name,json.effect]
+    });
+    return result;
+  }
+}
+
+item.tableName = 'item';
 module.exports = item
 ;
