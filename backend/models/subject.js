@@ -1,4 +1,4 @@
-// const PostgresStore = require('../utils/PostgresStore.js');
+const PostgresStore = require('../utils/PostgresStore.js');
 class subject {
   static toSqlTable () {
     return ` 
@@ -7,6 +7,14 @@ class subject {
           name TEXT
           
       )`;
+  }
+
+  static async create (subjects) {
+    await PostgresStore.pool.query({
+      text: `INSERT INTO ${subject.tableName}
+        (name) VALUES($1)`,
+      values: [subjects.name]
+    });
   }
 }
 subject.tableName = 'subject';

@@ -1,0 +1,83 @@
+[
+    {
+        "description": "2",
+        "idquestion": 1,
+        "value": true
+    },
+    {
+        "description": "4",
+        "idquestion": 1,
+        "value": false
+    },
+    {
+        "description": "1",
+        "idquestion": 1,
+        "value": false
+    },
+    {
+        "description": "14",
+        "idquestion": 1,
+        "value": false
+    },
+    {
+        "description": "20",
+        "idquestion": 2,
+        "value": true
+    },
+    {
+        "description": "200",
+        "idquestion": 2,
+        "value": false
+    },
+    {
+        "description": "15",
+        "idquestion": 2,
+        "value": false
+    },
+    {
+        "description": "2",
+        "idquestion": 2,
+        "value": false
+    },
+    {
+        "description": "Présent",
+        "idquestion": 3,
+        "value": true
+    },
+    {
+        "description": "Présen",
+        "idquestion": 3,
+        "value": false
+    },
+    {
+        "description": "Présan",
+        "idquestion": 3,
+        "value": false
+    },
+    {
+        "description": "Présant",
+        "idquestion": 3,
+        "value": false
+    },
+    {
+        "description": "Passé composé",
+        "idquestion": 4,
+        "value": true
+    },
+    {
+        "description": "Présent simple",
+        "idquestion": 4,
+        "value": false
+    },
+    {
+        "description": "Plus-que-parfait",
+        "idquestion": 4,
+        "value": false
+    },
+    {
+        "description": "Passé simple",
+        "idquestion": 4,
+        "value": false
+    },
+    
+]
