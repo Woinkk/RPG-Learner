@@ -30,6 +30,7 @@ class PostgresStore {
     await pgtools.createdb(confi, config.postgres.database);
     await this.init();
     await this.buildTables();
+    await this.insertTables();
     console.log('bien joué bg');
   }
 
@@ -48,5 +49,25 @@ class PostgresStore {
       }
     }
   }
+
+  async insertTables () {
+    const School = require('../models/school.js');
+    const sampleSchool = require('../insert_json/school.json');
+    for (let i = 0; i < sampleSchool.length; i++) {
+      await School.insert(sampleSchool[i]);
+    }
+    const Class = require('../models/class.js');
+    const sampleClass = require('../insert_json/class.json');
+    for (let i = 0; i < sampleClass.length; i++) {
+      await Class.insert(sampleClass[i]);
+    }
+    const Result = require('../models/result.js');
+    const sampleResult = require('../insert_json/result.json');
+    for (let i = 0; i < sampleResult.length; i++) {
+      await Result.insert(sampleResult[i]);
+    }
+    console.log('Insert was a success !');
+  }
 }
+
 module.exports = new PostgresStore();

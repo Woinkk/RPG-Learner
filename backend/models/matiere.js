@@ -1,4 +1,4 @@
-// const PostgresStore = require('../utils/PostgresStore.js');
+const PostgresStore = require('../utils/PostgresStore.js');
 class matiere {
   static toSqlTable () {
     return ` 
@@ -11,6 +11,18 @@ class matiere {
           FOREIGN KEY (idteacher) REFERENCES teacher (id)
   
       )`;
+  }
+
+  static async create (matieres) {
+    await PostgresStore.pool.query({
+      text: `INSERT INTO ${matiere.tableName}
+          (name,
+            idteacher,
+            idclasses) VALUES($1,$2,$3)`,
+      values: [matieres.name,
+        matieres.idteacher,
+        matieres.idclasses]
+    });
   }
 }
 matiere.tableName = 'matiere';
