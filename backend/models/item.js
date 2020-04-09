@@ -15,14 +15,15 @@ class item {
       `
       INSERT INTO ${item.tableName}
       (name,effect)
-      
+      VALUES($1,$2)
 
       `,
       values: [json.name,json.effect]
     });
-
+    return result;
+  }
 }
-item.tableName = 'item';
 
+item.tableName = 'item';
 module.exports = item
 ;
