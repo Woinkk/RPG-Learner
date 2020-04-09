@@ -3,7 +3,7 @@ module.exports = {
     user: 'postgres',
     host: 'localhost',
     database: 'RPG-learner',
-    password: 'allerpsg123'
+    password: 'malcolm94'
   }
 }
 ;
