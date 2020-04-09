@@ -1,0 +1,21 @@
+[
+    {
+    "firstname": "Thomas",
+    "lastname": "Bury",
+    "email": "bury@intechinfo.fr",
+    "password": "",
+    "pseudo" : "Gràpe",
+    "type" : "Skeleton",
+    "idclasses" : 1
+    },
+
+    {
+    "firstname": "Joseph",
+    "lastname": "Jeanne",
+    "email": "jeanne@intechinfo.fr",
+    "password": "",
+    "pseudo" : "Sherlock",
+    "type" : "Human",
+    "idclasses" : 2
+    }
+]

@@ -12,6 +12,19 @@ class inventory {
   
       )`;
   }
+  static insertToInventory (json){
+    const result = await PostGresStore.pool.query ({
+      text : 
+      `
+      INSERT INTO ${inventory.tableName}
+      (idstudent,iditem)
+      VALUES (json.idstudent,json.iditem)
+    
+      `,
+      values: [json.idstudent,json.iditem]
+    })
+    
+  }
 }
 inventory.tableName = 'inventory';
 

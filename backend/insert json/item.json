@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Heal Potion",
+        "effect": "treats an amount of 20hp"
+    },
+    {
+        "name": "Resurection Potion",
+        "effect": "Resurrecte your character"
+    }
+]
