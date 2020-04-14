@@ -15,7 +15,7 @@ class teacher {
       )`;
   }
 
-  static async insert (teachers) {
+  static async insert (json) {
     await PostgresStore.pool.query({
       text: `INSERT INTO ${teacher.tableName}
               (firstname,
@@ -24,12 +24,12 @@ class teacher {
                 password,
                 pseudo,
                 idschool) VALUES($1,$2,$3,$4,$5,$6)`,
-      values: [teachers.firstname,
-        teachers.lastname,
-        teachers.email,
-        teachers.password,
-        teachers.pseudo,
-        teachers.idschool
+      values: [json.firstname,
+        json.lastname,
+        json.email,
+        json.password,
+        json.pseudo,
+        json.idschool
 
       ]
     });
