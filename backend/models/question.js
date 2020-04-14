@@ -13,11 +13,11 @@ class question {
       )`;
   }
 
-  static async insert (questions) {
+  static async insert (json) {
     await PostgresStore.pool.query({
       text: `INSERT INTO ${question.tableName}
       (description, idmatiere, idsubject) VALUES($1, $2, $3)`,
-      values: [questions.description, questions.idmatiere, questions.idsubject]
+      values: [json.description, json.idmatiere, json.idsubject]
     });
   }
 }

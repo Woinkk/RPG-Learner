@@ -9,11 +9,11 @@ class subject {
       )`;
   }
 
-  static async insert (subjects) {
+  static async insert (json) {
     await PostgresStore.pool.query({
       text: `INSERT INTO ${subject.tableName}
         (name) VALUES($1)`,
-      values: [subjects.name]
+      values: [json.name]
     });
   }
 }
