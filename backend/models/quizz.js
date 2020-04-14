@@ -11,7 +11,7 @@ class quizz {
       )`;
   }
 
-  static async create (quizzs) {
+  static async insert (quizzs) {
     await PostgresStore.pool.query({
       text: `INSERT INTO ${quizz.tableName}
       (name, idquestion) VALUES($1, $2)`,

@@ -51,6 +51,11 @@ class PostgresStore {
   }
 
   async insertTables () {
+    const Item = require('../models/item.js');
+    const sampleItem = require('../insert_json/item.json');
+    for (let i = 0; i < sampleItem.length; i++) {
+      await Item.insert(sampleItem[i]);
+    }
     const School = require('../models/school.js');
     const sampleSchool = require('../insert_json/school.json');
     for (let i = 0; i < sampleSchool.length; i++) {
@@ -60,6 +65,46 @@ class PostgresStore {
     const sampleClass = require('../insert_json/class.json');
     for (let i = 0; i < sampleClass.length; i++) {
       await Class.insert(sampleClass[i]);
+    }
+    const Student = require('../models/student.js');
+    const sampleStudent = require('../insert_json/student.json');
+    for (let i = 0; i < sampleStudent.length; i++) {
+      await Student.insert(sampleStudent[i]);
+    }
+    const Subject = require('../models/subject.js');
+    const sampleSubject = require('../insert_json/subject.json');
+    for (let i = 0; i < sampleSubject.length; i++) {
+      await Subject.insert(sampleSubject[i]);
+    }
+    const Teacher = require('../models/teacher.js');
+    const sampleTeacher = require('../insert_json/teacher.json');
+    for (let i = 0; i < sampleTeacher.length; i++) {
+      await Teacher.insert(sampleTeacher[i]);
+    }
+    const Matiere = require('../models/matiere.js');
+    const sampleMatiere = require('../insert_json/matiere.json');
+    for (let i = 0; i < sampleMatiere.length; i++) {
+      await Matiere.insert(sampleMatiere[i]);
+    }
+    const Question = require('../models/question.js');
+    const sampleQuestion = require('../insert_json/question.json');
+    for (let i = 0; i < sampleQuestion.length; i++) {
+      await Question.insert(sampleQuestion[i]);
+    }
+    const Answer = require('../models/answer.js');
+    const sampleAnswer = require('../insert_json/answer.json');
+    for (let i = 0; i < sampleAnswer.length; i++) {
+      await Answer.insert(sampleAnswer[i]);
+    }
+    const Inventory = require('../models/inventory.js');
+    const sampleInventory = require('../insert_json/iventory.json');
+    for (let i = 0; i < sampleInventory.length; i++) {
+      await Inventory.insert(sampleInventory[i]);
+    }
+    const Quizz = require('../models/quizz.js');
+    const sampleQuizz = require('../insert_json/quizz.json');
+    for (let i = 0; i < sampleQuizz.length; i++) {
+      await Quizz.insert(sampleQuizz[i]);
     }
     const Result = require('../models/result.js');
     const sampleResult = require('../insert_json/result.json');

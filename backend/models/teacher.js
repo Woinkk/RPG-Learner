@@ -15,7 +15,7 @@ class teacher {
       )`;
   }
 
-  static async create (teachers) {
+  static async insert (teachers) {
     await PostgresStore.pool.query({
       text: `INSERT INTO ${teacher.tableName}
               (firstname,

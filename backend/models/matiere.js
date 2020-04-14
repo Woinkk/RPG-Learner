@@ -13,7 +13,7 @@ class matiere {
       )`;
   }
 
-  static async create (matieres) {
+  static async insert (matieres) {
     await PostgresStore.pool.query({
       text: `INSERT INTO ${matiere.tableName}
           (name,

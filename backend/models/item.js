@@ -1,4 +1,4 @@
-// const PostgresStore = require('../utils/PostgresStore.js');
+const PostgresStore = require('../utils/PostgresStore.js');
 
 class item {
   static toSqlTable () {
@@ -9,16 +9,17 @@ class item {
           effect TEXT
       )`;
   }
-  static insertToItem (json){
-    const result = await PostGresStore.pool.query ({
-      text : 
+
+  static async insert (json) {
+    const result = await PostgresStore.pool.query({
+      text:
       `
       INSERT INTO ${item.tableName}
       (name,effect)
       VALUES($1,$2)
 
       `,
-      values: [json.name,json.effect]
+      values: [json.name, json.effect]
     });
     return result;
   }

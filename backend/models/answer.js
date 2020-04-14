@@ -13,7 +13,7 @@ class answer {
     )`;
   }
 
-  static async create (answer) {
+  static async insert (answer) {
     await PostgresStore.pool.query({
       text: `INSERT INTO ${answer.tableName}
       (description, value, idquestion) VALUES($1, $2, $3)`,
