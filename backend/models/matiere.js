@@ -6,8 +6,6 @@ class matiere {
           id SERIAL PRIMARY KEY,
           name TEXT,
           idteacher INT,
-          idclasses INT,
-          FOREIGN KEY (idclasses) REFERENCES classes (id),
           FOREIGN KEY (idteacher) REFERENCES teacher (id)
   
       )`;
@@ -16,12 +14,9 @@ class matiere {
   static async insert (json) {
     await PostgresStore.pool.query({
       text: `INSERT INTO ${matiere.tableName}
-          (name,
-            idteacher,
-            idclasses) VALUES($1,$2,$3)`,
+          (name,idteacher) VALUES($1,$2)`,
       values: [json.name,
-        json.idteacher,
-        json.idclasses]
+        json.idteacher]
     });
   }
 }

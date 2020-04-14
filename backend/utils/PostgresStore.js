@@ -122,6 +122,11 @@ class PostgresStore {
     for (let i = 0; i < sampleResult.length; i++) {
       await Result.insert(sampleResult[i]);
     }
+    const Teacher_class = require('../models/teacher_class');
+    const sampleTeacherClass = require ('../insert_json/teacher_class.json');
+    for (let i = 0 ; i < sampleTeacherClass.length; i++){
+      await Teacher_class.insert(sampleTeacher[i]); 
+    }
     console.log('Result');
     console.log('Insert was a success !');
   }

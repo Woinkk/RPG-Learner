@@ -1,11 +1,10 @@
 [
     {
-        "name":"math",
+        "idclasses":1,
         "idteacher":1
     },
     {
-        "name":"francais",
+        "idclasses":2,
         "idteacher":2
-        
     }
 ]
