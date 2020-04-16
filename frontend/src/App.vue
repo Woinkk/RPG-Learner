@@ -9,7 +9,7 @@
     </v-app-bar>
 
     <v-content>
-      <Login/>
+      <Login v-on:login=Login /> 
     </v-content>
   </v-app>
 </template>
@@ -17,11 +17,17 @@
 <script>
 import Navbar from './components/Navbar';
 import Login from './components/Login';
-
+import {login} from '../services/api.js';
 
 export default {
+  methods: {
+    Login:function(logProp){
+      console.log("Login")
+      login(logProp);
+    }
+  },
+  
   name: 'App',
-
   components: {
     Navbar,
     Login,

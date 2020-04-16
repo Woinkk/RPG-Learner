@@ -34,6 +34,15 @@ class teacher {
       ]
     });
   }
+
+  static async selectTeacherWithEmail(mail){
+    await PostgresStore.pool.query({
+    text: ` SELECT FROM ${teacher.tableName}
+            WHERE email like $1 
+    `,
+    value: [mail]
+    })
+  }
 }
 teacher.tableName = 'teacher';
 
