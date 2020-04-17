@@ -16,7 +16,7 @@
                     :rules="emailRules"
                     label="Email"
                     name="email"
-                    prepend-icon="mdi-person"
+                    prepend-icon="mdi-email"
                     type="text"
                     required
                   />
@@ -36,6 +36,7 @@
               
               <v-card-actions>
                 <v-spacer />
+                <router-link to="/login">Login</router-link>
                 <v-btn @click=login(logProp) color="primary">Login</v-btn>
               </v-card-actions>
             
@@ -64,7 +65,6 @@
 
     methods : {
         login :function (logProp){
-            console.log(logProp.email),
             this.$emit('login',logProp);
             },    
         

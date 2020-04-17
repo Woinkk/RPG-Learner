@@ -1,16 +1,17 @@
+
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-  <Navbar/> 
+    
+    <v-app-bar app color="primary" dark>
+      <Navbar/> 
     </v-app-bar>
 
     <v-content>
       <Login v-on:login=Login /> 
     </v-content>
+    <router-link to="/login">Login</router-link>
+    <router-view></router-view>
+    
   </v-app>
 </template>
 
@@ -22,7 +23,6 @@ import {login} from '../services/api.js';
 export default {
   methods: {
     Login:function(logProp){
-      console.log("Login")
       login(logProp);
     }
   },
