@@ -16,7 +16,7 @@
                     :rules="emailRules"
                     label="Email"
                     name="email"
-                    prepend-icon="mdi-person"
+                    prepend-icon="mdi-email"
                     type="text"
                     required
                   />
