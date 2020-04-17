@@ -1,5 +1,6 @@
 const PostgresStore = require('../utils/PostgresStore.js');
 const bcrypt = require('bcrypt');
+
 class teacher {
   static toSqlTable() {
     return ` 
@@ -17,7 +18,8 @@ class teacher {
   }
 
   static async insert(json) {
-    const hashedPassword = await bcrypt.hash(json.password, 10);
+
+    const hashedPassword = await bcrypt.hash(json.password,10)
     await PostgresStore.pool.query({
       text: `INSERT INTO ${teacher.tableName}
               (firstname,
@@ -43,7 +45,7 @@ class teacher {
             WHERE email like $1 
     `,
       values: [mail]
-    })
+    });
     console.log(result);
     const currentPassword = result.rows[0].password;
 
@@ -56,8 +58,9 @@ class teacher {
     } else {
       return null;
     }
+    }    
   }
-}
+
 teacher.tableName = 'teacher';
 
 module.exports = teacher
