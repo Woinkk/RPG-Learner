@@ -73,7 +73,7 @@
         valid=true
       }
       
-    }
+    },
 
     methods : {
         login :function (logProp){
