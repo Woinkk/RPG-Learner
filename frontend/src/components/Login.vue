@@ -36,8 +36,11 @@
               
               <v-card-actions>
                 <v-spacer />
-                <router-link to='/home'>
-                <v-btn @click=login(logProp) color="primary">Login</v-btn>
+                <router-link  to='/home' v-if="valid" >
+                <v-btn @click=login(logProp) color="primary" >Login</v-btn>
+                </router-link>
+                <router-link  to='/home' v-else >
+                <v-btn @click=login(logProp) color="primary" disabled="true">Login</v-btn>
                 </router-link>
               </v-card-actions>
             
@@ -51,10 +54,11 @@
 </template>
 
 <script>
+
   export default {
     name: "Login",
     data :() =>({
-        valid:true,
+        valid:false,
         emailRules:[
             v=> !!v || 'Email is required',
             v=> /.+@.+\..+/.test(v) ||'E-mail must be valid' ,
@@ -63,6 +67,13 @@
         logProp:{email:null,password:null},  
         
     }),
+
+    updated(){
+      if(this.email != null && this.password != null){
+        valid=true
+      }
+      
+    }
 
     methods : {
         login :function (logProp){
