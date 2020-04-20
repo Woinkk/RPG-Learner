@@ -36,7 +36,9 @@
               
               <v-card-actions>
                 <v-spacer />
+                <router-link to='/home'>
                 <v-btn @click=login(logProp) color="primary">Login</v-btn>
+                </router-link>
               </v-card-actions>
             
             </v-card>
