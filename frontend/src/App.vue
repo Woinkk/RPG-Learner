@@ -19,8 +19,15 @@ import {login} from '../services/api.js';
 
 export default {
   methods: {
-    Login:function(logProp){
-      login(logProp);
+    Login:async function(logProp){
+      const req = await login(logProp);
+      console.log(req);
+      if (req != 200) {
+        console.log("fail");
+        this.$router.push("login");
+      } else {
+        this.$router.push("home");
+      }
     }
   },
 

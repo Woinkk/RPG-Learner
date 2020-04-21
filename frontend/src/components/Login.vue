@@ -1,3 +1,9 @@
+<style>
+  .disabled {
+  pointer-events: none;
+  cursor: default;
+  }
+</style>
 <template>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
@@ -36,12 +42,7 @@
               
               <v-card-actions>
                 <v-spacer />
-                <router-link  to='/home' v-if="valid" >
-                <v-btn @click=login(logProp) color="primary" >Login</v-btn>
-                </router-link>
-                <router-link  to='/home' v-else >
-                <v-btn @click=login(logProp) color="primary" disabled="true">Login</v-btn>
-                </router-link>
+                <v-btn @click=login(logProp) color="primary">Login</v-btn>
               </v-card-actions>
             
             </v-card>
@@ -49,7 +50,6 @@
           </v-col>
         </v-row>
       </v-container>
-  
 
 </template>
 
@@ -67,13 +67,6 @@
         logProp:{email:null,password:null},  
         
     }),
-
-    updated(){
-      if(this.email != null && this.password != null){
-        valid=true
-      }
-      
-    },
 
     methods : {
         login :function (logProp){

@@ -12,13 +12,12 @@ async function postLogin (req, res) {
     return;
   }
   console.log(req.body);
-  console.log("EMAIL "+req.body.email)
+  console.log('EMAIL ' + req.body.email);
   const email = req.body.email;
-  const password = req.body.password
+  const password = req.body.password;
 
   // on vérifie l'email et le mot de passe de l'utilisateur
-  const teacher = await Teacher.verifyTeacher(email,password);
-
+  const teacher = await Teacher.verifyTeacher(email, password);
   // si on a trouvé un utilisateur correspondant, alors on sauvegarde son ID
   // dans l'objet req.session
   if (teacher) {
