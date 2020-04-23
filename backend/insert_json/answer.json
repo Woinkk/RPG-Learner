@@ -2,81 +2,97 @@
     {
         "description": "2",
         "idquestion": 1,
-        "value": true
+        "value": true,
+        "from":"Duel"
     },
     {
         "description": "4",
         "idquestion": 1,
-        "value": false
+        "value": false,
+        "from":"Duel"
     },
     {
         "description": "1",
         "idquestion": 1,
-        "value": false
+        "value": false,
+        "from":"Duel"
     },
     {
         "description": "14",
         "idquestion": 1,
-        "value": false
+        "value": false,
+        "from":"Duel"
     },
     {
         "description": "20",
         "idquestion": 2,
-        "value": true
+        "value": true,
+        "from":"ClassVClass"
     },
     {
         "description": "200",
         "idquestion": 2,
-        "value": false
+        "value": false,
+        "from":"ClassVClass"
     },
     {
         "description": "15",
         "idquestion": 2,
-        "value": false
+        "value": false,
+        "from":"ClassVClass"
     },
     {
         "description": "2",
         "idquestion": 2,
-        "value": false
+        "value": false,
+        "from":"ClassVClass"
     },
     {
         "description": "Présent",
         "idquestion": 3,
-        "value": true
+        "value": true,
+        "from":"ClassVClass"
     },
     {
         "description": "Présen",
         "idquestion": 3,
-        "value": false
+        "value": false,
+        "from":"ClassVClass"
     },
     {
         "description": "Présan",
         "idquestion": 3,
-        "value": false
+        "value": false,
+        "from":"ClassVClass"
     },
     {
         "description": "Présant",
         "idquestion": 3,
-        "value": false
+        "value": false,
+        "from":"ClassVClass"
     },
     {
         "description": "Passé composé",
         "idquestion": 4,
-        "value": true
+        "value": true,
+        "from":"Duel"
     },
     {
         "description": "Présent simple",
         "idquestion": 4,
-        "value": false
+        "value": false,
+        "from":"Duel"
     },
     {
         "description": "Plus-que-parfait",
         "idquestion": 4,
-        "value": false
+        "value": false,
+        "from":"Duel"
     },
     {
         "description": "Passé simple",
         "idquestion": 4,
-        "value": false
+        "value": false,
+        "from":"Duel"
     }
 ]
