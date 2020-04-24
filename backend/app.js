@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-PostgresStore.reset();
+PostgresStore.init();
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
