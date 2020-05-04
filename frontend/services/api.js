@@ -17,7 +17,22 @@ function login (logProp) {
     });
 }
 
+function myClasses (content) {
+  var myInit = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(content)
+  };
+  return fetch(`${SERVER_URL}/home`, myInit)
+    .then(function (response) {
+      return response;
+    });
+}
+
 export {
-  login
+  login,
+  myClasses
 }
 ;

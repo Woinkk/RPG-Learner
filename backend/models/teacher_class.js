@@ -16,7 +16,15 @@ class teacher_class {
     await PostgresStore.pool.query({
       text: `INSERT INTO ${teacher_class.tableName}
         (idteacher,idclasses) VALUES($1,$2)`,
-      values: [json.idteacher,json.idclasses]
+      values: [json.idteacher, json.idclasses]
+    });
+  }
+
+  static async getClassByTeacher (TSession) {
+    await PostgresStore.pool.query({
+      text: `SELECT idclasses FROM ${teacher_class.tableName}
+      WHERE $1 === idteacher`,
+      values: [TSession.userId]
     });
   }
 }

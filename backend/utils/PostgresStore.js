@@ -123,20 +123,20 @@ class PostgresStore {
       await Result.insert(sampleResult[i]);
     }
     console.log('Result');
-    
-    const Teacher_class = require('../models/teacher_class.js');
-    const sampleTeacherClass = require ('../insert_json/teacher_class.json');
-    for (let i = 0 ; i < sampleTeacherClass.length; i++){
-      await Teacher_class.insert(sampleTeacherClass[i]); 
+
+    const teacherClass = require('../models/teacher_class.js');
+    const sampleTeacherClass = require('../insert_json/teacher_class.json');
+    for (let i = 0; i < sampleTeacherClass.length; i++) {
+      await teacherClass.insert(sampleTeacherClass[i]);
     }
     console.log('Teacher_class');
     const classVClass = require('../models/classVclass.js');
-    const sampleClassVclass = require ('../insert_json/classVclass.json');
-    for (let i = 0 ; i < sampleClassVclass.length; i++){
-      await classVClass.insert(sampleClassVclass[i]); 
+    const sampleClassVclass = require('../insert_json/classVclass.json');
+    for (let i = 0; i < sampleClassVclass.length; i++) {
+      await classVClass.insert(sampleClassVclass[i]);
     }
-    console.log('classVclass')
-    
+    console.log('classVclass');
+
     console.log('Insert was a success !');
   }
 }

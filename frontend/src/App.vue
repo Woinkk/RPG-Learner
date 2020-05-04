@@ -16,6 +16,7 @@
 <script>
 import Navbar from './components/Navbar';
 import {login} from '../services/api.js';
+import {myClasses} from '../services/api.js';
 
 export default {
   methods: {
@@ -28,6 +29,13 @@ export default {
       } else {
         this.$router.push("home");
       }
+    }
+  },
+
+  MyClasses:async function() {
+    const req = await myClasses();
+    if(req != null) {
+      return req;
     }
   },
 

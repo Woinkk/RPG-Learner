@@ -56,6 +56,7 @@
 <script>
 import CreateQuizz from "./CreateQuizz.vue";
 import ModifyQuizz from "./ModifyQuizz.vue";
+import {} from "../../services/api.js";
 export default {
   name: "Home",
   components: {
@@ -64,11 +65,7 @@ export default {
   },
   data: () => ({
     CreationMode: true,
-    myClasses: [
-        {
-            name: "classe 4A"
-        }
-    ],
+    myClasses: null,
     allClasses: [
         {
             name: "classe 5C"
@@ -96,6 +93,9 @@ export default {
     },
     switchToCreation: function () {
       this.CreationMode = true;
+    },
+    myClasses: function(myclass) {
+      this.myClasses = myclass;
     }
   }
 };
