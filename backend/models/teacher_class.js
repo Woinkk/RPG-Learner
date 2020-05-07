@@ -21,11 +21,12 @@ class teacher_class {
   }
 
   static async getClassByTeacher (TSession) {
-    await PostgresStore.pool.query({
+    const result = await PostgresStore.pool.query({
       text: `SELECT idclasses FROM ${teacher_class.tableName}
-      WHERE $1 === idteacher`,
+      WHERE $1 = idteacher`,
       values: [TSession.userId]
     });
+    return result;
   }
 }
 teacher_class.tableName = 'teacher_class';

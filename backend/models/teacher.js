@@ -45,7 +45,6 @@ class teacher {
     `,
       values: [mail]
     });
-    console.log(result);
     if (result.rows.length === 0) {
       return null;
     }

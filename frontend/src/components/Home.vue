@@ -18,7 +18,7 @@
 
               <v-list>
                 <v-list-item
-                  v-for="(item, index) in myClasses"
+                  v-for="(item, index) in myClasse"
                   :key="index"
                   @click="selectMyClasses(item.name)"
                 >
@@ -56,7 +56,8 @@
 <script>
 import CreateQuizz from "./CreateQuizz.vue";
 import ModifyQuizz from "./ModifyQuizz.vue";
-import {} from "../../services/api.js";
+import {myClasses} from "../../services/api.js";
+import {otherClasses} from "../../services/api.js";
 export default {
   name: "Home",
   components: {
@@ -65,18 +66,8 @@ export default {
   },
   data: () => ({
     CreationMode: true,
-    myClasses: null,
-    allClasses: [
-        {
-            name: "classe 5C"
-        },
-        {
-            name: "classe 2B"
-        }, 
-        {
-            name: "classe 3A"
-        }
-    ],
+    myClasse: null,
+    allClasses: null,
     selectedMyClasses: null,
     selectedAllClasses: null,
 
@@ -94,9 +85,25 @@ export default {
     switchToCreation: function () {
       this.CreationMode = true;
     },
-    myClasses: function(myclass) {
-      this.myClasses = myclass;
+
+    MyClasses:async function() {
+    const req = await myClasses();
+    if(req !== null) {
+      this.myClasse = req;
     }
-  }
+    return;
+    },
+    OtherClasses:async function() {
+      const req = await otherClasses();
+      if(req !== null) {
+        this.allClasses = req;
+      }
+      return;
+    }
+  },
+  created() {
+      this.MyClasses();
+      this.OtherClasses();
+    }
 };
 </script>

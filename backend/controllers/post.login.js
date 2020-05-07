@@ -12,8 +12,6 @@ async function postLogin (req, res) {
       .send('Already authenticated');
     return;
   }
-  console.log(req.body);
-  console.log('EMAIL ' + req.body.email);
   const email = req.body.email;
   const password = req.body.password;
 
@@ -29,7 +27,6 @@ async function postLogin (req, res) {
   }
 
   if (student) {
-    console.log('student');
     req.session.userId = student.id;
     res.json(student);
     return;

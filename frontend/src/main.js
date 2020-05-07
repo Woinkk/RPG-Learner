@@ -4,6 +4,12 @@ import App from './App.vue';
 import vuetify from './plugins/vuetify';
 import Login from './components/Login';
 import Home from './components/Home';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+
+Vue.use(VueAxios, axios);
+
+axios.defaults.withCredentials = true;
 
 Vue.use(VueRouter);
 Vue.config.productionTip = false;

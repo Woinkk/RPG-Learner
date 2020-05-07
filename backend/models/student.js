@@ -1,9 +1,8 @@
 const PostgresStore = require('../utils/PostgresStore.js');
 const bcrypt = require('bcrypt');
 
-
 class student {
-  static toSqlTable() {
+  static toSqlTable () {
     return ` 
           CREATE TABLE ${student.tableName}(
           id SERIAL PRIMARY KEY,
@@ -19,8 +18,8 @@ class student {
       )`;
   }
 
-  static async insert(json) {
-    const hashedPassword = await bcrypt.hash(json.password,10);
+  static async insert (json) {
+    const hashedPassword = await bcrypt.hash(json.password, 10);
     const result = await PostgresStore.pool.query({
       text:
         `
@@ -33,14 +32,14 @@ class student {
     });
     return result;
   }
-  static async verifyStudent(mail, password) {
+
+  static async verifyStudent (mail, password) {
     const result = await PostgresStore.pool.query({
       text: ` SELECT * FROM ${student.tableName}
             WHERE email like $1 
     `,
       values: [mail]
     });
-    console.log(result);
     if (result.rows.length === 0) {
       return null;
     }
