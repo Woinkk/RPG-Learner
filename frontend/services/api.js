@@ -1,6 +1,6 @@
 const SERVER_URL = 'http://localhost:3000';
 
-function login (logProp) {
+function login(logProp) {
   var myInit = {
     method: 'POST',
     headers: {
@@ -17,7 +17,24 @@ function login (logProp) {
     });
 }
 
-export {
-  login
+function insertAccountNewStudent(newStudent) {
+  var myInit = {
+    method:'POST',
+    header:{
+      'Content-type': 'application/json'
+    },
+    body:JSON.stringify(newStudent)
+  };
+  return fetch(`${SERVER_URL}/createNewStudent`,myInit)
+    .then(function(response){
+      return response.status
+    })
 }
-;
+
+
+export {
+  login,
+  insertAccountNewStudent
+};
+
+

@@ -3,14 +3,16 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
 import Login from './components/Login';
-import Home from './components/Home'
+import Home from './components/Home';
+import insertAccountNewStudent from './components/insertAccountNewStudent';
 
 Vue.use(VueRouter) ;
 Vue.config.productionTip = false
 
 const routes =[
   {path:'/login', component:Login},
-  {path:'/home', component:Home}
+  {path:'/home', component:Home},
+  {path:'/insertAccountNewStudent', component: insertAccountNewStudent}
 ]
 
 const router =new VueRouter({

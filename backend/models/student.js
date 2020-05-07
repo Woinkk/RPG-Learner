@@ -33,6 +33,20 @@ class student {
     });
     return result;
   }
+
+  static async insertAccountNewStudent (newStudent){
+    const hashedPassword = await bcrypt.hash(newStudent.password,10)
+    const result = await PostgresStore.pool.query({
+      text: `INSERT INTO ${student.tableName}
+      (firstname,lastname,email,password,idclasses)
+      VALUES($1,$2,$3,$4,$50)
+      `,
+      values:[newStudent.firstname,newStudent.lastname,newStudent.email,hashedPassword,newStudent.idclasses]
+    })
+    return result;
+  }
+
+
   static async verifyStudent(mail, password) {
     const result = await PostgresStore.pool.query({
       text: ` SELECT * FROM ${student.tableName}

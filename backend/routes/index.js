@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-const postLogin =require ('../controllers/post.login.js');
+const postLogin = require ('../controllers/post.login.js');
+const postInsertNewStudent = require ('../controllers/post.insertNewStudent.js');
 
 
 
@@ -14,7 +15,7 @@ async function isAuthenticated (req,res,next){
 }
 
 router.post('/login',postLogin);
-
+router.post('/createNewStudent',postInsertNewStudent);
 
 
 
