@@ -4,6 +4,7 @@ var router = express.Router();
 const postLogin = require('../controllers/post.login.js');
 const postMyClasses = require('../controllers/post.myClasses.js');
 const postOtherClasses = require('../controllers/post.otherClasses.js');
+const postClassVClass = require('../controllers/post.classVClass.js');
 
 async function isAuthenticated (req, res, next) {
   if (req.session.userId) {
@@ -16,6 +17,7 @@ async function isAuthenticated (req, res, next) {
 router.post('/login', postLogin);
 router.post('/myClasses', postMyClasses);
 router.post('/otherClasses', postOtherClasses);
+router.post('/ClassVClass', postClassVClass);
 
 /* GET home page. */
 router.get('/', function (req, res, next) {

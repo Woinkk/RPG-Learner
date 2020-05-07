@@ -12,8 +12,8 @@
           <v-card-actions>
             <v-menu open-on-hover top offset-y transition="fab-transition">
               <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on" v-if="selectedMyClasses === null">Ma classe</v-btn>
-                <v-btn color="primary" dark v-on="on" v-else>{{selectedMyClasses}}</v-btn>
+                <v-btn color="primary" dark v-on="on" v-if="ClassVClass.selectedMyClasses === null">Ma classe</v-btn>
+                <v-btn color="primary" dark v-on="on" v-else>{{ClassVClass.selectedMyClasses}}</v-btn>
               </template>
 
               <v-list>
@@ -29,8 +29,8 @@
             <span style="display:inline-block; width: 60px;"></span>
             <v-menu open-on-hover top offset-y transition="fab-transition">
               <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on" v-if="selectedAllClasses === null">Autre classe</v-btn>
-                <v-btn color="primary" dark v-on="on" v-else>{{selectedAllClasses}}</v-btn>
+                <v-btn color="primary" dark v-on="on" v-if="ClassVClass.selectedAllClasses === null">Autre classe</v-btn>
+                <v-btn color="primary" dark v-on="on" v-else>{{ClassVClass.selectedAllClasses}}</v-btn>
               </template>
 
               <v-list>
@@ -44,7 +44,7 @@
               </v-list>
             </v-menu>
             <v-spacer></v-spacer>
-            <v-btn>Créer</v-btn>
+            <v-btn @click=createClassVClass(ClassVClass)>Créer</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -58,6 +58,7 @@ import CreateQuizz from "./CreateQuizz.vue";
 import ModifyQuizz from "./ModifyQuizz.vue";
 import {myClasses} from "../../services/api.js";
 import {otherClasses} from "../../services/api.js";
+import {createClassVClass} from "../../services/api.js";
 export default {
   name: "Home",
   components: {
@@ -68,16 +69,14 @@ export default {
     CreationMode: true,
     myClasse: null,
     allClasses: null,
-    selectedMyClasses: null,
-    selectedAllClasses: null,
-
+    ClassVClass:{selectedMyClasses: null, selectedAllClasses: null}
   }),
   methods: {
     selectMyClasses: function(myClass) {
-      this.selectedMyClasses = myClass;
+      this.ClassVClass.selectedMyClasses = myClass;
     },
     selectAllClasses: function(Class) {
-      this.selectedAllClasses = Class;
+      this.ClassVClass.selectedAllClasses = Class;
     },
     switchToModification: function () {
       this.CreationMode = false;
@@ -85,7 +84,14 @@ export default {
     switchToCreation: function () {
       this.CreationMode = true;
     },
-
+    createClassVClass: async function (ClassVClass) {
+      const req = await createClassVClass(ClassVClass);
+      if(req != 200) {
+        this.$router.push("home");
+      } else {
+        this.$router.push("login");
+      }
+    },
     MyClasses:async function() {
     const req = await myClasses();
     if(req !== null) {

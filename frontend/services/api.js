@@ -17,9 +17,15 @@ function otherClasses (content) {
     .then(response => response.data);
 }
 
+function createClassVClass (ClassVClass) {
+  return axios.post(`${SERVER_URL}/ClassVClass`, ClassVClass)
+    .then(response => response.status);
+}
+
 export {
   login,
   myClasses,
-  otherClasses
+  otherClasses,
+  createClassVClass
 }
 ;
