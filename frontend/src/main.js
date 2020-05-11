@@ -19,7 +19,7 @@ Vue.config.productionTip = false;
 const routes = [
   { path: '/login', component: Login },
   {path:'/home', component:Home},
-  {path:'/insertAccountNewStudent', component: insertAccountNewStudent}
+  {path:'/insertAccountNewStudent', component: insertAccountNewStudent},
   { path: '/home', component: Home },
   { path: '/ClassVClass', component: ClassVClass }
 ];

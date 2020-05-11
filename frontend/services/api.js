@@ -41,7 +41,7 @@ export {
   login,
   insertAccountNewStudent,
   myClasses,
-  otherclasses,
+  otherClasses,
   createClassVClass
 };
 
