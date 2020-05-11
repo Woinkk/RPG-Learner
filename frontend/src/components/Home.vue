@@ -15,7 +15,6 @@
                 <v-btn color="primary" dark v-on="on" v-if="ClassVClass.selectedMyClasses === null">Ma classe</v-btn>
                 <v-btn color="primary" dark v-on="on" v-else>{{ClassVClass.selectedMyClasses}}</v-btn>
               </template>
-
               <v-list>
                 <v-list-item
                   v-for="(item, index) in myClasse"
@@ -26,16 +25,18 @@
                 </v-list-item>
               </v-list>
             </v-menu>
+            <pre align="center">       VS</pre>
             <span style="display:inline-block; width: 60px;"></span>
             <v-menu open-on-hover top offset-y transition="fab-transition">
               <template v-slot:activator="{ on }">
                 <v-btn color="primary" dark v-on="on" v-if="ClassVClass.selectedAllClasses === null">Autre classe</v-btn>
+
                 <v-btn color="primary" dark v-on="on" v-else>{{ClassVClass.selectedAllClasses}}</v-btn>
               </template>
 
               <v-list>
                 <v-list-item
-                  v-for="(item, index) in allClasses"
+                  v-for="(item, index) in computeAll"
                   :key="index"
                   @click="selectAllClasses(item.name)"
                 >
@@ -69,8 +70,14 @@ export default {
     CreationMode: true,
     myClasse: null,
     allClasses: null,
-    ClassVClass:{selectedMyClasses: null, selectedAllClasses: null}
+    ClassVClass:{selectedMyClasses: null, selectedAllClasses: null},
+    color: "primary"
   }),
+  computed: {
+    computeAll: function() {
+      return this.allClasses.filter(i => i.name !== this.ClassVClass.selectedMyClasses)
+    }
+  },
   methods: {
     selectMyClasses: function(myClass) {
       this.ClassVClass.selectedMyClasses = myClass;
@@ -87,9 +94,9 @@ export default {
     createClassVClass: async function (ClassVClass) {
       const req = await createClassVClass(ClassVClass);
       if(req != 200) {
-        this.$router.push("home");
+        this.$router.push("Home");
       } else {
-        this.$router.push("login");
+        this.$router.push("ClassVClass");
       }
     },
     MyClasses:async function() {
