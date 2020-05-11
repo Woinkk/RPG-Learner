@@ -1,9 +1,4 @@
-<style>
-  .disabled {
-  pointer-events: none;
-  cursor: default;
-  }
-</style>
+
 <template>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
@@ -30,12 +25,12 @@
 
                   <v-text-field
                     v-model="logProp.password"
+                    :rules="passwordRules"
                     id="password"
                     label="Password"
                     name="password"
                     prepend-icon="mdi-lock"
                     type="password"
-                    required
                   />
                 </v-form>
               </v-card-text>
@@ -63,7 +58,7 @@
             v=> !!v || 'Email is required',
             v=> /.+@.+\..+/.test(v) ||'E-mail must be valid' ,
         ],
-        
+        passwordRules:[v=> !!v || 'Password Required'],
         logProp:{email:null,password:null},  
         
     }),
@@ -77,3 +72,10 @@
     }
   }
 </script>
+
+<style>
+  .disabled {
+  pointer-events: none;
+  cursor: default;
+  }
+</style>

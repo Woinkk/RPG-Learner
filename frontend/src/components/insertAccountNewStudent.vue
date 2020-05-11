@@ -10,21 +10,19 @@
 
           <v-card-text>
             <v-form>
-              <v-text-field v-model="firstname" label="FirstName" required></v-text-field>
-              <v-text-field v-model="lastname" label="LastName" required></v-text-field>
-              <v-text-field v-model="email" label="E-mail" required></v-text-field>
-
+              <v-text-field v-model="firstname" :rules="fieldsRules" label="FirstName" type="text" required></v-text-field>
+              <v-text-field v-model="lastname" :rules="fieldsRules" label="LastName" required></v-text-field>
+              <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
               <v-checkbox
                 v-model="checkbox"
                 :error-messages="checkboxErrors"
                 label="Confirm ?"
-                required
               ></v-checkbox>
-              <v-card-actions>
-                <v-btn class="mr-4" @click="insertAccountNewStudent(creStudProp)">submit</v-btn>
-                <v-btn @click="clear">clear</v-btn>
-              </v-card-actions>
             </v-form>
+            <v-card-actions>
+              <v-btn class="mr-4" @click="insertAccountNewStudent(creStudProp)">submit</v-btn>
+              <v-btn @click="clear">clear</v-btn>
+            </v-card-actions>
           </v-card-text>
         </v-card>
       </v-col>
@@ -35,23 +33,22 @@
 
 <script>
 export default {
-  name:"insertAccountNewStudent",
-  data: function(){
+  name: "insertAccountNewStudent",
+  data: function() {
     return {
-  
-    creStudProp:{
-      firstname:null,
-      lastname: null,
-      email: null,
-      password: null
-    },
-    emailRules:[
-            v=> !!v || 'Email is required',
-            v=> /.+@.+\..+/.test(v) ||'E-mail must be valid' ,
-        ],
-        
-    checkbox: false
-    }
+      creStudProp: {
+        firstname: null,
+        lastname: null,
+        email: null,
+        password: null
+      },
+      emailRules: [
+        v => !!v || "Email is required",
+        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+      ],
+      fieldsRules: [v => !!v || "This field is required"],
+      checkbox: false
+    };
   },
 
   computed: {
@@ -60,17 +57,17 @@ export default {
       if (!this.checkbox.$dirty) return errors;
       !this.checkbox.checked && errors.push("You must agree to continue!");
       return errors;
-    },
+    }    
   },
 
   methods: {
     insertAccountNewStudent(creStudProp) {
-      this.$emit('insertAccountNewStudent',creStudProp);
+      this.$emit("insertAccountNewStudent", creStudProp);
     },
     clear() {
       this.$reset();
       this.firstname = "";
-      this.lastname=""
+      this.lastname = "";
       this.email = "";
       this.checkbox = false;
     }
