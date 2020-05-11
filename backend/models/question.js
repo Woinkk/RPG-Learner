@@ -5,6 +5,7 @@ class question {
           CREATE TABLE ${question.tableName}(
           id SERIAL PRIMARY KEY,
           description TEXT,
+          classLevel TEXT,
           idmatiere INT,
           idsubject INT,
           FOREIGN KEY (idmatiere) REFERENCES matiere (id),
@@ -16,8 +17,8 @@ class question {
   static async insert (json) {
     await PostgresStore.pool.query({
       text: `INSERT INTO ${question.tableName}
-      (description, idmatiere, idsubject) VALUES($1, $2, $3)`,
-      values: [json.description, json.idmatiere, json.idsubject]
+      (description,classLevel ,idmatiere, idsubject) VALUES($1, $2, $3,$4)`,
+      values: [json.description,json.classLevel,json.idmatiere, json.idsubject]
     });
   }
 }

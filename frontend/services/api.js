@@ -1,20 +1,25 @@
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 const SERVER_URL = 'http://localhost:3000';
 
-function login(logProp) {
-  var myInit = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(logProp)
-  };
-  // console.log(myInit.body)
-  return fetch(`${SERVER_URL}/login`, myInit)
-    .then(function (response) {
-      console.log(response);
-      console.log(response.status);
-      return response.status;
-    });
+function login (logProp) {
+  return axios.post(`${SERVER_URL}/login`, logProp)
+    .then(response => response.status);
+}
+
+function myClasses (content) {
+  return axios.post(`${SERVER_URL}/myClasses`, content)
+    .then(response => response.data);
+}
+
+function otherClasses (content) {
+  return axios.post(`${SERVER_URL}/otherClasses`, content)
+    .then(response => response.data);
+}
+
+function createClassVClass (ClassVClass) {
+  return axios.post(`${SERVER_URL}/ClassVClass`, ClassVClass)
+    .then(response => response.status);
 }
 
 function insertAccountNewStudent(newStudent) {
@@ -34,7 +39,10 @@ function insertAccountNewStudent(newStudent) {
 
 export {
   login,
-  insertAccountNewStudent
+  insertAccountNewStudent,
+  myClasses,
+  otherclasses,
+  createClassVClass
 };
 
 

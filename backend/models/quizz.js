@@ -5,8 +5,11 @@ class quizz {
           CREATE TABLE ${quizz.tableName}(
           id SERIAL PRIMARY KEY,
           name TEXT,
+          type TEXT,
           idquestion INT,
-          FOREIGN KEY (idquestion) REFERENCES question (id)
+          idsubject INT,
+          FOREIGN KEY (idquestion) REFERENCES question (id),
+          FOREIGN KEY (idsubject) REFERENCES subject (id)
   
       )`;
   }
@@ -14,8 +17,8 @@ class quizz {
   static async insert (json) {
     await PostgresStore.pool.query({
       text: `INSERT INTO ${quizz.tableName}
-      (name, idquestion) VALUES($1, $2)`,
-      values: [json.description, json.idquestion]
+      (name,type,idquestion,idsubject) VALUES($1, $2,$3,$4)`,
+      values: [json.name, json.from,json.idquestion,json.idsubject]
     });
   }
 }

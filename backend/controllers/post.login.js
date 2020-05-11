@@ -1,19 +1,17 @@
 const Teacher = require('../models/teacher.js');
-const Student = require ('../models/student.js');
+const Student = require('../models/student.js');
 
 /**
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  */
-async function postLogin(req, res) {
+async function postLogin (req, res) {
   // si l'utilisateur est déjà connecté, alors on lui retourne Unauthorized
   if (req.session.userId) {
     res.status(401)
       .send('Already authenticated');
     return;
   }
-  console.log(req.body);
-  console.log('EMAIL ' + req.body.email);
   const email = req.body.email;
   const password = req.body.password;
 
@@ -27,9 +25,8 @@ async function postLogin(req, res) {
     res.json(teacher);
     return;
   }
-  
+
   if (student) {
-    console.log("student")
     req.session.userId = student.id;
     res.json(student);
     return;
@@ -37,10 +34,6 @@ async function postLogin(req, res) {
   // si on n'a pas trouvé d'utilisateur, alors on retourne une erreur 401 (unauthorized)
   res.status(401)
     .send('Unknown email or password');
-
-
-  
 }
-
 
 module.exports = postLogin;

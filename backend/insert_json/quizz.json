@@ -1,18 +1,26 @@
 [
     {
         "name": "Mathematique",
-        "idquestion": 1
+        "from":"Duel",
+        "idquestion": 1,
+        "idsubject":1
     },
     {
         "name": "Mathematique",
-        "idquestion": 2
+        "from":"ClassVClass",
+        "idquestion": 2,
+        "idsubject":2
     },
     {
         "name": "Français",
-        "idquestion": 3
+        "from":"ClassVClass",
+        "idquestion": 3,
+        "idsubject":3
     },
     {
         "name": "Français",
-        "idquestion": 4
+        "from":"Duel",
+        "idquestion": 4,
+        "idsubject":4
     }
 ]

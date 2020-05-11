@@ -22,6 +22,23 @@ class classes {
   
       )`;
   }
+
+  static async getClassById (id) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT name FROM ${classes.tableName}
+      WHERE $1 = id`,
+      values: [id]
+    });
+    return result;
+  }
+
+  static async getAllClasses () {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT name FROM ${classes.tableName}`,
+      values: []
+    });
+    return result;
+  }
 }
 classes.tableName = 'classes';
 

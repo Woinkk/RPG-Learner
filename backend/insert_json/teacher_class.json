@@ -6,5 +6,9 @@
     {
         "idclasses":2,
         "idteacher":2
+    },
+    {
+        "idclasses":3,
+        "idteacher":1
     }
 ]

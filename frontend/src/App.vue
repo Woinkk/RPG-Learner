@@ -3,7 +3,8 @@
   <v-app>
     <v-app-bar app color="primary" dark>
       <Navbar />
-      <v-spacer />
+        <v-spacer/>
+        <router-link to='/login' style ="color:Black">Sign in</router-link>
     </v-app-bar>
 
     <v-content>
