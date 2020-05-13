@@ -16,12 +16,15 @@ class question {
   }
 
   static async insert (json) {
-    await PostgresStore.pool.query({
+    const result = await PostgresStore.pool.query({
       text: `INSERT INTO ${question.tableName}
       (question,reponse1 ,reponse2, reponse3, reponse4, good, idquizz) VALUES($1, $2, $3,$4,$5,$6,$7)`,
       values: [json.question, json.reponse1, json.reponse2, json.reponse3, json.reponse4, json.good, json.idquizz]
     });
+
+    return result;
   }
+
 }
 question.tableName = 'question';
 
