@@ -1,26 +1,22 @@
 [
     {
         "name": "Mathematique",
-        "from":"Duel",
-        "idquestion": 1,
-        "idsubject":1
+        "idsubject":1,
+        "idteacher":1
     },
     {
         "name": "Mathematique",
-        "from":"ClassVClass",
-        "idquestion": 2,
-        "idsubject":2
+        "idsubject":2,
+        "idteacher":2
     },
     {
         "name": "Français",
-        "from":"ClassVClass",
-        "idquestion": 3,
-        "idsubject":3
+        "idsubject":3,
+        "idteacher":2
     },
     {
         "name": "Français",
-        "from":"Duel",
-        "idquestion": 4,
-        "idsubject":4
+        "idsubject":4,
+        "idteacher":1
     }
 ]

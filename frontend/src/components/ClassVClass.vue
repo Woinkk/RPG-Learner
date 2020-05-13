@@ -40,13 +40,20 @@
 </template>
 
 <script>
+import {MyQuizz} from "../../services/api.js";
 export default {
   methods: {
-    
+    myQuizz: async function () {
+        const req = await MyQuizz();
+        if(req !== null) {
+            this.myQuizzes = req;
+        }
+        return;
+    }
   },
 
   created() {
-    
+    this.myQuizz();
   },
   
   name: 'App',
@@ -57,6 +64,7 @@ export default {
  data () {
       return {
         drawer: false,
+        myQuizzes: null,
       }
     },
 };

@@ -17,7 +17,7 @@
               </template>
               <v-list>
                 <v-list-item
-                  v-for="(item, index) in myClasse"
+                  v-for="(item, index) in computeMine"
                   :key="index"
                   @click="selectMyClasses(item.name)"
                 >
@@ -71,11 +71,21 @@ export default {
     myClasse: null,
     allClasses: null,
     ClassVClass:{selectedMyClasses: null, selectedAllClasses: null},
-    color: "primary"
   }),
   computed: {
     computeAll: function() {
-      return this.allClasses.filter(i => i.name !== this.ClassVClass.selectedMyClasses)
+      if(this.allClasses !== null) {
+        return this.allClasses.filter(i => i.name !== this.ClassVClass.selectedMyClasses);
+      } else {
+        return[];
+      }
+    },
+    computeMine: function() {
+      if(this.myClasse !== null) {
+        return this.myClasse.filter(i => i.name !== this.ClassVClass.selectedAllClasses);
+      } else {
+        return[];
+      }
     }
   },
   methods: {

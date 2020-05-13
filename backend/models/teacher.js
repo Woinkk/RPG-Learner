@@ -12,8 +12,9 @@ class teacher {
           password TEXT,
           pseudo TEXT,
           idschool INT,
-          FOREIGN KEY (idschool) REFERENCES school (id)
-  
+          idmatiere INT,
+          FOREIGN KEY (idschool) REFERENCES school (id),
+          FOREIGN KEY (idmatiere) REFERENCES matiere (id)
       )`;
   }
 
@@ -26,14 +27,15 @@ class teacher {
                 email,
                 password,
                 pseudo,
-                idschool) VALUES($1,$2,$3,$4,$5,$6)`,
+                idschool,
+                idmatiere) VALUES($1,$2,$3,$4,$5,$6,$7)`,
       values: [json.firstname,
         json.lastname,
         json.email,
         hashedPassword,
         json.pseudo,
-        json.idschool
-
+        json.idschool,
+        json.idmatiere
       ]
     });
   }

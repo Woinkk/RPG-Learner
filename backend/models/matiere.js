@@ -4,19 +4,15 @@ class matiere {
     return ` 
           CREATE TABLE ${matiere.tableName}(
           id SERIAL PRIMARY KEY,
-          name TEXT,
-          idteacher INT,
-          FOREIGN KEY (idteacher) REFERENCES teacher (id)
-  
+          name TEXT
       )`;
   }
 
   static async insert (json) {
     await PostgresStore.pool.query({
       text: `INSERT INTO ${matiere.tableName}
-          (name,idteacher) VALUES($1,$2)`,
-      values: [json.name,
-        json.idteacher]
+          (name) VALUES($1)`,
+      values: [json.name]
     });
   }
 }

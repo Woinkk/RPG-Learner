@@ -22,10 +22,16 @@ function createClassVClass (ClassVClass) {
     .then(response => response.status);
 }
 
+function MyQuizz (content) {
+  return axios.post(`${SERVER_URL}/myQuizz`, content)
+    .then(response => response.data);
+}
+
 export {
   login,
   myClasses,
   otherClasses,
-  createClassVClass
+  createClassVClass,
+  MyQuizz
 }
 ;

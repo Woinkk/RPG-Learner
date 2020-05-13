@@ -4,21 +4,22 @@ class question {
     return ` 
           CREATE TABLE ${question.tableName}(
           id SERIAL PRIMARY KEY,
-          description TEXT,
-          classLevel TEXT,
-          idmatiere INT,
-          idsubject INT,
-          FOREIGN KEY (idmatiere) REFERENCES matiere (id),
-          FOREIGN KEY (idsubject) REFERENCES subject (id)
-  
+          question TEXT,
+          reponse1 TEXT,
+          reponse2 TEXT,
+          reponse3 TEXT,
+          reponse4 TEXT,
+          good INT,
+          idquizz INT,
+          FOREIGN KEY (idquizz) REFERENCES quizz (id)
       )`;
   }
 
   static async insert (json) {
     await PostgresStore.pool.query({
       text: `INSERT INTO ${question.tableName}
-      (description,classLevel ,idmatiere, idsubject) VALUES($1, $2, $3,$4)`,
-      values: [json.description,json.classLevel,json.idmatiere, json.idsubject]
+      (question,reponse1 ,reponse2, reponse3, reponse4, good, idquizz) VALUES($1, $2, $3,$4,$5,$6,$7)`,
+      values: [json.question, json.reponse1, json.reponse2, json.reponse3, json.reponse4, json.good, json.idquizz]
     });
   }
 }

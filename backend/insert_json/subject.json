@@ -1,14 +1,18 @@
 [   
     {
-        "name":"addition"
+        "name":"addition",
+        "idteacher":1
     },
     {
-        "name":"multiplication"
+        "name":"multiplication",
+        "idteacher":2
     },
     {
-        "name":"orthographe"
+        "name":"orthographe",
+        "idteacher":2
     },
     {
-        "name":"conjugaison"
+        "name":"conjugaison",
+        "idteacher":1
     }
 ]

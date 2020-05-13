@@ -1,26 +1,38 @@
 [
     {
-        "description": "1 + 1 =",
-        "classLevel":"6e",
-        "idmatiere": 1,
-        "idsubject": 1
+        "question": "1 + 1 =",
+        "reponse1": "3",
+        "reponse2": "2",
+        "reponse3": "1",
+        "reponse4": "11",
+        "good":2,
+        "idquizz": 1
     },
     {
-        "description": "2 * 10 =",
-        "classLevel":"6e",
-        "idmatiere": 1,
-        "idsubject": 2
+        "question": "2 * 10 =",
+        "reponse1": "5",
+        "reponse2": "10",
+        "reponse3": "20",
+        "reponse4": "210",
+        "good":3,
+        "idquizz": 2
     },
     {
-        "description": "Quelle est la bonne orthographe du mot suivant ?",
-        "classLevel":"1e",
-        "idmatiere": 2,
-        "idsubject": 3
+        "question": "Quelle est la bonne orthographe du mot suivant ?",
+        "reponse1": "Présan",
+        "reponse2": "Present",
+        "reponse3": "Présant",
+        "reponse4": "Présent",
+        "good":4,
+        "idquizz": 3
     },
     {
-        "description": "A quel temps est conjugé le mot suivant: J'ai usé",
-        "classLevel":"1e",
-        "idmatiere": 2,
-        "idsubject": 4
+        "question": "A quel temps est conjugé le verbe suivant: J'ai usé",
+        "reponse1": "Présent",
+        "reponse2": "Subjonctif futur",
+        "reponse3": "Passé composé",
+        "reponse4": "Passé d'avant",
+        "good":3,
+        "idquizz": 4
     }
 ]

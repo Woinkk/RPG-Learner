@@ -5,7 +5,8 @@
         "email":"legrandmonarque@gmail.com",
         "password":"viergemarie123",
         "pseudo":"ahgugo",
-        "idschool":1
+        "idschool":1,
+        "idmatiere":1
 
     },
     {
@@ -14,6 +15,7 @@
         "email":"lebgmuscler@gmail.com",
         "password":"bandana123",
         "pseudo":"yougotthat",
-        "idschool":1
+        "idschool":1,
+        "idmatiere":1
     }
 ]
