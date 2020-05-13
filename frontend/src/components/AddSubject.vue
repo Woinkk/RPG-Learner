@@ -19,7 +19,7 @@
           </v-card-title>
   
           <v-card-text>
-            Nom du sujet: <v-text-field></v-text-field>
+            Nom du sujet: <v-text-field v-model="subject"></v-text-field>
           </v-card-text>
   
           <v-divider></v-divider>
@@ -29,7 +29,7 @@
             <v-btn
               color="primary"
               text
-              @click="dialog = false"
+              @click="createSubject"
             >
               Créer
             </v-btn>
@@ -45,11 +45,19 @@ export default {
     data () {
         return {
         dialog: false,
+        subject: null,
         }
-    }
+    },
+    methods: {
+      createSubject: function () {
+        console.log(this.subject);
+        this.dialog = false;
+        this.$emit('createSubject', this.subject);
+        this.$emit('reload')
+      }
+    },
 }
 </script>
 
 <style>
-
-</style>script
+</style>

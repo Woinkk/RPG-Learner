@@ -8,8 +8,8 @@
           <v-card-actions>
             <v-menu open-on-hover top offset-y transition="fab-transition" :elevation="20">
               <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on" v-if="selectedMatiere === null">Matière</v-btn>
-                <v-btn color="primary" dark v-on="on" v-else>{{selectedMatiere}}</v-btn>
+                <v-btn color="primary" dark v-on="on" v-if="selected.selectedMatiere === null">Matière</v-btn>
+                <v-btn color="primary" dark v-on="on" v-else>{{selected.selectedMatiere}}</v-btn>
               </template>
 
               <v-list>
@@ -25,8 +25,8 @@
             <span style="display:inline-block; width: 60px;"></span>
             <v-menu open-on-hover top offset-y transition="fab-transition">
               <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on" v-if="selectedSubject === null">Sujet</v-btn>
-                <v-btn color="primary" dark v-on="on" v-else>{{selectedSubject}}</v-btn>
+                <v-btn color="primary" dark v-on="on" v-if="selected.selectedSubject === null">Sujet</v-btn>
+                <v-btn color="primary" dark v-on="on" v-else>{{selected.selectedSubject}}</v-btn>
               </template>
 
               <v-list>
@@ -39,10 +39,11 @@
                 </v-list-item>
               </v-list>
             </v-menu>
-            <AddSubject></AddSubject>
+            <AddSubject @createSubject="createSubject" @reload="LoadMatiereAndSubject"></AddSubject>
             <v-spacer></v-spacer>
             <v-btn @click="switchToModification">Modifier un quizz existant</v-btn>
-            <v-btn>Créer</v-btn>
+            <v-btn v-if="CanCreate" @click="GoToQuizzCreation">Créer</v-btn>
+            <v-btn v-else disabled>Créer</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -51,38 +52,81 @@
 
 <script>
 import AddSubject from "./AddSubject.vue";
+import { getMatiere, getSubject } from "../../services/api.js";
 export default {
   name: "CreateQuizz",
   components: {
     AddSubject
   },
+  async created () {
+    await this.LoadMatiereAndSubject();
+  },
   data: () => ({
+    CanCreate: false,
     matiere: [
-      {
-        name: "mathématique"
-      }
     ],
     subject: [
-      {
-        name: "multiplication"
-      },
-      {
-        name: "addition"
-      }
     ],
-    selectedMatiere: null,
-    selectedSubject: null,
+    selected: {
+      selectedMatiere: null,
+      selectedSubject: null,
+    },
   }),
   methods: {
     selectMatiere: function(matiere) {
-      this.selectedMatiere = matiere;
+      this.selected.selectedMatiere = matiere;
+      if (this.selected.selectedMatiere != null && this.selected.selectedSubject != null) {
+        this.CanCreate = true;
+      }
     },
     selectSubject: function(subject) {
-      this.selectedSubject = subject;
+      this.selected.selectedSubject = subject;
+      if (this.selected.selectedMatiere != null && this.selected.selectedSubject != null) {
+        this.CanCreate = true;
+      }
     },
     switchToModification: function () {
         console.log("test");
         this.$emit('switchMode');
+    },
+    GoToQuizzCreation: function () {
+      this.$emit("goToQuizzCreation", this.selected);
+      console.log(this.selected);
+    },
+    createSubject: function (subject) {
+      console.log(subject);
+      this.$emit("createSubject", subject);
+    },
+    GetMatiere: async function () {
+      const matieres = await getMatiere();
+      return matieres;
+    },
+    GetSubject: async function () {
+      const subjects = await getSubject();
+      return subjects;
+    },
+    LoadMatiereAndSubject: async function () {
+      this.matiere = [];
+      this.subject = [];
+      
+      const matiere = await this.GetMatiere();
+      const subject = await this.GetSubject();
+
+      console.log(matiere);
+
+      for (let i = 0; i < matiere.length; i++) {
+        const element = matiere[i];
+
+        this.matiere = [...this.matiere, {name: element.name}]
+      }
+
+      console.log(subject);
+
+      for (let i = 0; i < subject.length; i++) {
+        const element = subject[i];
+        
+        this.subject = [...this.subject, {name: element.name}]
+      }
     }
   }
 };

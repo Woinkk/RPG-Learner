@@ -8,14 +8,14 @@
     </v-app-bar>
 
     <v-content>
-      <router-view @login="Login"></router-view>
+      <router-view @login="Login" @goToQuizzCreation="ShowQuizzCreation" v-bind:selected="selected" @createSubject="createSubject" @sendQuizz="sendQuizz"></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
 import Navbar from './components/Navbar';
-import {login} from '../services/api.js';
+import {login, createSubject, } from '../services/api.js';
 
 export default {
   methods: {
@@ -28,6 +28,18 @@ export default {
       } else {
         this.$router.push("home");
       }
+    },
+    ShowQuizzCreation: function (selected) {
+      this.selected = selected;
+      this.$router.push("QuizzCreation");
+      console.log(this.selected);
+    },
+    createSubject: async function (subject) {
+      console.log(subject);
+      await createSubject(subject);
+    },
+    sendQuizz: async function () {
+      
     }
   },
 
@@ -46,7 +58,7 @@ export default {
   },
 
   data: () => ({
-    //
+    selected: null,
   }),
 };
 </script>

@@ -12,7 +12,10 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:8080' // si votre port est différent, changez cette valeur !
+  }));
 app.use(session({secret:'secret'}))
 app.use(logger('dev'));
 app.use(express.json());

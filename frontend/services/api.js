@@ -17,7 +17,46 @@ function login (logProp) {
     });
 }
 
+function createSubject (subject) {
+  var myInit = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({subject: subject})
+  }
+
+  console.log(myInit.body);
+
+  return fetch(`${SERVER_URL}/createSubject`, myInit)
+}
+
+function getMatiere () {
+  var myInit = {
+    method: 'GET'
+  }
+
+  return fetch(`${SERVER_URL}/getMatiere`, myInit)
+  .then(response => response.json()).then(data => {
+    return data
+  })
+}
+
+function getSubject () {
+  var myInit = {
+    method: 'GET'
+  }
+
+  return fetch(`${SERVER_URL}/getSubject`, myInit)
+  .then(response => response.json()).then(data => {
+    return data
+  })
+}
+
 export {
-  login
+  login,
+  createSubject,
+  getMatiere,
+  getSubject,
 }
 ;
