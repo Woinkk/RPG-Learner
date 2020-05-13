@@ -27,11 +27,28 @@ function MyQuizz (content) {
     .then(response => response.data);
 }
 
+function insertAccountNewStudent(newStudent) {
+  var myInit = {
+    method:'POST',
+    header:{
+      'Content-type': 'application/json'
+    },
+    body:JSON.stringify(newStudent)
+  };
+  return fetch(`${SERVER_URL}/createNewStudent`,myInit)
+    .then(function(response){
+      return response.status
+    })
+}
+
+
 export {
   login,
+  insertAccountNewStudent,
   myClasses,
   otherClasses,
   createClassVClass,
   MyQuizz
-}
-;
+};
+
+

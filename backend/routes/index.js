@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const postLogin = require('../controllers/post.login.js');
+const postInsertNewStudent = require ('../controllers/post.insertNewStudent.js');
 const postMyClasses = require('../controllers/post.myClasses.js');
 const postOtherClasses = require('../controllers/post.otherClasses.js');
 const postClassVClass = require('../controllers/post.classVClass.js');
@@ -16,6 +17,7 @@ async function isAuthenticated (req, res, next) {
 }
 
 router.post('/login', postLogin);
+router.post('/createNewStudent',postInsertNewStudent);
 router.post('/myClasses', postMyClasses);
 router.post('/otherClasses', postOtherClasses);
 router.post('/ClassVClass', postClassVClass);
