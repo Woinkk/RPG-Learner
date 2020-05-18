@@ -9,8 +9,6 @@ import Home from './components/Home';
 import insertAccountNewStudent from './components/insertAccountNewStudent';
 import QuizzCreation from './components/QuizzCreation';
 import ClassVClass from './components/ClassVClass';
-import axios from 'axios';
-import VueAxios from 'vue-axios';
 
 Vue.use(VueAxios, axios);
 

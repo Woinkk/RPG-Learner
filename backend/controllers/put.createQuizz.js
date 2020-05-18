@@ -1,6 +1,5 @@
 const Quizz = require('../models/quizz.js');
 const Question = require('../models/question.js');
-const Answer = require('../models/answer.js');
 const Matiere = require('../models/matiere.js');
 const Subject = require('../models/subject.js');
 
@@ -33,7 +32,7 @@ async function putCreateQuizz(req, res) {
             const element = quizz.reponses[i];
             
             const json = {description: element.text, value: element.value , type: classLevel, idMatiere: idMatiere, idSubject: idSubject};
-            const result
+            //const result
 
         }
 
