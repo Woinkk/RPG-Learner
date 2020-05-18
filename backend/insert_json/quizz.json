@@ -12,11 +12,11 @@
     {
         "name": "Français",
         "idsubject":3,
-        "idteacher":2
+        "idteacher":3
     },
     {
         "name": "Français",
         "idsubject":4,
-        "idteacher":1
+        "idteacher":3
     }
 ]

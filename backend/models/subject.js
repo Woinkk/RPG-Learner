@@ -17,6 +17,16 @@ class subject {
       values: [json.name, json.idteacher]
     });
   }
+
+  static async getSubjectById (id) {
+    const result = await PostgresStore.pool.query({
+      text: ` SELECT * FROM ${subject.tableName}
+            WHERE id = $1 
+    `,
+      values: [id]
+    });
+    return result;
+  }
 }
 subject.tableName = 'subject';
 

@@ -22,8 +22,18 @@ function createClassVClass (ClassVClass) {
     .then(response => response.status);
 }
 
-function MyQuizz (content) {
-  return axios.post(`${SERVER_URL}/myQuizz`, content)
+function AllQuizz (content) {
+  return axios.post(`${SERVER_URL}/allQuizz`, content)
+    .then(response => response.data);
+}
+
+function GetNmbQuestionsByQuizz (content) {
+  return axios.post(`${SERVER_URL}/NmbQueByQui`, content)
+    .then(response => response.data);
+}
+
+function GetSubjectByQuizz (content) {
+  return axios.post(`${SERVER_URL}/SubjectByQuizz`, content)
     .then(response => response.data);
 }
 
@@ -48,7 +58,9 @@ export {
   myClasses,
   otherClasses,
   createClassVClass,
-  MyQuizz
+  AllQuizz,
+  GetNmbQuestionsByQuizz,
+  GetSubjectByQuizz
 };
 
 

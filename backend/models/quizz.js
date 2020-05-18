@@ -19,6 +19,14 @@ class quizz {
       values: [json.name, json.idsubject, json.idteacher]
     });
   }
+
+  static async getAllQuizzes () {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT * FROM ${quizz.tableName}`,
+      values: []
+    });
+    return result;
+  }
 }
 quizz.tableName = 'quizz';
 

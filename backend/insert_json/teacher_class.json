@@ -10,5 +10,9 @@
     {
         "idclasses":3,
         "idteacher":1
+    },
+    {
+        "idclasses":1,
+        "idteacher":3
     }
 ]

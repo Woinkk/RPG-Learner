@@ -22,6 +22,16 @@ class question {
       values: [json.question, json.reponse1, json.reponse2, json.reponse3, json.reponse4, json.good, json.idquizz]
     });
   }
+
+  static async getQuestionsByQuizz (id) {
+    const result = await PostgresStore.pool.query({
+      text: ` SELECT * FROM ${question.tableName}
+            WHERE idquizz = $1 
+    `,
+      values: [id]
+    });
+    return result;
+  }
 }
 question.tableName = 'question';
 

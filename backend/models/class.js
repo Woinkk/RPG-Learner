@@ -25,6 +25,15 @@ class classes {
     return result;
   }
 
+  static async getIdByName(name) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT id FROM ${classes.tableName}
+      WHERE $1 = name`,
+      values: [name]
+    });
+    return result;
+  }
+
   static async getClassById (id) {
     const result = await PostgresStore.pool.query({
       text: `SELECT name FROM ${classes.tableName}
