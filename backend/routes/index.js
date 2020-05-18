@@ -15,15 +15,24 @@ async function isAuthenticated (req, res, next) {
   res.status(401).send('unauthorized(1)');
 }
 
+router.get('/',function (req,res,next){
+  if(req.sessions.userId){
+    res.status(200);
+  }
+  res.status(401).send('unauthorized(1)');
+});
+
 router.post('/login', postLogin);
-router.post('/createNewStudent',postInsertNewStudent);
+router.put('/createNewStudent',postInsertNewStudent);
 router.post('/myClasses', postMyClasses);
 router.post('/otherClasses', postOtherClasses);
 router.post('/ClassVClass', postClassVClass);
 
 /* GET home page. */
+
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
+
 
 module.exports = router;

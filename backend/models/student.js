@@ -38,7 +38,7 @@ class student {
     const result = await PostgresStore.pool.query({
       text: `INSERT INTO ${student.tableName}
       (firstname,lastname,email,password,idclasses)
-      VALUES($1,$2,$3,$4,$50)
+      VALUES($1,$2,$3,$4,$5)
       `,
       values:[newStudent.firstname,newStudent.lastname,newStudent.email,hashedPassword,newStudent.idclasses]
     })

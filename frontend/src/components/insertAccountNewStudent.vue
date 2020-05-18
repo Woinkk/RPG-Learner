@@ -10,17 +10,47 @@
 
           <v-card-text>
             <v-form>
-              <v-text-field v-model="firstname" :rules="fieldsRules" label="FirstName" type="text" required></v-text-field>
-              <v-text-field v-model="lastname" :rules="fieldsRules" label="LastName" required></v-text-field>
-              <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-              <v-checkbox
-                v-model="checkbox"
-                :error-messages="checkboxErrors"
-                label="Confirm ?"
-              ></v-checkbox>
+              <v-text-field
+                v-model="newStudent.firstname"
+                :rules="fieldsRules"
+                label="FirstName"
+                name="firstname"
+              ></v-text-field>
+              <v-text-field
+                v-model="newStudent.lastname"
+                :rules="fieldsRules"
+                label="LastName"
+                name="lastname"
+              ></v-text-field>
+              <v-text-field
+                v-model="newStudent.email"
+                :rules="emailRules"
+                label="E-mail"
+                name="email"
+              ></v-text-field>
+              <v-menu open-on-hover top offset-y transition="fab-transition">
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    color="primary"
+                    dark
+                    v-on="on"
+                    v-if="tclass === null"
+                  >La classe</v-btn>
+                  <v-btn color="primary" dark v-on="on" v-else>{{tclass}}</v-btn>
+                </template>
+                <v-list>
+                  <v-list-item
+                    v-for="(item, index) in myClasses"
+                    :key="index"
+                    @click="selectMyClasses(item.name)"
+                  >
+                    <v-list-item-title>{{ item.name }}</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
             </v-form>
             <v-card-actions>
-              <v-btn class="mr-4" @click="insertAccountNewStudent(creStudProp)">submit</v-btn>
+              <v-btn class="mr-4" @click="insertAccountNewStudent(newStudent)">submit</v-btn>
               <v-btn @click="clear">clear</v-btn>
             </v-card-actions>
           </v-card-text>
@@ -32,45 +62,61 @@
 
 
 <script>
+import { myClasses } from "../../services/api.js";
+
 export default {
-  name: "insertAccountNewStudent",
+  name: "NewStudent",
   data: function() {
     return {
-      creStudProp: {
+      newStudent: {
         firstname: null,
         lastname: null,
         email: null,
-        password: null
+        tclass:null
       },
       emailRules: [
         v => !!v || "Email is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
       ],
       fieldsRules: [v => !!v || "This field is required"],
-      checkbox: false
+      checkbox: false,
+      //tclass: null,
+      myClasses: null
     };
   },
 
-  computed: {
-    checkboxErrors() {
-      const errors = [];
-      if (!this.checkbox.$dirty) return errors;
-      !this.checkbox.checked && errors.push("You must agree to continue!");
-      return errors;
-    }    
-  },
+  computed: {},
 
   methods: {
-    insertAccountNewStudent(creStudProp) {
-      this.$emit("insertAccountNewStudent", creStudProp);
+    insertAccountNewStudent(newStudent) {
+      this.$emit("insertAccountNewStudent", newStudent);
     },
+    selectMyClasses: function(myClass) {
+      this.newStudent.tclass = myClass;
+    },
+
+    MyClasses: async function() {
+      console.log("lemyclasses")
+      const req = await myClasses();
+      if (req !== null) {
+        this.myClasses = req;
+      }
+      return;
+    },
+
+   
+
     clear() {
       this.$reset();
       this.firstname = "";
       this.lastname = "";
       this.email = "";
       this.checkbox = false;
-    }
-  }
+    },
+  },
+   created() {
+      console.log("lecreated")
+      this.MyClasses();
+    },
 };
 </script>

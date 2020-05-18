@@ -18,10 +18,6 @@
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
           width="100"
         />
-       <v-spacer/>
-       <router-link to='/login' style ="color:Black">
-        <v-btn color="primary">Sign in</v-btn>
-        </router-link> 
       </div>
 </template>
 

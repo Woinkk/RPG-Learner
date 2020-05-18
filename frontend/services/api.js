@@ -23,26 +23,24 @@ function createClassVClass (ClassVClass) {
 }
 
 function insertAccountNewStudent(newStudent) {
-  var myInit = {
-    method:'POST',
-    header:{
-      'Content-type': 'application/json'
-    },
-    body:JSON.stringify(newStudent)
-  };
-  return fetch(`${SERVER_URL}/createNewStudent`,myInit)
-    .then(function(response){
-      return response.status
-    })
+  return axios.put(`${SERVER_URL}/createNewStudent`,newStudent)
+    .then(response => response.data)
+    
 }
 
+function isConnected(){
+  return axios.post(`${SERVER_URL}`)
+    .then(response=>response.data)
+  
+}
 
 export {
   login,
   insertAccountNewStudent,
   myClasses,
   otherClasses,
-  createClassVClass
+  createClassVClass,
+  isConnected
 };
 
 

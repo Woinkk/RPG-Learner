@@ -75,7 +75,13 @@ export default {
   }),
   computed: {
     computeAll: function() {
-      return this.allClasses.filter(i => i.name !== this.ClassVClass.selectedMyClasses)
+      if(this.allClasses !== null){
+        return this.allClasses.filter(i => i.name !== this.ClassVClass.selectedMyClasses)
+      }
+      else{
+        return [];
+      }
+      
     }
   },
   methods: {

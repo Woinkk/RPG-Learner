@@ -1,4 +1,5 @@
 const Student = require('../models/student.js')
+const Class = require('../models/class.js')
 
 
 /**
@@ -8,20 +9,23 @@ const Student = require('../models/student.js')
 
 async function postInsertNewStudent(req, res) {
 
-//TODO :VERIF QUE LE PROF SOIT CO Et FAIRE PASSER l'idClasses choisis par un select
-    
+    //TODO :VERIF QUE LE PROF SOIT CO Et FAIRE PASSER l'idClasses choisis par un select
 
-
-    const firstname = req.body.firstname
-    const lastname = req.body.lastname
-    const password = req.body.password
-
-    const addStudent = await Student.insertAccountNewStudent(firstname, lastname, password);
-    if(addStudent){
+console.log("BODYYYY "+req.body.tclass)
+    var newStudent ={
+        firstname:req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        idclasses: await Class.getClassByName(req.body.tclass),
+        password :req.body.firstname.concat('', req.body.lastname)
+    }
+    console.log("password" + newStudent.password)
+    const addStudent = await Student.insertAccountNewStudent(newStudent);
+    if (addStudent) {
         res.json(addStudent)
         return;
     }
-    
+
     res.status(401)
         .send('Unknown parameters;');
 }

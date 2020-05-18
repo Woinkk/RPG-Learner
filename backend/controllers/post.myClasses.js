@@ -7,6 +7,7 @@ const Class = require('../models/class.js');
  */
 async function postMyClasses (req, res) {
   const TSession = req.session;
+  console.log(TSession.userId)
   const MyClasses = await TeacherClass.getClassByTeacher(TSession);
   if (MyClasses.rows.length === 1) {
     const name = await Class.getClassById(MyClasses.rows[0].idclasses);

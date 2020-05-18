@@ -17,11 +17,10 @@ Vue.use(VueRouter);
 Vue.config.productionTip = false;
 
 const routes = [
-  { path: '/login', component: Login },
-  {path:'/home', component:Home},
-  {path:'/insertAccountNewStudent', component: insertAccountNewStudent},
-  { path: '/home', component: Home },
-  { path: '/ClassVClass', component: ClassVClass }
+  {path: '/login', component: Login },
+  {path:'/home', component: Home},
+  {path:'/newStudent', component: insertAccountNewStudent},
+  {path: '/ClassVClass', component: ClassVClass }
 ];
 
 const router = new VueRouter({
