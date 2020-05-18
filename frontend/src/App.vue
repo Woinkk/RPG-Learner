@@ -8,14 +8,14 @@
     </v-app-bar>
 
     <v-content>
-      <router-view @login="Login" @insertAccountNewStudent="insertAccountNewStudent" />
+      <router-view @login="Login" @insertAccountNewStudent="insertAccountNewStudent" @goToQuizzCreation="ShowQuizzCreation" v-bind:selected="selected" @createSubject="createSubject" @sendQuizz="sendQuizz"></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
 import Navbar from "./components/Navbar";
-import { login } from "../services/api.js";
+import {login, createSubject, } from '../services/api.js';
 import { insertAccountNewStudent } from "../services/api.js";
 
 export default {
@@ -34,6 +34,18 @@ export default {
       if (req != 200) {
         this.$router.push("createNewStudent");
       }
+    },
+    ShowQuizzCreation: function (selected) {
+      this.selected = selected;
+      this.$router.push("QuizzCreation");
+      console.log(this.selected);
+    },
+    createSubject: async function (subject) {
+      console.log(subject);
+      await createSubject(subject);
+    },
+    sendQuizz: async function () {
+      
     }
   },
 
@@ -49,7 +61,7 @@ export default {
   },
 
   data: () => ({
-    //
+    selected: null,
   })
 };
 </script>

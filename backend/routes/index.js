@@ -9,6 +9,10 @@ const postClassVClass = require('../controllers/post.classVClass.js');
 const postAllQuizzes = require('../controllers/post.allQuizz.js');
 const postNmbQueByQui = require('../controllers/post.nmbQueByQui.js');
 const postSubjectByQuizz = require('../controllers/post.subjectByQUizz.js');
+const putCreateSubject = require('../controllers/put.createSubject.js');
+const putCreateQuizz = require('../controllers/put.createQuizz.js');
+const getMatiere = require('../controllers/get.matiere.js');
+const getSubject = require('../controllers/get.subject.js');
 
 async function isAuthenticated (req, res, next) {
   if (req.session.userId) {
@@ -26,6 +30,11 @@ router.post('/ClassVClass', postClassVClass);
 router.post('/allQuizz', postAllQuizzes);
 router.post('/NmbQueByQui', postNmbQueByQui);
 router.post('/SubjectByQuizz', postSubjectByQuizz);
+router.put('/createQuizz', putCreateQuizz);
+
+router.put('/createSubject', putCreateSubject);
+router.get('/getMatiere', getMatiere);
+router.get('/getSubject', getSubject);
 
 /* GET home page. */
 router.get('/', function (req, res, next) {

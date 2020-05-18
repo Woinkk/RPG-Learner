@@ -15,6 +15,23 @@ class matiere {
       values: [json.name]
     });
   }
+
+  static async getAll () {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT * FROM ${matiere.tableName}`
+    });
+
+    return result.rows;
+  }
+
+  static async getId (matiereName) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT id FROM ${matiere.tableName} WHERE name  = $1`,
+      values: [matiereName]
+    });
+
+    return result.rows;
+  }
 }
 matiere.tableName = 'matiere';
 

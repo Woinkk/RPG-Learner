@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row dense>
-      <CreateQuizz @switchMode= "switchToModification" v-if="CreationMode === true"></CreateQuizz>
+      <CreateQuizz @switchMode= "switchToModification" v-if="CreationMode === true" @goToQuizzCreation="goToQuizzCreation" @createSubject="createSubject"></CreateQuizz>
       <ModifyQuizz @switchMode= "switchToCreation" v-else></ModifyQuizz>
       <v-col cols="12">
         <v-card color="#4c727e" dark>
@@ -101,13 +101,21 @@ export default {
     switchToCreation: function () {
       this.CreationMode = true;
     },
+    goToQuizzCreation: function (selected) {
+      this.$emit("goToQuizzCreation", selected);
+      console.log(selected);
+    },
+    createSubject: function (subject) {
+      console.log(subject);
+      this.$emit("createSubject", subject);
+    },
     createClassVClass: async function (ClassVClass) {
       const req = await createClassVClass(ClassVClass);
       if(req != 200) {
         this.$router.push("Home");
       } else {
         this.$router.push("ClassVClass");
-      }
+        }
     },
     MyClasses:async function() {
     const req = await myClasses();
