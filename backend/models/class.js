@@ -31,7 +31,7 @@ class classes {
     });
     return result;
   }
-  static async getClassByName(name){
+  static async getIdClassByName(name){
     const result = await PostgresStore.pool.query({
       text:`SELECT id FROM ${classes.tableName}
       WHERE name like $1`,

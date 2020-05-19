@@ -24,7 +24,7 @@ function createClassVClass (ClassVClass) {
 
 function insertAccountNewStudent(newStudent) {
   return axios.put(`${SERVER_URL}/createNewStudent`,newStudent)
-    .then(response => response.data)
+    .then(response => response.status)
     
 }
 

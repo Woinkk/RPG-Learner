@@ -17,7 +17,8 @@ async function isAuthenticated (req, res, next) {
 
 router.get('/',function (req,res,next){
   if(req.sessions.userId){
-    res.status(200);
+    var connected= true
+    return connected
   }
   res.status(401).send('unauthorized(1)');
 });

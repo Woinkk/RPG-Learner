@@ -3,18 +3,18 @@
   <v-app>
     <v-app-bar app color="primary" dark>
       <Navbar />
-        <v-spacer/>
-        <v-btn color="primary" >
-        <router-link to="/account" style="color:Black">Account</router-link>
-        <router-link to='/login' style ="color:Black">Sign in</router-link>
-        </v-btn>
-        <v-btn color="primary">
-          <router-link to='/newStudent' style="color:Black">Add Student</router-link>
-        </v-btn>
+      <v-spacer />
+      <v-btn color="primary">
+        <!--<router-link v-if="connected" to="/account" style="colo:black">Account</router-link>!-->
+        <router-link to="/login" style="color:Black">Sign in</router-link>
+      </v-btn>
+      <v-btn color="primary">
+        <router-link to="/newStudent" style="color:Black">Add Student</router-link>
+      </v-btn>
     </v-app-bar>
 
     <v-content>
-      <router-view @login="Login" @insertAccountNewStudent="insertAccountNewStudent"/>
+      <router-view @login="Login" @insertAccountNewStudent="insertAccountNewStudent" />
     </v-content>
   </v-app>
 </template>
@@ -23,7 +23,7 @@
 import Navbar from "./components/Navbar";
 import { login } from "../services/api.js";
 import { insertAccountNewStudent } from "../services/api.js";
-import { isConnected } from "../services/api.js";
+//import { isConnected } from "../services/api.js";
 
 export default {
   methods: {
@@ -37,12 +37,17 @@ export default {
     },
 
     insertAccountNewStudent: async function(newStudent) {
-      const req = await insertAccountNewStudent(newStudent);
-      console.log(req)
-      if (req != 200) {
+      if (newStudent.tclass !== null) {
+        const req = await insertAccountNewStudent(newStudent);
+        console.log(req);
+        if (req !== 200) {
+          this.$router.push("newStudent");
+        } else {
+          this.$router.push("home");
+        }
+      }else{
+        console.log("error");
         this.$router.push("newStudent");
-      }else {
-        this.$router.push("home");
       }
     }
   },
@@ -51,7 +56,7 @@ export default {
     this.$on("login", function(logProp) {
       this.Login(logProp);
     });
-    isConnected();
+    //isConnected();
   },
 
   name: "App",

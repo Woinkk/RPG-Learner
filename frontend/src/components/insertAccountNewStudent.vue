@@ -30,18 +30,14 @@
               ></v-text-field>
               <v-menu open-on-hover top offset-y transition="fab-transition">
                 <template v-slot:activator="{ on }">
-                  <v-btn
-                    color="primary"
-                    dark
-                    v-on="on"
-                    v-if="tclass === null"
-                  >La classe</v-btn>
-                  <v-btn color="primary" dark v-on="on" v-else>{{tclass}}</v-btn>
+                  <v-btn color="primary" dark v-on="on" v-if="newStudent.tclass === null">La classe</v-btn>
+                  <v-btn color="primary" dark v-on="on" v-else>{{newStudent.tclass}}</v-btn>
                 </template>
                 <v-list>
                   <v-list-item
                     v-for="(item, index) in myClasses"
                     :key="index"
+                    :rules="fieldsRules"
                     @click="selectMyClasses(item.name)"
                   >
                     <v-list-item-title>{{ item.name }}</v-list-item-title>
@@ -72,7 +68,7 @@ export default {
         firstname: null,
         lastname: null,
         email: null,
-        tclass:null
+        tclass: null
       },
       emailRules: [
         v => !!v || "Email is required",
@@ -89,14 +85,16 @@ export default {
 
   methods: {
     insertAccountNewStudent(newStudent) {
-      this.$emit("insertAccountNewStudent", newStudent);
+
+        this.$emit("insertAccountNewStudent", newStudent);
+      
     },
     selectMyClasses: function(myClass) {
       this.newStudent.tclass = myClass;
     },
 
     MyClasses: async function() {
-      console.log("lemyclasses")
+      console.log("lemyclasses");
       const req = await myClasses();
       if (req !== null) {
         this.myClasses = req;
@@ -104,19 +102,17 @@ export default {
       return;
     },
 
-   
-
     clear() {
-      this.$reset();
-      this.firstname = "";
-      this.lastname = "";
-      this.email = "";
-      this.checkbox = false;
-    },
+      this.newStudent.$reset();
+      this.newStudent.firstname = null;
+      this.newStudent.lastname = null;
+      this.newStudent.email = null;
+      this.newStudent.tclass = null;
+    }
   },
-   created() {
-      console.log("lecreated")
-      this.MyClasses();
-    },
+  created() {
+    console.log("lecreated");
+    this.MyClasses();
+  }
 };
 </script>
