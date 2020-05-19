@@ -13,6 +13,7 @@ const teacher_class = require ('./teacher_class.js');
 const classVclass = require ('./classVclass.js');
 const classLevel = require('./classLevel.js');
 const answerStudent = require('./answerStudent.js');
+const quizzClassVClass = require('./quizzClassVClass.js');
 
 module.exports = [
   item,
@@ -29,5 +30,6 @@ module.exports = [
   inventory,
   result,
   teacher_class,
-  classVclass
+  classVclass,
+  quizzClassVClass,
 ];

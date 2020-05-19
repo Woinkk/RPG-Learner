@@ -17,5 +17,14 @@
         "pseudo":"yougotthat",
         "idschool":1,
         "idmatiere":1
+    },
+    {
+        "firstname":"jean",
+        "lastname":"delafontaine",
+        "email":"fontaine@gmail.com",
+        "password":"jean123",
+        "pseudo":"lesfables",
+        "idschool":1,
+        "idmatiere":2
     }
 ]

@@ -1,3 +1,6 @@
+const ClassVClass = require('../models/classVclass.js');
+const Class = require('../models/class.js');
+
 /**
  * @param {import('express').Request} req
  * @param {import('express').Response} res
@@ -10,8 +13,15 @@ async function postClassVClass (req, res) {
       .send('Null or same selected');
   }
 
-  req.session.myClass = req.body.selectedMyClasses;
-  req.session.otherClass = req.body.selectedAllClasses;
+  const datenull = "0001-01-01 01:01:01";
+  const list = [];
+  const idclass1 = await Class.getIdByName(req.body.selectedMyClasses);
+  const idclass2 = await Class.getIdByName(req.body.selectedMyClasses);
+
+  const resp = await ClassVClass.create(idclass1.rows[0].id, idclass2.rows[0].id, datenull, list);
+
+  req.session.myClass = req.body.selectedMyClasses;Object
+  req.session.otherClass = req.body.selectedMyClasses;
 
   res.status(200)
     .send('All good');

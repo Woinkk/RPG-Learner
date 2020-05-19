@@ -40,6 +40,16 @@ class teacher {
     });
   }
 
+  static async getTeacherById (id) {
+    const result = await PostgresStore.pool.query({
+      text: ` SELECT * FROM ${teacher.tableName}
+            WHERE id = $1 
+    `,
+      values: [id]
+    });
+    return result;
+  }
+
   static async verifyTeacher (mail, password) {
     const result = await PostgresStore.pool.query({
       text: ` SELECT * FROM ${teacher.tableName}
