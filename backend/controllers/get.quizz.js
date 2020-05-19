@@ -1,6 +1,7 @@
 const Quizz = require('../models/quizz.js');
 const Subject = require('../models/subject.js');
 const Matiere =require('../models/matiere.js');
+const Teacher = require('../models/teacher.js');
 
 /**
  * @param {import('express').Request} req
@@ -11,13 +12,15 @@ async function getQuizz(req, res) {
     
     const result = await Quizz.getAll();
 
+    const idMatiere = await Teacher.getMatiereIdByTeacher(TSession.userId)
+    const matiereName = await Matiere.getNameById(idMatiere[0].idmatiere);
+
     let finalResult = [];
 
      for (let i = 0; i < result.length; i++) {
         const element = result[i];
         
         const subjectName = await Subject.getSubjectNameById(element.idsubject);
-        const matiereName = await Matiere.getNameById(element.idteacher);
 
         const Quizz = { id: element.id, name: element.name, subject: subjectName[0].name, matiere: matiereName[0].name };
 
