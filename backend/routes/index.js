@@ -13,6 +13,9 @@ const putCreateSubject = require('../controllers/put.createSubject.js');
 const putCreateQuizz = require('../controllers/put.createQuizz.js');
 const getMatiere = require('../controllers/get.matiere.js');
 const getSubject = require('../controllers/get.subject.js');
+const postSavingClassVClass = require('../controllers/post.savingClassVClass.js');
+const postMyClassVClass = require('../controllers/post.myClassVClass.js');
+const postDeleteClassVClass = require('../controllers/post.deleteClassVClass.js');
 
 async function isAuthenticated (req, res, next) {
   if (req.session.userId) {
@@ -30,6 +33,9 @@ router.post('/ClassVClass', postClassVClass);
 router.post('/allQuizz', postAllQuizzes);
 router.post('/NmbQueByQui', postNmbQueByQui);
 router.post('/SubjectByQuizz', postSubjectByQuizz);
+router.post('/myClassVClass', postMyClassVClass)
+router.post('/SavingClassVClass', postSavingClassVClass);
+router.post('/deleteClassVClass', postDeleteClassVClass);
 router.put('/createQuizz', putCreateQuizz);
 
 router.put('/createSubject', putCreateSubject);
