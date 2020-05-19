@@ -18,6 +18,23 @@ class quizzClassVClass {
       values: [json.idquizz, json.idclassVClass]
     });
   }
+  static async deleteByClassVClassId (id) {
+    const result = await PostgresStore.pool.query({
+      text: `DELETE FROM ${quizzClassVClass.tableName}
+      WHERE $1 = idclassVClass`,
+      values: [id]
+    });
+    return result;
+  }
+
+  static async addingQuizz(idclassVClass, idquizz) {
+      const resp = await PostgresStore.pool.query({
+        text: `INSERT INTO ${quizzClassVClass.tableName}
+        (idquizz, idclassVClass) VALUES($1, $2)`,
+        values: [idquizz, idclassVClass]
+      });
+      return resp;
+  }
 }
 quizzClassVClass.tableName = 'quizzClassVClass';
 

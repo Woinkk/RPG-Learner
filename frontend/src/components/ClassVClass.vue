@@ -30,12 +30,12 @@
         </v-btn>
         <br :hidden="hidden">
         <br>
-      <v-date-picker v-model="pickerDate" :hidden="hidden" landscape=true></v-date-picker>
-      <v-time-picker v-model="pickerTime" :hidden="hidden" format=24hr landscape=true></v-time-picker>
+      <v-date-picker v-model="savings.pickerDate" :hidden="hidden" landscape=true></v-date-picker>
+      <v-time-picker v-model="savings.pickerTime" :hidden="hidden" format=24hr landscape=true></v-time-picker>
     </v-col>
 
       <v-col 
-      v-for="(item, i) in quizzList"
+      v-for="(item, i) in savings.quizzList"
       :key="i"
       cols="12">
           <v-card
@@ -90,6 +90,20 @@
         </v-btn>
       </v-row>
     </v-container>
+
+    <v-snackbar
+      v-model="snackbar"
+      timeout=2000
+    >
+      {{ text }}
+      <v-btn
+        color="blue"
+        text
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
 
     <v-navigation-drawer
       v-model="drawer"
@@ -152,17 +166,18 @@
 import {AllQuizz} from "../../services/api.js";
 import {GetNmbQuestionsByQuizz} from "../../services/api.js";
 import {GetSubjectByQuizz} from "../../services/api.js";
+import {SavingClassVClass} from "../../services/api.js";
 export default {
   computed: {
     computeMine: function() {
       if(this.myQuizzes !== null) {
         var list = [];
         var verif = false;
-        if(this.quizzList.length === 0) for(let i = 0; i < this.myQuizzes.length; i++) list.push(this.myQuizzes[i]);
+        if(this.savings.quizzList.length === 0) for(let i = 0; i < this.myQuizzes.length; i++) list.push(this.myQuizzes[i]);
         else {
           for(let i = 0; i < this.myQuizzes.length; i++) {
-            for(let j = 0; j < this.quizzList.length; j++) {
-              if(this.quizzList[j].id === this.myQuizzes[i].id) verif = true;
+            for(let j = 0; j < this.savings.quizzList.length; j++) {
+              if(this.savings.quizzList[j].id === this.myQuizzes[i].id) verif = true;
             }
             if(!verif) list.push(this.myQuizzes[i]);
           }
@@ -176,11 +191,11 @@ export default {
       if(this.otherQuizzes !== null) {
         var list = [];
         var verif = false;
-        if(this.quizzList.length === 0) for(let i = 0; i < this.otherQuizzes.length; i++) list.push(this.otherQuizzes[i]);
+        if(this.savings.quizzList.length === 0) for(let i = 0; i < this.otherQuizzes.length; i++) list.push(this.otherQuizzes[i]);
         else {
           for(let i = 0; i < this.otherQuizzes.length; i++) {
-            for(let j = 0; j < this.quizzList.length; j++) {
-              if(this.quizzList[j].id === this.otherQuizzes[i].id) verif = true;
+            for(let j = 0; j < this.savings.quizzList.length; j++) {
+              if(this.savings.quizzList[j].id === this.otherQuizzes[i].id) verif = true;
             }
             if(!verif) list.push(this.otherQuizzes[i]);
           }
@@ -193,7 +208,16 @@ export default {
   },
   methods: {
     saving: async function() {
-      
+      const resp = await SavingClassVClass(this.savings);
+      console.log(resp);
+      if(resp === 202){
+        this.text = "Problème sauvegarde date/temps.";
+        this.snackbar = true;
+      } else if(resp === 200) {
+        this.text = "Sauvegarde Quizzs et date effectuée.";
+        this.snackbar = true;
+      }
+      return;
     },
     allQuizz: async function () {
         const req = await AllQuizz();
@@ -227,21 +251,21 @@ export default {
         return;
     },
     addQuizz: async function(quizz) {
-      this.quizzList.push(quizz);
+      this.savings.quizzList.push(quizz);
     },
     deleteQuizz: async function(quizz) {
-      for(let i = 0; i < this.quizzList.length; i++) if(this.quizzList[i].name === quizz.name) this.quizzList.splice(i, 1);
+      for(let i = 0; i < this.savings.quizzList.length; i++) if(this.savings.quizzList[i].name === quizz.name) this.savings.quizzList.splice(i, 1);
     },
     plusPos: async function(quizz) {
       var plus;
       var sub;
       var verif = false;
       for(let i = 0; !verif; i++) {
-        if(quizz.id === this.quizzList[i].id) {
+        if(quizz.id === this.savings.quizzList[i].id) {
           plus = i + 1;
           sub = i - 1;
-          this.quizzList.splice(sub, 0, quizz);
-          this.quizzList.splice(plus, 1);
+          this.savings.quizzList.splice(sub, 0, quizz);
+          this.savings.quizzList.splice(plus, 1);
           verif = true;
         }
       }
@@ -252,8 +276,8 @@ export default {
       for(let i = 0; !verif; i++) {
         if(quizz.id === this.quizzList[i].id) {
           plus = i + 2;
-          this.quizzList.splice(plus, 0, quizz);
-          this.quizzList.splice(i, 1);
+          this.savings.quizzList.splice(plus, 0, quizz);
+          this.savings.quizzList.splice(i, 1);
           verif = true;
         }
       }
@@ -271,13 +295,13 @@ export default {
 
  data () {
       return {
-        pickerDate: new Date().toISOString().substr(0, 10),
-        pickerTime: null,
         drawer: false,
         myQuizzes: null,
         otherQuizzes: null,
-        quizzList: [],
         hidden: true,
+        savings: {quizzList: [], pickerTime: null, pickerDate:new Date().toISOString().substr(0, 10)},
+        snackbar: false,
+        text: null,
       }
     },
 };

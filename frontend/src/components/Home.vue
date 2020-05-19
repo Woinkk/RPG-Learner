@@ -49,6 +49,53 @@
           </v-card-actions>
         </v-card>
       </v-col>
+      <v-col
+          v-for="(item, i) in allClassVClass"
+          :key="i"
+          cols="12"
+        >
+          <v-card
+            dark
+          >
+            <div class="d-flex flex-no-wrap justify-space-between">
+              <div>
+                <v-card-title
+                  class="headline"
+                >{{item.name1}} VS {{item.name2}}</v-card-title>
+
+                <v-card-subtitle v-if="item.date !== null">Un Class VS Class déjà existant
+                  <br>
+                  Qui aura lieu : {{item.date}}.
+                </v-card-subtitle>
+                <v-card-subtitle v-else>Un Class VS Class déjà existant
+                  <br>
+                  La date et l'heure de cet événement rêste encore à définir.
+                </v-card-subtitle>
+              </div>
+              <v-col
+              align="right"
+              >
+              <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn @click=DeleteClassVClass(item) class="mx-2" fab small dark color="red" v-on="on">
+                  <v-icon dark>mdi-delete</v-icon>
+                </v-btn>
+              </template>
+              <span>Supprimer ce Classe VS Classe</span>
+            </v-tooltip>
+            <br>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn @click=editClassVClass(item) class="mx-2" fab small dark color="green" v-on="on">
+                  <v-icon dark>mdi-pencil</v-icon>
+                </v-btn>
+              </template>
+              <span>Editer ce Classe VS Classe</span>
+            </v-tooltip>
+              </v-col>
+            </div>
+          </v-card>
+        </v-col>
     </v-row>
   </v-container>
 </template>
@@ -60,6 +107,8 @@ import ModifyQuizz from "./ModifyQuizz.vue";
 import {myClasses} from "../../services/api.js";
 import {otherClasses} from "../../services/api.js";
 import {createClassVClass} from "../../services/api.js";
+import {myClassVClass} from "../../services/api.js";
+import {deleteClassVClass} from "../../services/api.js";
 export default {
   name: "Home",
   components: {
@@ -71,6 +120,7 @@ export default {
     myClasse: null,
     allClasses: null,
     ClassVClass:{selectedMyClasses: null, selectedAllClasses: null},
+    allClassVClass:null,
   }),
   computed: {
     computeAll: function() {
@@ -130,11 +180,26 @@ export default {
         this.allClasses = req;
       }
       return;
+    },
+    MyClassVClass: async function() {
+      const req = await myClassVClass();
+      if(req !== null) {
+        this.allClassVClass = req;
+      }
+    },
+    DeleteClassVClass: async function(ClassVClass) {
+      const req = await deleteClassVClass(ClassVClass);
+      if(req == 200) {
+        for(let i = 0; i < this.allClassVClass.length; i++) {
+          if(this.allClassVClass[i].id === ClassVClass.id) this.allClassVClass.splice(i, 1);
+        }
+      } 
     }
   },
   created() {
       this.MyClasses();
       this.OtherClasses();
+      this.MyClassVClass();
     }
 };
 </script>

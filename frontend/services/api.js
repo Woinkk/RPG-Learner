@@ -37,6 +37,21 @@ function GetSubjectByQuizz (content) {
     .then(response => response.data);
 }
 
+function SavingClassVClass (content) {
+  return axios.post(`${SERVER_URL}/SavingClassVClass`, content)
+    .then(response => response.status);
+}
+
+function deleteClassVClass (content) {
+  return axios.post(`${SERVER_URL}/deleteClassVClass`, content)
+    .then(response => response.status);
+}
+
+function myClassVClass (content) {
+  return axios.post(`${SERVER_URL}/myClassVClass`, content)
+    .then(response => response.data);
+}
+
 function insertAccountNewStudent(newStudent) {
   var myInit = {
     method:'POST',
@@ -103,10 +118,13 @@ export {
   getQuizz,
   AllQuizz,
   GetNmbQuestionsByQuizz,
-  GetSubjectByQuizz
+  GetSubjectByQuizz,
   deleteQuizz,
   getQuizzByIdToModify,
   modifyQuizz
+  SavingClassVClass,
+  myClassVClass,
+  deleteClassVClass
 };
 
 
