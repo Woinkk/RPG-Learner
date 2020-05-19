@@ -1,5 +1,5 @@
 [
-    {"name":"5èmeB", "idschool":1}, 
-    {"name":"3èmeD", "idschool":1},
-    {"name":"5èmeC", "idschool":1}
+    {"name":"5èmeB", "idschool":1, "idclassLevel":2}, 
+    {"name":"3èmeD", "idschool":1, "idclassLevel":4},
+    {"name":"5èmeC", "idschool":1, "idclassLevel":2}
 ]

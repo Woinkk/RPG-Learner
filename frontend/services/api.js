@@ -22,16 +22,78 @@ function createClassVClass (ClassVClass) {
     .then(response => response.status);
 }
 
+function AllQuizz (content) {
+  return axios.post(`${SERVER_URL}/allQuizz`, content)
+    .then(response => response.data);
+}
+
+function GetNmbQuestionsByQuizz (content) {
+  return axios.post(`${SERVER_URL}/NmbQueByQui`, content)
+    .then(response => response.data);
+}
+
+function GetSubjectByQuizz (content) {
+  return axios.post(`${SERVER_URL}/SubjectByQuizz`, content)
+    .then(response => response.data);
+}
+
+function SavingClassVClass (content) {
+  return axios.post(`${SERVER_URL}/SavingClassVClass`, content)
+    .then(response => response.status);
+}
+
+function deleteClassVClass (content) {
+  return axios.post(`${SERVER_URL}/deleteClassVClass`, content)
+    .then(response => response.status);
+}
+
+function myClassVClass (content) {
+  return axios.post(`${SERVER_URL}/myClassVClass`, content)
+    .then(response => response.data);
+}
+
 function insertAccountNewStudent(newStudent) {
   return axios.put(`${SERVER_URL}/createNewStudent`,newStudent)
     .then(response => response.status)
     
 }
 
-function isConnected(){
-  return axios.post(`${SERVER_URL}`)
-    .then(response=>response.data)
-  
+function createSubject (subject) {
+  return axios.put(`${SERVER_URL}/createSubject`, {subject: subject})
+  .then(response => response.data);
+}
+
+function getMatiere () {
+  return axios.get(`${SERVER_URL}/getMatiere`)
+  .then(response => response.data);
+}
+
+function getSubject () {
+  return axios.get(`${SERVER_URL}/getSubject`)
+  .then(response => response.data);
+}
+
+function createQuizz (completeQuizz) {
+  return axios.put(`${SERVER_URL}/createQuizz`, completeQuizz)
+  .then(response => response.data);
+}
+
+function getQuizz() {
+  return axios.get(`${SERVER_URL}/getQuizz`)
+  .then(response => response.data);
+}
+
+function getQuizzByIdToModify(quizzId) {
+  return axios.get(`${SERVER_URL}/getQuizz/${quizzId}`)
+  .then(response => response.data);
+}
+
+function modifyQuizz(quizzId, Quizz) {
+  return axios.put(`${SERVER_URL}/modifyQuizz/${quizzId}`, Quizz)
+}
+
+function deleteQuizz(quizzId) {
+  return axios.delete(`${SERVER_URL}/deleteQuizz/${quizzId}`)
 }
 
 export {
@@ -39,8 +101,22 @@ export {
   insertAccountNewStudent,
   myClasses,
   otherClasses,
+  createSubject,
+  getMatiere,
+  getSubject,
   createClassVClass,
-  isConnected
+  //MyQuizz,
+  createQuizz,
+  getQuizz,
+  AllQuizz,
+  GetNmbQuestionsByQuizz,
+  GetSubjectByQuizz,
+  deleteQuizz,
+  getQuizzByIdToModify,
+  modifyQuizz,
+  SavingClassVClass,
+  myClassVClass,
+  deleteClassVClass
 };
 
 

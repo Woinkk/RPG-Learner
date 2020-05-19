@@ -1,11 +1,8 @@
 [
     {
-        "name":"math",
-        "idteacher":1
+        "name":"Mathématiques"
     },
     {
-        "name":"francais",
-        "idteacher":2
-        
+        "name":"Français" 
     }
 ]

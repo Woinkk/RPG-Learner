@@ -1,4 +1,3 @@
-const answer = require('./answer.js');
 const classe = require('./class.js');
 const inventory = require('./inventory.js');
 const item = require('./item.js');
@@ -12,21 +11,25 @@ const subject = require('./subject.js');
 const teacher = require('./teacher.js');
 const teacher_class = require ('./teacher_class.js');
 const classVclass = require ('./classVclass.js');
+const classLevel = require('./classLevel.js');
+const answerStudent = require('./answerStudent.js');
+const quizzClassVClass = require('./quizzClassVClass.js');
 
 module.exports = [
   item,
   school,
+  classLevel,
   classe,
   student,
-  subject,
-  teacher,
   matiere,
-  question,
-  answer,
-  inventory,
+  teacher,
+  subject,
   quizz,
+  question,
+  answerStudent,
+  inventory,
   result,
   teacher_class,
-  classVclass
-
+  classVclass,
+  quizzClassVClass,
 ];

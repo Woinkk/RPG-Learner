@@ -1,0 +1,26 @@
+[
+    {
+        "answer":1,
+        "type":"ClassVClass",
+        "idstudent":1,
+        "idquestion":1
+    },
+    {
+        "answer":3,
+        "type":"Duel",
+        "idstudent":1,
+        "idquestion":3
+    },
+    {
+        "answer":2,
+        "type":"ClassVClass",
+        "idstudent":2,
+        "idquestion":2
+    },
+    {
+        "answer":4,
+        "type":"Duel",
+        "idstudent":2,
+        "idquestion":4
+    }
+]

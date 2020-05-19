@@ -4,19 +4,75 @@ class subject {
     return ` 
           CREATE TABLE ${subject.tableName}(
           id SERIAL PRIMARY KEY,
-          name TEXT
-          
+          name TEXT,
+          idteacher INT,
+          FOREIGN KEY (idteacher) REFERENCES teacher (id)
       )`;
   }
 
   static async insert (json) {
-    await PostgresStore.pool.query({
+    const result = await PostgresStore.pool.query({
       text: `INSERT INTO ${subject.tableName}
-        (name) VALUES($1)`,
-      values: [json.name]
+        (name, idteacher) VALUES($1, $2)`,
+      values: [json.name, json.idteacher]
     });
+
+    console.log("result of the insert ", result);
+  }
+
+  static async verifysubject (json) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT * FROM ${subject.tableName} WHERE name = $1`,
+      values: [json.subject]
+    });
+
+    console.log(json.subject);
+
+    console.log(result);
+
+    if(result.rows.length === 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  static async getAll () {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT * FROM ${subject.tableName}`
+    });
+
+    return result.rows;
+  }
+
+  static async getId (subjectName) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT * FROM ${subject.tableName} WHERE name = $1`,
+      values: [subjectName]
+    });
+
+    return result.rows;
+  }
+
+  static async getSubjectByTeacher (userId) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT name FROM ${subject.tableName} WHERE idteacher = $1`,
+      values: [userId]
+    });
+
+    return result.rows;
+  }
+
+  static async getSubjectNameById (subjectId) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT name FROM ${subject.tableName} WHERE id = $1`,
+      values: [subjectId]
+    });
+
+    return result.rows;
   }
 }
+
 subject.tableName = 'subject';
 
 module.exports = subject
