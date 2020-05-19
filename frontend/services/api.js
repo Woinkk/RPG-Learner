@@ -113,7 +113,7 @@ export {
   getMatiere,
   getSubject,
   createClassVClass,
-  MyQuizz,
+  //MyQuizz,
   createQuizz,
   getQuizz,
   AllQuizz,
@@ -121,7 +121,7 @@ export {
   GetSubjectByQuizz,
   deleteQuizz,
   getQuizzByIdToModify,
-  modifyQuizz
+  modifyQuizz,
   SavingClassVClass,
   myClassVClass,
   deleteClassVClass
