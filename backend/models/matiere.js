@@ -33,10 +33,10 @@ class matiere {
     return result.rows;
   }
 
-  static async getNameById (idMatiere) {
+  static async getNameById (idTeacher) {
     const result = await PostgresStore.pool.query({
       text: `SELECT name FROM ${matiere.tableName} WHERE id = $1`,
-      values: [idMatiere]
+      values: [idTeacher]
     });
 
     return result.rows;
