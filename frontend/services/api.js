@@ -42,39 +42,41 @@ function insertAccountNewStudent(newStudent) {
 }
 
 function createSubject (subject) {
-  var myInit = {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({subject: subject})
-  }
-
-  console.log(myInit.body);
-
-  return fetch(`${SERVER_URL}/createSubject`, myInit)
+  return axios.put(`${SERVER_URL}/createSubject`, {subject: subject})
+  .then(response => response.data);
 }
 
 function getMatiere () {
-  var myInit = {
-    method: 'GET'
-  }
-
-  return fetch(`${SERVER_URL}/getMatiere`, myInit)
-  .then(response => response.json()).then(data => {
-    return data
-  })
+  return axios.get(`${SERVER_URL}/getMatiere`)
+  .then(response => response.data);
 }
 
 function getSubject () {
-  var myInit = {
-    method: 'GET'
-  }
+  return axios.get(`${SERVER_URL}/getSubject`)
+  .then(response => response.data);
+}
 
-  return fetch(`${SERVER_URL}/getSubject`, myInit)
-  .then(response => response.json()).then(data => {
-    return data
-  })
+function createQuizz (completeQuizz) {
+  return axios.put(`${SERVER_URL}/createQuizz`, completeQuizz)
+  .then(response => response.data);
+}
+
+function getQuizz() {
+  return axios.get(`${SERVER_URL}/getQuizz`)
+  .then(response => response.data);
+}
+
+function getQuizzByIdToModify(quizzId) {
+  return axios.get(`${SERVER_URL}/getQuizz/${quizzId}`)
+  .then(response => response.data);
+}
+
+function modifyQuizz(quizzId, Quizz) {
+  return axios.put(`${SERVER_URL}/modifyQuizz/${quizzId}`, Quizz)
+}
+
+function deleteQuizz(quizzId) {
+  return axios.delete(`${SERVER_URL}/deleteQuizz/${quizzId}`)
 }
 
 export {
@@ -86,7 +88,12 @@ export {
   getMatiere,
   getSubject,
   createClassVClass,
-  MyQuizz
+  MyQuizz,
+  createQuizz,
+  getQuizz,
+  deleteQuizz,
+  getQuizzByIdToModify,
+  modifyQuizz
 };
 
 

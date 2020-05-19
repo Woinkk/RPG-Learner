@@ -64,6 +64,27 @@ class teacher {
       return null;
     }
   }
+
+  static async getMatiereIdByTeacher (userId) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT idmatiere FROM ${teacher.tableName} where id = $1`,
+      values: [userId]
+    });
+
+    return result.rows;
+  }
+
+  static async getMatiereNameByTeacher (TeacherId) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT M.name FROM ${teacher.tableName} AS T
+      JOIN matiere AS M
+      ON T.idmatiere = M.id
+      where T.id = $1`,
+      values: [TeacherId]
+    });
+
+    return result.rows;
+  }
 }
 
 teacher.tableName = 'teacher';

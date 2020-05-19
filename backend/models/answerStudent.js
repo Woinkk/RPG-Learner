@@ -25,6 +25,16 @@ class answerStudent {
     });
     return result;
   }
+
+  static async deleteByIdQuestion (idquestion) {
+    const result = await PostgresStore.pool.query({
+      text: `
+            DELETE FROM ${answerStudent.tableName}
+            WHERE idquestion = $1`,
+      values: [idquestion]
+    });
+    return result;
+  }
 }
 answerStudent.tableName = 'answerStudent';
 

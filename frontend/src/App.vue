@@ -15,7 +15,7 @@
 
 <script>
 import Navbar from "./components/Navbar";
-import {login, createSubject, } from '../services/api.js';
+import {login, createSubject, createQuizz} from '../services/api.js';
 import { insertAccountNewStudent } from "../services/api.js";
 
 export default {
@@ -44,8 +44,10 @@ export default {
       console.log(subject);
       await createSubject(subject);
     },
-    sendQuizz: async function () {
-      
+    sendQuizz: async function (completeQuizz) {
+      console.log(completeQuizz);
+      await createQuizz(completeQuizz);
+      this.$router.push("home");
     }
   },
 

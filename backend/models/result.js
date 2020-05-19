@@ -24,6 +24,18 @@ class result {
     });
     return results;
   }
+
+  static async deleteByIdQuizz (idquizz) {
+    const results = await PostgresStore.pool.query({
+      text: `
+            DELETE FROM ${result.tableName}
+            WHERE idquizz = $1
+            `,
+      values: [idquizz]
+    });
+
+    return results.rows;
+  }
 }
 result.tableName = 'result';
 

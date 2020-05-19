@@ -32,6 +32,15 @@ class matiere {
 
     return result.rows;
   }
+
+  static async getNameById (idMatiere) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT name FROM ${matiere.tableName} WHERE id = $1`,
+      values: [idMatiere]
+    });
+
+    return result.rows;
+  }
 }
 matiere.tableName = 'matiere';
 

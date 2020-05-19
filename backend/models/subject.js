@@ -53,6 +53,24 @@ class subject {
 
     return result.rows;
   }
+
+  static async getSubjectByTeacher (userId) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT name FROM ${subject.tableName} WHERE idteacher = $1`,
+      values: [userId]
+    });
+
+    return result.rows;
+  }
+
+  static async getSubjectNameById (subjectId) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT name FROM ${subject.tableName} WHERE id = $1`,
+      values: [subjectId]
+    });
+
+    return result.rows;
+  }
 }
 
 subject.tableName = 'subject';

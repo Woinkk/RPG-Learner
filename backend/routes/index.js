@@ -11,6 +11,10 @@ const putCreateQuizz = require('../controllers/put.createQuizz.js');
 const getMatiere = require('../controllers/get.matiere.js');
 const getSubject = require('../controllers/get.subject.js');
 const postMyQuizzes = require('../controllers/post.myQuizz.js');
+const getQuizz = require('../controllers/get.quizz.js');
+const deleteQuizz =  require('../controllers/delete.quizz.js');
+const getQuizzById = require('../controllers/get.quizzById.js');
+const putModifyQuizz = require('../controllers/put.modifyQuizz.js');
 
 async function isAuthenticated (req, res, next) {
   if (req.session.userId) {
@@ -31,6 +35,10 @@ router.put('/createSubject', putCreateSubject);
 router.post('/myQuizz', postMyQuizzes);
 router.get('/getMatiere', getMatiere);
 router.get('/getSubject', getSubject);
+router.get('/getQuizz', getQuizz);
+router.get('/getQuizz/:id', getQuizzById);
+router.delete('/deleteQuizz/:id', deleteQuizz);
+router.put('/modifyQuizz/:id', putModifyQuizz);
 
 /* GET home page. */
 router.get('/', function (req, res, next) {

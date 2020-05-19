@@ -1,8 +1,8 @@
 <template>
   <div>
-    Matière: <input type="text" disabled v-model=selected.selectedMatiere>
+    Matière: <input type="text" disabled v-model=completeQuizz.matiere>
     <br/>
-    Sujet: <input type="text" disabled v-model=selected.selectedSubject>
+    Sujet: <input type="text" disabled v-model=completeQuizz.subject>
     <v-card
         name="QuizzTitle"
         class="text-center"
@@ -73,14 +73,16 @@
     </v-simple-table>
     <br/>
     <div class="text-center">
-      <v-btn @click="sendQuizz">Créer !</v-btn>
+      <v-btn @click="modifyQuizz">Modifier !</v-btn>
     </div>
   </div>
 </template>
 
 <script>
+import { getQuizzByIdToModify, modifyQuizz } from "../../services/api.js";
+
 export default {
-  name: "QuizzCreation",
+  name: "QuizzModification",
   components: {
   },
   props: ['selected'],
@@ -96,16 +98,31 @@ export default {
   //     this.complete = true;
   //   }
   // },
+  async created() {
+    const QuizzToModify = await getQuizzByIdToModify(this.$route.params.id);
+
+    console.log(QuizzToModify);
+
+    this.completeQuizz = {
+      quizzId: QuizzToModify.id,
+      quizzName: QuizzToModify.quizzName,
+      quizz: QuizzToModify.question,
+      matiere: QuizzToModify.matiere,
+      subject: QuizzToModify.subject,
+      classLevel: null
+    }
+    
+
+  },
   data: function() {
     return {
     //complete: false,
       completeQuizz: {
+        quizzId: null,
         quizzName: null,
-        quizz: [
-          {question: "", reponses: [{text: "", value: false}, {text: "", value: false}, {text: "", value: false}, {text: "", value: false}]},
-        ],
-        matiere: this.selected.selectedMatiere,
-        subject: this.selected.selectedSubject,
+        quizz: [],
+        matiere: null,
+        subject: null,
         classLevel: null
       },
       classesLevel: [
@@ -140,8 +157,11 @@ export default {
     selectClassLevel: function (classLevel) {
       this.completeQuizz.classLevel = classLevel;
     },
-    sendQuizz: function () {
-      this.$emit('sendQuizz', this.completeQuizz)
+    modifyQuizz: async function () {
+      const req = await modifyQuizz(this.completeQuizz.quizzId, this.completeQuizz);
+      if(req.status === 200) {
+        this.$router.push({name: "home"});
+      }
     }
   }
 };

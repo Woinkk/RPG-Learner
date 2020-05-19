@@ -25,6 +25,37 @@ class question {
     return result;
   }
 
+  static async getAllQuestionByIdQuizz (idquizz) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT * FROM ${question.tableName}
+      WHERE idquizz = $1`,
+      values: [idquizz]
+    });
+
+    return result.rows;
+  }
+
+  static async deleteAllQuestionByQuizzId (idquizz) {
+    const result = await PostgresStore.pool.query({
+      text: `DELETE FROM ${question.tableName}
+      WHERE idquizz = $1`,
+      values: [idquizz]
+    });
+
+    return result.rows;
+  }
+
+  static async updateByIdQuestion (json) {
+    const result = await PostgresStore.pool.query({
+      text: `UPDATE ${question.tableName}
+      SET (question, reponse1, reponse2, reponse3, reponse4, good) = ($1, $2, $3, $4, $5, $6)
+      WHERE id = $7`,
+      values: [json.question, json.reponse1, json.reponse2, json.reponse3, json.reponse4, json.good, json.idquestion]
+    });
+
+    return result.rows;
+  }
+
 }
 question.tableName = 'question';
 

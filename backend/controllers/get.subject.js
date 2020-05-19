@@ -5,7 +5,10 @@ const Subject = require('../models/subject.js');
  * @param {import('express').Response} res
  */
 async function getSubject(req, res) {
-    const result = await Subject.getAll();
+    const TSession = req.session;
+
+
+    const result = await Subject.getSubjectByTeacher(TSession.userId);
 
     console.log(result);
 
