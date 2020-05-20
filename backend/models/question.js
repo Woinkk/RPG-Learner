@@ -35,6 +35,15 @@ class question {
     return result.rows;
   }
 
+  static async getQuestionsByQuizz (idquizz) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT * FROM ${question.tableName}
+      WHERE idquizz = $1`,
+      values: [idquizz]
+    });
+    return result;
+  }
+
   static async deleteAllQuestionByQuizzId (idquizz) {
     const result = await PostgresStore.pool.query({
       text: `DELETE FROM ${question.tableName}

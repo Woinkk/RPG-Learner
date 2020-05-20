@@ -63,7 +63,7 @@
               <span>Placer ce Quizz plus tôt</span>
             </v-tooltip>
 
-            <v-tooltip bottom v-if="i !== quizzList.length - 1">
+            <v-tooltip bottom v-if="i !== savings.quizzList.length - 1">
               <template v-slot:activator="{ on }">
                 <v-btn @click=subPos(item) class="mx-2" fab small dark color="red" v-on="on">
                   <v-icon dark>mdi-sort-numeric-ascending</v-icon>
@@ -274,7 +274,7 @@ export default {
       var plus;
       var verif = false;
       for(let i = 0; !verif; i++) {
-        if(quizz.id === this.quizzList[i].id) {
+        if(quizz.id === this.savings.quizzList[i].id) {
           plus = i + 2;
           this.savings.quizzList.splice(plus, 0, quizz);
           this.savings.quizzList.splice(i, 1);
