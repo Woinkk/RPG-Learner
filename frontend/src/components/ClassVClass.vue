@@ -30,7 +30,7 @@
         </v-btn>
         <br :hidden="hidden">
         <br>
-      <v-date-picker v-model="savings.pickerDate" :hidden="hidden" landscape=true></v-date-picker>
+      <v-date-picker v-model="savings.pickerDate" :hidden="hidden" landscape=true locale="fr"></v-date-picker>
       <v-time-picker v-model="savings.pickerTime" :hidden="hidden" format=24hr landscape=true></v-time-picker>
     </v-col>
 

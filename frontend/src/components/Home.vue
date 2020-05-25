@@ -45,67 +45,58 @@
               </v-list>
             </v-menu>
             <v-spacer></v-spacer>
-            <v-btn @click=createClassVClass(ClassVClass)>Créer</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-      <v-col
-          v-for="(item, i) in allClassVClass"
-          :key="i"
-          cols="12"
-        >
-          <v-card
-            dark
-          >
-            <div class="d-flex flex-no-wrap justify-space-between">
-              <div>
-                <v-btn @click=EditClassVClass(item) class="mx-2" fab small dark color="green" v-on="on">
-                  <v-icon dark>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-              <span>Editer ce Classe VS Classe</span>
-            </v-tooltip>
-              </v-col>
-            </div>
-          </v-card>
-        </v-col>
-                <v-card-title
-                  class="headline"
-                >{{item.name1}} VS {{item.name2}}</v-card-title>
-
-                <v-card-subtitle v-if="item.date !== null">Un Class VS Class déjà existant
-                  <br>
-                  Qui aura lieu : {{item.date}}.
-                </v-card-subtitle>
-                <v-card-subtitle v-else>Un Class VS Class déjà existant
-                  <br>
-                  La date et l'heure de cet événement rêste encore à définir.
-                </v-card-subtitle>
-              </div>
-              <v-col
-              align="right"
-              >
-              <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn @click=DeleteClassVClass(item) class="mx-2" fab small dark color="red" v-on="on">
-                  <v-icon dark>mdi-delete</v-icon>
-                </v-btn>
-              </template>
-              <span>Supprimer ce Classe VS Classe</span>
-            </v-tooltip>
-            <br>
             <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn @click=editClassVClass(item) class="mx-2" fab small dark color="green" v-on="on">
-                  <v-icon dark>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-              <span>Editer ce Classe VS Classe</span>
-            </v-tooltip>
-              </v-col>
-            </div>
-          </v-card>
-        </v-col>
+                <template v-slot:activator="{ on }">
+            <v-btn v-on="on" @click=createClassVClass(ClassVClass)>Créer</v-btn>
+            </template>
+                <span>Créer un nouveau Classe VS Classe</span>
+              </v-tooltip>
+          </v-card-actions>
+        
+         <v-simple-table fixed-header dark>
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-left">Classe n°1</th>
+            <th class="text-left">Classe n°2</th>
+            <th class="text-left">Date et Heure</th>
+            <th class="text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in allClassVClass" :key="index">
+            <td>
+              {{item.name1}}
+            </td>
+            <td>
+              {{item.name2}}
+            </td>
+            <td v-if="item.date !== null">
+              {{item.date}}
+            </td>
+            <td v-else>
+              Date à définir.
+            </td>
+            <td>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon @click="DeleteClassVClass(item)" v-on="on">mdi-delete</v-icon>
+                </template>
+                <span>Supprimer ce Classe VS Classe</span>
+              </v-tooltip>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon @click="EditClassVClass(item)" v-on="on">mdi-pencil</v-icon>
+                </template>
+                <span>Editer ce Classe VS Classe</span>
+              </v-tooltip>
+            </td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
+    </v-card>
+    </v-col>
     </v-row>
   </v-container>
 </template>

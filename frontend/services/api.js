@@ -129,13 +129,12 @@ export {
   GetNmbQuestionsByQuizz,
   GetSubjectByQuizz,
   deleteClassVClass,
-  GetQuizzById
+  GetQuizzById,
   deleteQuizz,
   getQuizzByIdToModify,
   modifyQuizz,
   SavingClassVClass,
-  myClassVClass,
-  deleteClassVClass
+  myClassVClass
 };
 
 
