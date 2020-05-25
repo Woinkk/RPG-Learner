@@ -59,6 +59,16 @@
           >
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>
+                <v-btn @click=EditClassVClass(item) class="mx-2" fab small dark color="green" v-on="on">
+                  <v-icon dark>mdi-pencil</v-icon>
+                </v-btn>
+              </template>
+              <span>Editer ce Classe VS Classe</span>
+            </v-tooltip>
+              </v-col>
+            </div>
+          </v-card>
+        </v-col>
                 <v-card-title
                   class="headline"
                 >{{item.name1}} VS {{item.name2}}</v-card-title>
@@ -109,6 +119,7 @@ import {otherClasses} from "../../services/api.js";
 import {createClassVClass} from "../../services/api.js";
 import {myClassVClass} from "../../services/api.js";
 import {deleteClassVClass} from "../../services/api.js";
+import {editClassVClass} from "../../services/api.js";
 export default {
   name: "Home",
   components: {
@@ -194,6 +205,14 @@ export default {
           if(this.allClassVClass[i].id === ClassVClass.id) this.allClassVClass.splice(i, 1);
         }
       } 
+    },
+    EditClassVClass: async function(ClassVClass) {
+      const req = await editClassVClass(ClassVClass);
+      if(req == 200) {
+        this.$router.push("ClassVClass");
+      } else {
+        console.log("couldn't edit");
+      }
     }
   },
   created() {

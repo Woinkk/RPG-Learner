@@ -167,6 +167,8 @@ import {AllQuizz} from "../../services/api.js";
 import {GetNmbQuestionsByQuizz} from "../../services/api.js";
 import {GetSubjectByQuizz} from "../../services/api.js";
 import {SavingClassVClass} from "../../services/api.js";
+import {classVClassLoader} from "../../services/api.js";
+import {GetQuizzById} from "../../services/api.js";
 export default {
   computed: {
     computeMine: function() {
@@ -219,9 +221,11 @@ export default {
       }
       return;
     },
+    showTime: async function() {
+      console.log(this.savings.pickerTime);
+    },
     allQuizz: async function () {
         const req = await AllQuizz();
-        console.log(req);
         if(req !== null) {
             var MyQuizz = [];
             var OtherQuizz = [];
@@ -281,10 +285,30 @@ export default {
           verif = true;
         }
       }
+    },
+    loader: async function() {
+      const req = await classVClassLoader();
+      if(req !== null) {
+        var nmb;
+        var subject;
+        var reqs;
+        this.savings.pickerTime = req.date.substr(11, 5);
+        this.savings.pickerDate = req.date.substr(0, 10);
+        for(let i = 0; i  < req.rows.length; i++) {
+          reqs = await GetQuizzById(req.rows[i]);
+          nmb = await GetNmbQuestionsByQuizz(reqs);
+          subject = await GetSubjectByQuizz(reqs);
+          reqs.nmbQuestions = nmb;
+          reqs.subject = subject;
+          this.savings.quizzList.push(reqs);
+        }
+      }
+      return;
     }
   },
 
   created() {
+    this.loader();
     this.allQuizz();
   },
   

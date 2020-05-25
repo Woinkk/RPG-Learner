@@ -6,6 +6,7 @@ const Subject = require('../models/subject.js');
  */
 
 async function postSubjectByQuizz (req, res) {
+  console.log(req.body);
   const response = await Subject.getSubjectById(req.body.idsubject);
   res.json(response.rows[0].name);
 }

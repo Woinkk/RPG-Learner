@@ -35,6 +35,15 @@ class quizzClassVClass {
       });
       return resp;
   }
+
+  static async getQuizzByClassVClassId(id) {
+    const resp = await PostgresStore.pool.query({
+      text: `SELECT * FROM ${quizzClassVClass.tableName}
+      WHERE idclassVClass = $1`,
+      values: [id]
+    });
+    return resp;
+  }
 }
 quizzClassVClass.tableName = 'quizzClassVClass';
 
