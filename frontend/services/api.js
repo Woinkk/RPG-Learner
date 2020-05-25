@@ -87,8 +87,25 @@ function getSubject () {
   })
 }
 
+function editClassVClass (content) {
+  return axios.post(`${SERVER_URL}/editClassVClass`, content)
+    .then(response => response.status);
+}
+
+function classVClassLoader (content) {
+  return axios.post(`${SERVER_URL}/classVClassLoader`, content)
+    .then(response => response.data);
+}
+
+function GetQuizzById (content) {
+  return axios.post(`${SERVER_URL}/GetQuizzById`, content)
+    .then(response => response.data);
+}
+
 export {
   login,
+  classVClassLoader,
+  editClassVClass,
   insertAccountNewStudent,
   myClasses,
   otherClasses,
@@ -99,6 +116,8 @@ export {
   AllQuizz,
   GetNmbQuestionsByQuizz,
   GetSubjectByQuizz
+  deleteClassVClass,
+  GetQuizzById
 };
 
 
