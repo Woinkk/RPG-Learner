@@ -115,7 +115,7 @@ export {
   createClassVClass,
   AllQuizz,
   GetNmbQuestionsByQuizz,
-  GetSubjectByQuizz
+  GetSubjectByQuizz,
   deleteClassVClass,
   GetQuizzById
 };
