@@ -59,10 +59,12 @@
               <v-textarea label="Question" v-model=item.question></v-textarea>
             </td>
             <td>
-              <v-text-field placeholder="Réponse 1" v-model=item.reponses[0].text></v-text-field>Bonne réponse: <v-checkbox v-model="item.reponses[0].value"></v-checkbox>
-              <v-text-field placeholder="Réponse 2" v-model=item.reponses[1].text></v-text-field>Bonne réponse: <v-checkbox v-model="item.reponses[1].value"></v-checkbox>
-              <v-text-field placeholder="Réponse 3" v-model=item.reponses[2].text></v-text-field>Bonne réponse: <v-checkbox v-model="item.reponses[2].value"></v-checkbox>
-              <v-text-field placeholder="Réponse 4" v-model=item.reponses[3].text></v-text-field>Bonne réponse: <v-checkbox v-model="item.reponses[3].value"></v-checkbox>
+              <v-radio-group v-model="item.goodAnswer">
+              <v-text-field placeholder="Réponse 1" v-model=item.reponses[0].text></v-text-field>Bonne réponse: <v-radio :value=1></v-radio>
+              <v-text-field placeholder="Réponse 2" v-model=item.reponses[1].text></v-text-field>Bonne réponse: <v-radio :value=2></v-radio>
+              <v-text-field placeholder="Réponse 3" v-model=item.reponses[2].text></v-text-field>Bonne réponse: <v-radio :value=3></v-radio>
+              <v-text-field placeholder="Réponse 4" v-model=item.reponses[3].text></v-text-field>Bonne réponse: <v-radio :value=4></v-radio>
+              </v-radio-group>
             </td>
             <td style="border-left: 1px solid;">
               <v-icon @click="deleteQuestion(index)">mdi-delete</v-icon>
@@ -109,10 +111,9 @@ export default {
       quizz: QuizzToModify.question,
       matiere: QuizzToModify.matiere,
       subject: QuizzToModify.subject,
-      classLevel: null
+      classLevel: QuizzToModify.classLevel
     }
     
-
   },
   data: function() {
     return {
@@ -141,7 +142,7 @@ export default {
       this.completeQuizz.quizz.splice(index, 1)
     },
     addQuestion: function () {
-      this.completeQuizz.quizz = [...this.completeQuizz.quizz, {question: "", reponses: [{text: "", value: false}, {text: "", value: false}, {text: "", value: false}, {text: "", value: false}]}]
+      this.completeQuizz.quizz = [...this.completeQuizz.quizz, {question: "", reponses: [{text: "", value: false}, {text: "", value: false}, {text: "", value: false}, {text: "", value: false}], goodAnswer: null}]
     },
     checkQuizz: function () {
       for (let i = 0; i < this.quizz.length; i++) {

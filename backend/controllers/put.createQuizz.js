@@ -26,15 +26,15 @@ async function putCreateQuizz(req, res) {
 
     //const found = array1.find(element => element.value === true);
 
-    const idQuizz = await Quizz.insert({name: quizzName, idsubject: idSubject[0].id, idteacher: TSession.userId})
+    const idQuizz = await Quizz.insert({name: quizzName, classlevel: classLevel, idsubject: idSubject[0].id, idteacher: TSession.userId})
 
     console.log("ID QUIZZ:", idQuizz);
 
     for (let i = 0; i < quizz.length; i++) {
         const element = quizz[i];
-        const good = element.reponses.findIndex(element => element.value === true)
+        //const good = element.reponses.findIndex(element => element.value === true)
 
-        const json = { question: element.question, reponse1: element.reponses[0].text, reponse2: element.reponses[1].text, reponse3: element.reponses[2].text, reponse4: element.reponses[3].text, good: good+1, idquizz: idQuizz[0].id};
+        const json = { question: element.question, reponse1: element.reponses[0].text, reponse2: element.reponses[1].text, reponse3: element.reponses[2].text, reponse4: element.reponses[3].text, good: element.goodAnswer, idquizz: idQuizz[0].id};
         const result = await Question.insert(json);
     }
 

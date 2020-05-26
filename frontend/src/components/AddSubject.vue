@@ -1,15 +1,21 @@
 <template>
     <div class="text-center">
+
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn @click="showDialog" class="mx-2" fab small dark color="indigo" v-on="on">
+            <v-icon dark>mdi-plus</v-icon>
+          </v-btn>
+        </template>
+        <span>Créer un nouveau sujet</span>
+      </v-tooltip>
+
       <v-dialog
         v-model="dialog"
         width="500"
       >
-        <template v-slot:activator="{ on }">
-          <v-btn class="mx-2" fab small dark color="indigo" v-on="on">
-            <v-icon dark>mdi-plus</v-icon>
-        </v-btn>
-        </template>
-  
+
+
         <v-card>
           <v-card-title
             class="headline grey lighten-2"
@@ -54,6 +60,9 @@ export default {
         this.dialog = false;
         this.$emit('createSubject', this.subject);
         this.$emit('reload')
+      },
+      showDialog: function () {
+        this.dialog = true;
       }
     },
 }
