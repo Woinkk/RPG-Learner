@@ -23,17 +23,20 @@
 import Navbar from "./components/Navbar";
 import {login, createSubject, createQuizz} from '../services/api.js';
 import { insertAccountNewStudent } from "../services/api.js";
-//import { isConnected } from "../services/api.js";
 
 export default {
   methods: {
     Login: async function(logProp) {
+  
       const req = await login(logProp);
-      if (req != 200) {
+      console.log("vahomegro")
+      if (req.status != 200) {
         this.$router.push("login");
       } else {
-        this.$router.push("home");
+        
+        this.$router.push({name:"home"});
       }
+      
     },
 
     insertAccountNewStudent: async function(newStudent) {
@@ -70,7 +73,6 @@ export default {
     this.$on("login", function(logProp) {
       this.Login(logProp);
     });
-    //isConnected();
   },
 
   name: "App",

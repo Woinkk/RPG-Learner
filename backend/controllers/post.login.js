@@ -22,12 +22,15 @@ async function postLogin (req, res) {
   // dans l'objet req.session
   if (teacher) {
     req.session.userId = teacher.id;
+    req.session.whoIsConnected= "teacher";
+    console.log(req.session);
     res.json(teacher);
     return;
   }
 
   if (student) {
     req.session.userId = student.id;
+    req.session.whoIsConnected = "student";
     res.json(student);
     return;
   }

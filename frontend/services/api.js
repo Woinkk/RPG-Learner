@@ -4,7 +4,7 @@ const SERVER_URL = 'http://localhost:3000';
 
 function login (logProp) {
   return axios.post(`${SERVER_URL}/login`, logProp)
-    .then(response => response.status);
+    .then(response => response);
 }
 
 function myClasses (content) {
@@ -95,6 +95,10 @@ function modifyQuizz(quizzId, Quizz) {
 function deleteQuizz(quizzId) {
   return axios.delete(`${SERVER_URL}/deleteQuizz/${quizzId}`)
 }
+function isConnected(){
+  return axios.get(`${SERVER_URL}/who`)
+  .then(response => response.data);
+}
 
 export {
   login,
@@ -116,7 +120,8 @@ export {
   modifyQuizz,
   SavingClassVClass,
   myClassVClass,
-  deleteClassVClass
+  deleteClassVClass,
+  isConnected,
 };
 
 
