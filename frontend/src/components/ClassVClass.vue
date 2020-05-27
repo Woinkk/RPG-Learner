@@ -213,7 +213,7 @@ export default {
       const resp = await SavingClassVClass(this.savings);
       console.log(resp);
       if(resp === 202){
-        this.text = "Problème sauvegarde date/temps.";
+        this.text = "Sauvegarde Quizzs mais pas de date sélectionnée.";
         this.snackbar = true;
       } else if(resp === 200) {
         this.text = "Sauvegarde Quizzs et date effectuée.";

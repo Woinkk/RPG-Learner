@@ -111,6 +111,11 @@ function GetQuizzById (content) {
     .then(response => response.data);
 }
 
+function classesStudents (content) {
+  return axios.post(`${SERVER_URL}/classesStudents`, content)
+    .then(response => response.data);
+}
+
 export {
   login,
   classVClassLoader,
@@ -134,7 +139,8 @@ export {
   getQuizzByIdToModify,
   modifyQuizz,
   SavingClassVClass,
-  myClassVClass
+  myClassVClass,
+  classesStudents
 };
 
 
