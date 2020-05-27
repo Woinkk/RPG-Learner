@@ -1,21 +1,25 @@
 [
     {
         "name": "Mathematique",
+        "classlevel": "4e",
         "idsubject":1,
         "idteacher":1
     },
     {
         "name": "Mathematique",
+        "classlevel": "T",
         "idsubject":2,
         "idteacher":2
     },
     {
         "name": "Français",
+        "classlevel": "3e",
         "idsubject":3,
         "idteacher":3
     },
     {
         "name": "Français",
+        "classlevel": "6e",
         "idsubject":4,
         "idteacher":3
     }
