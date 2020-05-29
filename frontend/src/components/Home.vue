@@ -45,6 +45,8 @@
               </v-list>
             </v-menu>
             <v-spacer></v-spacer>
+            <v-btn @click="hidden = !hidden" v-if="hidden">Afficher mes Classe VS Classe</v-btn>
+            <v-btn @click="hidden = !hidden" v-else>Cacher mes Classe VS Classe</v-btn>
             <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
             <v-btn v-on="on" @click=createClassVClass(ClassVClass)>Créer</v-btn>
@@ -53,7 +55,7 @@
               </v-tooltip>
           </v-card-actions>
         
-         <v-simple-table fixed-header dark>
+         <v-simple-table :hidden="hidden" fixed-header dark>
       <template v-slot:default>
         <thead>
           <tr>
@@ -80,15 +82,15 @@
             <td>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
-                  <v-icon @click="DeleteClassVClass(item)" v-on="on">mdi-delete</v-icon>
-                </template>
-                <span>Supprimer ce Classe VS Classe</span>
-              </v-tooltip>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
                   <v-icon @click="EditClassVClass(item)" v-on="on">mdi-pencil</v-icon>
                 </template>
                 <span>Editer ce Classe VS Classe</span>
+              </v-tooltip>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon @click="DeleteClassVClass(item)" v-on="on">mdi-delete</v-icon>
+                </template>
+                <span>Supprimer ce Classe VS Classe</span>
               </v-tooltip>
             </td>
           </tr>
@@ -123,6 +125,7 @@ export default {
     allClasses: null,
     ClassVClass:{selectedMyClasses: null, selectedAllClasses: null},
     allClassVClass:null,
+    hidden: true,
   }),
   computed: {
     computeAll: function() {

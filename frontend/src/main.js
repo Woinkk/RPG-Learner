@@ -10,6 +10,7 @@ import insertAccountNewStudent from './components/insertAccountNewStudent';
 import QuizzCreation from './components/QuizzCreation';
 import ClassVClass from './components/ClassVClass';
 import QuizzModification from './components/QuizzModification';
+import Accueil from './components/Accueil';
 
 Vue.use(VueAxios, axios);
 
@@ -27,7 +28,8 @@ const routes = [
   {path:'/newStudent', component: insertAccountNewStudent},
   { path: '/QuizzCreation', component: QuizzCreation },
   { path: '/ClassVClass', component: ClassVClass },
-  { path : '/QuizzModification/:id', component: QuizzModification }
+  { path : '/QuizzModification/:id', component: QuizzModification },
+  { path: '/', component: Accueil }
 ];
 
 const router = new VueRouter({
