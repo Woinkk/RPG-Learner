@@ -144,8 +144,7 @@ export {
   modifyQuizz,
   SavingClassVClass,
   myClassVClass,
-  deleteClassVClass,
-  classesStudents
+  classesStudents,
   isConnected,
 };
 
