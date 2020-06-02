@@ -77,10 +77,37 @@
     <div class="text-center">
       <v-btn @click="sendQuizz">Créer !</v-btn>
     </div>
+    <v-snackbar
+      v-model="snackbarGood"
+      :timeout="timeout"
+    >
+      Quizz créer avec succes !
+      <v-btn
+        color="blue"
+        text
+        @click="snackbarGood = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
+    <v-snackbar
+      v-model="snackbarError"
+      :timeout="timeout"
+    >
+      Une erreur s'est produite veuillez verifier les informations de votre quizz
+      <v-btn
+        color="blue"
+        text
+        @click="snackbarError = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </div>
 </template>
 
 <script>
+import {createQuizz} from '../../services/api.js';
 export default {
   name: "QuizzCreation",
   components: {
@@ -101,6 +128,9 @@ export default {
   data: function() {
     return {
     //complete: false,
+      snackbarGood: false,
+      snackbarError: false,
+      timeout: "2000",
       completeQuizz: {
         quizzName: null,
         quizz: [
@@ -142,8 +172,18 @@ export default {
     selectClassLevel: function (classLevel) {
       this.completeQuizz.classLevel = classLevel;
     },
-    sendQuizz: function () {
-      this.$emit('sendQuizz', this.completeQuizz)
+    sendQuizz: async function () {
+      //this.$emit('sendQuizz', this.completeQuizz)
+      const req = await createQuizz(this.completeQuizz);
+      if (req.status === 200) {
+        this.snackbarGood = true;
+        setTimeout(() => {
+          this.$router.push("home");
+        }, this.timeout);
+      } else {
+        this.snackbarError = true;
+      }
+      
     }
   }
 };

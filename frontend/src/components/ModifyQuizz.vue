@@ -44,6 +44,32 @@
             </v-data-table>
         </v-card>
         </v-card>
+        <v-snackbar
+      v-model="snackbarGood"
+      :timeout="timeout"
+    >
+      Quizz supprimer avec succes!
+      <v-btn
+        color="blue"
+        text
+        @click="snackbarGood = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
+    <v-snackbar
+      v-model="snackbarError"
+      :timeout="timeout"
+    >
+      Une erreur s'est produite veuillez réessayer.
+      <v-btn
+        color="blue"
+        text
+        @click="snackbarError = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
       </v-col>
 </template>
 
@@ -61,6 +87,9 @@ export default {
   },
   data () {
       return {
+        snackbarGood: false,
+        snackbarError: false,
+        timeout: "2000",
         myQuizz: [],
         search: '',
         headers: [
@@ -81,14 +110,17 @@ export default {
         this.$emit('switchMode');
     },
     deleteQuizz: async function (itemId) {
-        console.log(itemId);
-        await deleteQuizz(itemId);
+        const req = await deleteQuizz(itemId);
+        if (req.status === 200) {
+            this.snackbarGood = true;
+        } else {
+            this.snackbarError = true;
+        }
         this.myQuizz = [];
         this.getQuizzInMyQuizz();
     },
     getQuizzInMyQuizz: async function () {
         this.myQuizz = await getQuizz();
-        console.log("LE QUIZZ", this.myQuizz);
     },
     editQuizz: function (itemId) {
         this.$router.push(`QuizzModification/${itemId}`);

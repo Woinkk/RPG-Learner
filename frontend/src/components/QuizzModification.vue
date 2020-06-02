@@ -77,6 +77,32 @@
     <div class="text-center">
       <v-btn @click="modifyQuizz">Modifier !</v-btn>
     </div>
+    <v-snackbar
+      v-model="snackbarGood"
+      :timeout="timeout"
+    >
+      Quizz modifier avec succes!
+      <v-btn
+        color="blue"
+        text
+        @click="snackbarGood = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
+    <v-snackbar
+      v-model="snackbarError"
+      :timeout="timeout"
+    >
+      Une erreur s'est produite veuillez verifier les informations de votre quizz.
+      <v-btn
+        color="blue"
+        text
+        @click="snackbarError = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -117,7 +143,9 @@ export default {
   },
   data: function() {
     return {
-    //complete: false,
+      snackbarGood: false,
+      snackbarError: false,
+      timeout: "2000",
       completeQuizz: {
         quizzId: null,
         quizzName: null,
@@ -161,7 +189,12 @@ export default {
     modifyQuizz: async function () {
       const req = await modifyQuizz(this.completeQuizz.quizzId, this.completeQuizz);
       if(req.status === 200) {
-        this.$router.push({name: "home"});
+        this.snackbarGood = true;
+        setTimeout(() => {
+          this.$router.push({name: "home"});
+        }, this.timeout);
+      } else {
+        this.snackbarError = true;
       }
     }
   }
