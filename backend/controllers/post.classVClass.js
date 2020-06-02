@@ -23,6 +23,7 @@ async function postClassVClass (req, res) {
   const resp = await ClassVClass.create(idclass1.rows[0].id, idclass2.rows[0].id, datenull, matiere.rows[0].idmatiere);
 
   req.session.classVClass = resp.rows[0].id;
+  req.session.editClassVClass = false;
   req.session.myClass = req.body.selectedMyClasses;
   req.session.otherClass = req.body.selectedMyClasses;
 

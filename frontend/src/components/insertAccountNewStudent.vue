@@ -50,6 +50,49 @@
               <v-btn @click="clear">clear</v-btn>
             </v-card-actions>
           </v-card-text>
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Rechercher par classe"
+            single-line
+            hide-details
+            align="right"
+            dark="true"
+            filled="true"
+            ></v-text-field>
+          <v-simple-table fixed-header dark>
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-left">Nom</th>
+            <th class="text-left">Prénom</th>
+            <th class="text-left">Classe</th>
+            <th class="text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in computeClass" :key="index">
+            <td>
+              {{item.lastname}}
+            </td>
+            <td>
+              {{item.firstname}}
+            </td>
+            <td>
+              {{item.class}}
+            </td>
+            <td>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon @click="EditStudent(item)" v-on="on">mdi-pencil</v-icon>
+                </template>
+                <span>Editer cet élève</span>
+              </v-tooltip>
+            </td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
         </v-card>
       </v-col>
     </v-row>
@@ -59,7 +102,7 @@
 
 <script>
 import { myClasses } from "../../services/api.js";
-
+import { classesStudents } from "../../services/api.js";
 export default {
   name: "NewStudent",
   data: function() {
@@ -77,11 +120,22 @@ export default {
       fieldsRules: [v => !!v || "This field is required"],
       checkbox: false,
       //tclass: null,
-      myClasses: null
+      myClasses: null,
+      allStudent: null,
+      search: null,
     };
   },
 
-  computed: {},
+  computed: {
+    computeClass: function() {
+      if(this.allStudent !== null) {
+        if(this.search !== null && this.search !== "") return this.allStudent.filter(i => i.class === this.search);
+        else return this.allStudent;
+      } else {
+        return[];
+      }
+    }
+  },
 
   methods: {
     insertAccountNewStudent(newStudent) {
@@ -95,9 +149,21 @@ export default {
 
     MyClasses: async function() {
       console.log("lemyclasses");
+      var students;
+      var list = [];
       const req = await myClasses();
       if (req !== null) {
         this.myClasses = req;
+        for(let i = 0; i < req.length; i++) {
+          students = await classesStudents(req[i]);
+          if(students !== null) {
+            for(let j = 0; j < students.length; j++) {
+              students[j].class = req[i].name;
+              list.push(students[j]);
+            }
+          }
+        }
+        this.allStudent = list;
       }
       return;
     },

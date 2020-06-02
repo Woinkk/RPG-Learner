@@ -26,20 +26,30 @@
                 :items="myQuizz"
                 :search="search"
             >
-                <template v-slot:item.actions="{ item }">                                                                                                                                   
-                    <v-icon
-                        small
-                        class="mr-2"
-                        @click="editQuizz(item.id)"
-                    >
-                        mdi-pencil
-                    </v-icon>
-                    <v-icon
-                        small
-                        @click="deleteQuizz(item.id)"
-                    >
-                        mdi-delete
-                    </v-icon>
+                <template v-slot:item.actions="{ item }">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">                                                                                                                                   
+                            <v-icon
+                                class="mr-2"
+                                @click="editQuizz(item.id)"
+                                v-on="on"
+                            >
+                                mdi-pencil
+                            </v-icon>
+                        </template>
+                        <span>Editer ce quizz</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <v-icon
+                                @click="deleteQuizz(item.id)"
+                                v-on="on"
+                            >
+                                mdi-delete
+                            </v-icon>
+                        </template>
+                        <span>Supprimer ce quizz</span>
+                    </v-tooltip>
                 </template>
             </v-data-table>
         </v-card>

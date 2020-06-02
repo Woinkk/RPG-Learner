@@ -45,6 +45,15 @@ class student {
     return result;
   }
 
+  static async getStudentsByClasses (idclasses) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT * FROM ${student.tableName}
+      WHERE $1 = idclasses`,
+      values: [idclasses]
+    });
+    return result;
+  }
+
 
   static async verifyStudent (mail, password) {
     const result = await PostgresStore.pool.query({

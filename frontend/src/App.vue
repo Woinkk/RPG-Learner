@@ -14,26 +14,42 @@
     </v-app-bar>
 
     <v-content>
-      <router-view @login="Login" @insertAccountNewStudent="insertAccountNewStudent" @goToQuizzCreation="ShowQuizzCreation" v-bind:selected="selected" @createSubject="createSubject" @sendQuizz="sendQuizz"></router-view>
+      <router-view
+        @login="Login"
+        v-bind:text="textToast"
+        v-bind:snackbar="snackbar"
+        @insertAccountNewStudent="insertAccountNewStudent"
+        @goToQuizzCreation="ShowQuizzCreation"
+        v-bind:selected="selected"
+        @createSubject="createSubject"
+        @sendQuizz="sendQuizz"
+      ></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
 import Navbar from "./components/Navbar";
-import {login, createSubject, createQuizz} from '../services/api.js';
+import { login, createSubject, createQuizz } from "../services/api.js";
 import { insertAccountNewStudent } from "../services/api.js";
-//import { isConnected } from "../services/api.js";
-
 export default {
   methods: {
     Login: async function(logProp) {
-      const req = await login(logProp);
-      if (req != 200) {
+      try {
+        await login(logProp);
+        this.textToast = "Vous êtes connecté(e)";
+        console.log(this.textToast);
+        setTimeout(() => {
+          this.$router.push({ name: "home" });
+        }, 2000);
+      } catch (error) {
+        this.textToast = "La connexion a échoué";
         this.$router.push("login");
-      } else {
-        this.$router.push("home");
       }
+      this.snackbar=true;
+      setTimeout(() => {
+        this.snackbar = false;
+      }, 2000);
     },
 
     insertAccountNewStudent: async function(newStudent) {
@@ -45,21 +61,21 @@ export default {
         } else {
           this.$router.push("home");
         }
-      }else{
+      } else {
         console.log("error");
         this.$router.push("newStudent");
       }
     },
-    ShowQuizzCreation: function (selected) {
+    ShowQuizzCreation: function(selected) {
       this.selected = selected;
       this.$router.push("QuizzCreation");
       console.log(this.selected);
     },
-    createSubject: async function (subject) {
+    createSubject: async function(subject) {
       console.log(subject);
       await createSubject(subject);
     },
-    sendQuizz: async function (completeQuizz) {
+    sendQuizz: async function(completeQuizz) {
       console.log(completeQuizz);
       await createQuizz(completeQuizz);
       this.$router.push("home");
@@ -70,7 +86,6 @@ export default {
     this.$on("login", function(logProp) {
       this.Login(logProp);
     });
-    //isConnected();
   },
 
   name: "App",
@@ -80,6 +95,8 @@ export default {
 
   data: () => ({
     selected: null,
+    textToast: null,
+    snackbar: false
   })
 };
 </script>

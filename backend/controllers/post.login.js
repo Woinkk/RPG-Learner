@@ -7,11 +7,11 @@ const Student = require('../models/student.js');
  */
 async function postLogin (req, res) {
   // si l'utilisateur est déjà connecté, alors on lui retourne Unauthorized
-  if (req.session.userId) {
+  /*if (req.session.userId) {
     res.status(401)
       .send('Already authenticated');
     return;
-  }
+  }*/
   const email = req.body.email;
   const password = req.body.password;
 
@@ -22,12 +22,15 @@ async function postLogin (req, res) {
   // dans l'objet req.session
   if (teacher) {
     req.session.userId = teacher.id;
+    req.session.whoIsConnected= "teacher";
+    console.log(req.session);
     res.json(teacher);
     return;
   }
 
   if (student) {
     req.session.userId = student.id;
+    req.session.whoIsConnected = "student";
     res.json(student);
     return;
   }

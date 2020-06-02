@@ -4,7 +4,7 @@ const SERVER_URL = 'http://localhost:3000';
 
 function login (logProp) {
   return axios.post(`${SERVER_URL}/login`, logProp)
-    .then(response => response.status);
+    .then(response => response);
 }
 
 function myClasses (content) {
@@ -95,9 +95,35 @@ function modifyQuizz(quizzId, Quizz) {
 function deleteQuizz(quizzId) {
   return axios.delete(`${SERVER_URL}/deleteQuizz/${quizzId}`)
 }
+function isConnected(){
+  return axios.get(`${SERVER_URL}/who`)
+  .then(response => response.data);
+}
+
+function editClassVClass (content) {
+  return axios.post(`${SERVER_URL}/editClassVClass`, content)
+    .then(response => response.status);
+}
+
+function classVClassLoader (content) {
+  return axios.post(`${SERVER_URL}/classVClassLoader`, content)
+    .then(response => response.data);
+}
+
+function GetQuizzById (content) {
+  return axios.post(`${SERVER_URL}/GetQuizzById`, content)
+    .then(response => response.data);
+}
+
+function classesStudents (content) {
+  return axios.post(`${SERVER_URL}/classesStudents`, content)
+    .then(response => response.data);
+}
 
 export {
   login,
+  classVClassLoader,
+  editClassVClass,
   insertAccountNewStudent,
   myClasses,
   otherClasses,
@@ -111,12 +137,16 @@ export {
   AllQuizz,
   GetNmbQuestionsByQuizz,
   GetSubjectByQuizz,
+  deleteClassVClass,
+  GetQuizzById,
   deleteQuizz,
   getQuizzByIdToModify,
   modifyQuizz,
   SavingClassVClass,
   myClassVClass,
-  deleteClassVClass
+  deleteClassVClass,
+  classesStudents
+  isConnected,
 };
 
 
