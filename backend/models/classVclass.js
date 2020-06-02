@@ -72,6 +72,16 @@ class classVclass {
     });
     return select;
   }
+
+  static async getClassVClassTime (id) {
+    const select = await PostgresStore.pool.query({
+      text: `
+            SELECT date FROM ${classVclass.tableName} WHERE id = $1
+            `,
+      values: [id]
+    });
+    return select;
+  }
 }
 classVclass.tableName = 'classVclass';
 

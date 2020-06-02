@@ -32,7 +32,9 @@ async function postMyClassVClass (req, res) {
         list[i].name1 = name.rows[0].name;
         var name = await Class.getClassById(list[i].idclass2);
         list[i].name2 = name.rows[0].name;
-        list[i].date = list[i].date.toLocaleString();
+        if(list[i].date !== null) {
+            list[i].date = list[i].date.toLocaleString();
+        }
     }
     res.json(list);
 }

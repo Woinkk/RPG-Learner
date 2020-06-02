@@ -30,7 +30,7 @@
         </v-btn>
         <br :hidden="hidden">
         <br>
-      <v-date-picker v-model="savings.pickerDate" :hidden="hidden" landscape=true></v-date-picker>
+      <v-date-picker v-model="savings.pickerDate" :hidden="hidden" landscape=true locale="fr"></v-date-picker>
       <v-time-picker v-model="savings.pickerTime" :hidden="hidden" format=24hr landscape=true></v-time-picker>
     </v-col>
 
@@ -63,7 +63,7 @@
               <span>Placer ce Quizz plus tôt</span>
             </v-tooltip>
 
-            <v-tooltip bottom v-if="i !== quizzList.length - 1">
+            <v-tooltip bottom v-if="i !== savings.quizzList.length - 1">
               <template v-slot:activator="{ on }">
                 <v-btn @click=subPos(item) class="mx-2" fab small dark color="red" v-on="on">
                   <v-icon dark>mdi-sort-numeric-ascending</v-icon>
@@ -167,6 +167,8 @@ import {AllQuizz} from "../../services/api.js";
 import {GetNmbQuestionsByQuizz} from "../../services/api.js";
 import {GetSubjectByQuizz} from "../../services/api.js";
 import {SavingClassVClass} from "../../services/api.js";
+import {classVClassLoader} from "../../services/api.js";
+import {GetQuizzById} from "../../services/api.js";
 export default {
   computed: {
     computeMine: function() {
@@ -211,7 +213,7 @@ export default {
       const resp = await SavingClassVClass(this.savings);
       console.log(resp);
       if(resp === 202){
-        this.text = "Problème sauvegarde date/temps.";
+        this.text = "Sauvegarde Quizzs mais pas de date sélectionnée.";
         this.snackbar = true;
       } else if(resp === 200) {
         this.text = "Sauvegarde Quizzs et date effectuée.";
@@ -219,9 +221,11 @@ export default {
       }
       return;
     },
+    showTime: async function() {
+      console.log(this.savings.pickerTime);
+    },
     allQuizz: async function () {
         const req = await AllQuizz();
-        console.log(req);
         if(req !== null) {
             var MyQuizz = [];
             var OtherQuizz = [];
@@ -274,17 +278,37 @@ export default {
       var plus;
       var verif = false;
       for(let i = 0; !verif; i++) {
-        if(quizz.id === this.quizzList[i].id) {
+        if(quizz.id === this.savings.quizzList[i].id) {
           plus = i + 2;
           this.savings.quizzList.splice(plus, 0, quizz);
           this.savings.quizzList.splice(i, 1);
           verif = true;
         }
       }
+    },
+    loader: async function() {
+      const req = await classVClassLoader();
+      if(req !== null) {
+        var nmb;
+        var subject;
+        var reqs;
+        this.savings.pickerTime = req.date.substr(11, 5);
+        this.savings.pickerDate = req.date.substr(0, 10);
+        for(let i = 0; i  < req.rows.length; i++) {
+          reqs = await GetQuizzById(req.rows[i]);
+          nmb = await GetNmbQuestionsByQuizz(reqs);
+          subject = await GetSubjectByQuizz(reqs);
+          reqs.nmbQuestions = nmb;
+          reqs.subject = subject;
+          this.savings.quizzList.push(reqs);
+        }
+      }
+      return;
     }
   },
 
   created() {
+    this.loader();
     this.allQuizz();
   },
   

@@ -11,6 +11,7 @@ import QuizzCreation from './components/QuizzCreation';
 import ClassVClass from './components/ClassVClass';
 import QuizzModification from './components/QuizzModification';
 import { isConnected } from '../services/api.js';
+import Accueil from './components/Accueil';
 
 Vue.use(VueAxios, axios);
 
@@ -23,6 +24,7 @@ Vue.config.productionTip = false;
 axios.defaults.withCredentials = true;
 
 const routes = [
+  { path: '/', component: Accueil }
   {path:'/login',component: Login},
   {
     name: "home", path: '/home', component: Home,

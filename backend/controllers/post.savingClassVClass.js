@@ -11,6 +11,7 @@ async function postSavingClassVClass (req, res) {
     const pickerTime = req.body.pickerTime;
     const id = req.session.classVClass;
 
+    const response = await quizzClassVClass.deleteByClassVClassId(id);
     for(let i = 0; i < req.body.quizzList.length; i++) {
         var addingQuizz = await quizzClassVClass.addingQuizz(id, req.body.quizzList[i].id);
     }

@@ -30,6 +30,13 @@ class quizz {
      return result.rows;
    }
 
+  static async getAllQuizzes() {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT * FROM ${quizz.tableName}`
+    });
+    return result;
+  }
+
    static async getById (idQuizz) {
     const result = await PostgresStore.pool.query({
       text: `SELECT * FROM ${quizz.tableName}
