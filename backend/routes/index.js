@@ -52,11 +52,10 @@ router.post('/ClassVClass', postClassVClass);
 router.post('/allQuizz', postAllQuizzes);
 router.post('/NmbQueByQui', postNmbQueByQui);
 router.post('/SubjectByQuizz', postSubjectByQuizz);
-router.post('/myClassVClass', postMyClassVClass)
+router.post('/myClassVClass', postMyClassVClass);
 router.post('/SavingClassVClass', postSavingClassVClass);
 router.post('/deleteClassVClass', postDeleteClassVClass);
 router.put('/createQuizz', putCreateQuizz);
-
 router.put('/createSubject', putCreateSubject);
 router.get('/getMatiere', getMatiere);
 router.get('/getSubject', getSubject);
