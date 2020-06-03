@@ -4,13 +4,15 @@
     <v-app-bar app color="primary" dark>
       <Navbar />
       <v-spacer />
-      <v-btn color="primary">
-        <!--<router-link v-if="connected" to="/account" style="colo:black">Account</router-link>!-->
-        <router-link to="/login" style="color:Black">Sign in</router-link>
-      </v-btn>
-      <v-btn color="primary">
-        <router-link to="/newStudent" style="color:Black">Add Student</router-link>
-      </v-btn>
+      <router-link to="/login" style="color:Black">
+        <v-btn color="primary">
+          <!--<router-link v-if="connected" to="/account" style="colo:black">Account</router-link>!-->
+          Connexion
+        </v-btn>
+      </router-link>
+      <router-link to="/newStudent" style="color:Black">
+        <v-btn color="primary">Add Student</v-btn>
+      </router-link>
     </v-app-bar>
 
     <v-content>
@@ -46,7 +48,7 @@ export default {
         this.textToast = "La connexion a échoué";
         this.$router.push("login");
       }
-      this.snackbar=true;
+      this.snackbar = true;
       setTimeout(() => {
         this.snackbar = false;
       }, 2000);
@@ -59,7 +61,7 @@ export default {
         if (req !== 200) {
           this.$router.push("newStudent");
         } else {
-          this.$router.push("home");
+          this.$router.push("newStudent");
         }
       } else {
         console.log("error");
