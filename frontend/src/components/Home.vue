@@ -49,8 +49,9 @@
             <v-btn @click="hidden = !hidden" v-else>Cacher mes Classe VS Classe</v-btn>
             <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
-            <v-btn v-on="on" @click=createClassVClass(ClassVClass)>Créer</v-btn>
-            </template>
+                  <v-btn v-if="ClassVClass.selectedAllClasses == null || ClassVClass.selectedMyClasses == null" disabled>Créer</v-btn>
+                  <v-btn v-else v-on="on" @click=createClassVClass(ClassVClass)>Créer</v-btn>
+                </template>
                 <span>Créer un nouveau Classe VS Classe</span>
               </v-tooltip>
           </v-card-actions>
