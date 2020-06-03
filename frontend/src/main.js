@@ -24,7 +24,7 @@ Vue.config.productionTip = false;
 axios.defaults.withCredentials = true;
 
 const routes = [
-  { path: '/', component: Accueil }
+  {path: '/', component: Accueil },
   {path:'/login',component: Login},
   {
     name: "home", path: '/home', component: Home,
