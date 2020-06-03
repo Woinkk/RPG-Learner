@@ -1,15 +1,21 @@
 <template>
     <div class="text-center">
+
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn @click="showDialog" class="mx-2" fab small dark color="indigo" v-on="on">
+            <v-icon dark>mdi-plus</v-icon>
+          </v-btn>
+        </template>
+        <span>Créer un nouveau sujet</span>
+      </v-tooltip>
+
       <v-dialog
         v-model="dialog"
         width="500"
       >
-        <template v-slot:activator="{ on }">
-          <v-btn class="mx-2" fab small dark color="indigo" v-on="on">
-            <v-icon dark>mdi-plus</v-icon>
-        </v-btn>
-        </template>
-  
+
+
         <v-card>
           <v-card-title
             class="headline grey lighten-2"
@@ -36,24 +42,63 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+      <v-snackbar
+      v-model="snackbarGood"
+      :timeout="timeout"
+    >
+      Sujet créer avec succes!
+      <v-btn
+        color="blue"
+        text
+        @click="snackbarGood = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
+    <v-snackbar
+      v-model="snackbarError"
+      :timeout="timeout"
+    >
+      Il a eu un problème a la création du sujet/le sujet existe déja.
+      <v-btn
+        color="blue"
+        text
+        @click="snackbarGood = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
     </div>
 </template>
 
 <script>
+import {createSubject} from '../../services/api.js';
+
 export default {
     name: "AddSubject",
     data () {
         return {
+        snackbarGood: false,
+        snackbarError: false,
+        timeout: "2000",
         dialog: false,
         subject: null,
         }
     },
     methods: {
-      createSubject: function () {
-        console.log(this.subject);
-        this.dialog = false;
-        this.$emit('createSubject', this.subject);
+      createSubject: async function () {
+        const req = await createSubject(this.subject);
+        if (req.status === 200) {
+          this.snackbarGood = true
+          this.dialog = false;
+        } else {
+          this.snackbarError = true
+        }
+        //this.$emit('createSubject', this.subject);
         this.$emit('reload')
+      },
+      showDialog: function () {
+        this.dialog = true;
       }
     },
 }

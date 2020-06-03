@@ -18,6 +18,7 @@ class quizzClassVClass {
       values: [json.idquizz, json.idclassVClass]
     });
   }
+
   static async deleteByClassVClassId (id) {
     const result = await PostgresStore.pool.query({
       text: `DELETE FROM ${quizzClassVClass.tableName}
@@ -34,6 +35,15 @@ class quizzClassVClass {
         values: [idquizz, idclassVClass]
       });
       return resp;
+  }
+
+  static async deleteByQuizzId (id) {
+    const result = await PostgresStore.pool.query({
+      text: `DELETE FROM ${quizzClassVClass.tableName}
+      WHERE idquizz = $1`,
+      values: [id]
+    });
+    return result;
   }
 
   static async getQuizzByClassVClassId(id) {

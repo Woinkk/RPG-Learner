@@ -2,6 +2,7 @@ const Quizz = require('../models/quizz.js');
 const Question  = require ('../models/question.js');
 const AnswerStudent = require('../models/answerStudent.js');
 const Result = require('../models/result.js');
+const QuizzClassVClass = require('../models/quizzClassVClass.js');
 
 /**
  * @param {import('express').Request} req
@@ -12,6 +13,8 @@ async function deleteQuizz(req, res) {
     const params = req.params;
 
     console.log(params);
+
+    await QuizzClassVClass.deleteByQuizzId(params.id);
 
     const idQuestion = await Question.getAllQuestionByIdQuizz(params.id);
 

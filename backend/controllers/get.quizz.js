@@ -10,7 +10,7 @@ const Teacher = require('../models/teacher.js');
 async function getQuizz(req, res) {
     const TSession = req.session;
     
-    const result = await Quizz.getAll();
+    const result = await Quizz.getQuizzByIdTeacher(TSession.userId);
 
     const idMatiere = await Teacher.getMatiereIdByTeacher(TSession.userId)
     const matiereName = await Matiere.getNameById(idMatiere[0].idmatiere);

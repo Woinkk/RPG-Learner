@@ -60,7 +60,7 @@ function insertAccountNewStudent(newStudent) {
 
 function createSubject (subject) {
   return axios.put(`${SERVER_URL}/createSubject`, {subject: subject})
-  .then(response => response.data);
+  .then(response => response);
 }
 
 function getMatiere () {
@@ -75,7 +75,7 @@ function getSubject () {
 
 function createQuizz (completeQuizz) {
   return axios.put(`${SERVER_URL}/createQuizz`, completeQuizz)
-  .then(response => response.data);
+  .then(response => response);
 }
 
 function getQuizz() {
