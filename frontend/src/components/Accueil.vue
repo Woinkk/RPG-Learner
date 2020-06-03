@@ -1,3 +1,55 @@
+<style scoped>
+::-webkit-scrollbar {
+width: 0px;
+}
+
+.earth{
+    position: absolute;
+    left: -160px;
+    bottom: -250px;
+    height: 110%;
+    width: 50%;
+    -webkit-animation: rotation 20s infinite linear;
+}
+
+.player{
+  position: absolute;
+  left: 160px;
+  bottom: 190px;
+  height: 300px;
+  width: 150px;
+}
+
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: .5;
+  position: absolute;
+  width: 100%;
+}
+
+.background {
+  position: absolute;
+  background-image: url('../assets/stars_background.gif');
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  border-style: hidden;
+  outline-style: hidden;
+}
+
+@-webkit-keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
+</style>
+
 <template>
   <v-container style="background-color: black; height:100%" fluid>
 
@@ -54,58 +106,6 @@
 
   </v-container>
 </template>
-
-<style>
-::-webkit-scrollbar {
-width: 0px;
-}
-
-.earth{
-    position: absolute;
-    left: -160px;
-    bottom: -250px;
-    height: 110%;
-    width: 50%;
-    -webkit-animation: rotation 20s infinite linear;
-}
-
-.player{
-  position: absolute;
-  left: 160px;
-  bottom: 190px;
-  height: 300px;
-  width: 150px;
-}
-
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: .5;
-  position: absolute;
-  width: 100%;
-}
-
-.background {
-  position: absolute;
-  background-image: url('../assets/stars_background.gif');
-  height: 100%;
-  width: 100%;
-  top: 0px;
-  left: 0px;
-  border-style: hidden;
-  outline-style: hidden;
-}
-
-@-webkit-keyframes rotation {
-		from {
-				-webkit-transform: rotate(0deg);
-		}
-		to {
-				-webkit-transform: rotate(359deg);
-		}
-}
-</style>
 
 <script>
 export default {

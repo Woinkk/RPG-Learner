@@ -213,6 +213,7 @@ export default {
       this.MyClasses();
       this.OtherClasses();
       this.MyClassVClass();
+      document.documentElement.style.overflow = 'scroll';
     }
 };
 </script>
