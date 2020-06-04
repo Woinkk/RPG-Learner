@@ -45,8 +45,8 @@
               </v-list>
             </v-menu>
             <v-spacer></v-spacer>
-            <v-btn @click="hidden = !hidden" v-if="hidden">Afficher mes Classe VS Classe</v-btn>
-            <v-btn @click="hidden = !hidden" v-else>Cacher mes Classe VS Classe</v-btn>
+            <v-icon @click="hidden = !hidden" v-if="hidden">mdi-eye-outline</v-icon>
+            <v-icon @click="hidden = !hidden" v-else>mdi-eye-off-outline</v-icon>
             <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
             <v-btn v-on="on" @click=createClassVClass(ClassVClass)>Créer</v-btn>

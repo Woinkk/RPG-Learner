@@ -7,7 +7,7 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn @click="switchToCreation">Créer un quizz</v-btn>
+            <v-icon @click="switchToCreation">mdi-eye-off-outline</v-icon>
           </v-card-actions>
         <v-card>
         <v-card-title>

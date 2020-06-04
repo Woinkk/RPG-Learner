@@ -12,22 +12,22 @@
       >
 
     <v-col cols="12" align="center">
-      <v-btn
+      <v-icon
           color="pink"
           dark
           @click="hidden = !hidden"
           v-if="hidden"
         >
-          Choisir la date !
-        </v-btn>
-        <v-btn
+          mdi-calendar-clock
+        </v-icon>
+        <v-icon
           color="pink"
           dark
           @click="hidden = !hidden"
           v-else-if="!hidden"
         >
-          Cacher la date !
-        </v-btn>
+          mdi-calendar-clock
+        </v-icon>
         <br :hidden="hidden">
         <br>
       <v-date-picker v-model="savings.pickerDate" :hidden="hidden" landscape=true locale="fr"></v-date-picker>
@@ -74,20 +74,20 @@
           </v-card>
         </v-col>
 
-        <v-btn
+        <v-icon
           color="pink"
           dark
           @click="drawer = !drawer"
         >
-          Ajouter un Quizz !
-        </v-btn>
-        <v-btn
+          mdi-toy-brick-plus-outline
+        </v-icon>
+        <v-icon
           color="green"
           dark
           @click="saving()"
         >
-          Sauvegarder !
-        </v-btn>
+          mdi-content-save-all
+        </v-icon>
       </v-row>
     </v-container>
 

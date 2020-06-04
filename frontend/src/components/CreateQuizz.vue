@@ -41,7 +41,7 @@
             </v-menu>
             <AddSubject @createSubject="createSubject" @reload="LoadMatiereAndSubject"></AddSubject>
             <v-spacer></v-spacer>
-            <v-btn @click="switchToModification">Modifier un quizz existant</v-btn>
+            <v-icon @click="switchToModification">mdi-eye-outline</v-icon>
             <v-btn v-if="CanCreate" @click="GoToQuizzCreation">Créer</v-btn>
             <v-btn v-else disabled>Créer</v-btn>
           </v-card-actions>

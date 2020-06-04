@@ -11,7 +11,7 @@
         </v-btn>
       </router-link>
       <router-link to="/newStudent" style="color:Black">
-        <v-btn color="primary">Add Student</v-btn>
+        <v-btn color="primary"><v-icon>mdi-account-plus-outline</v-icon></v-btn>
       </router-link>
     </v-app-bar>
 
@@ -34,6 +34,7 @@
 import Navbar from "./components/Navbar";
 import { login, createSubject, createQuizz } from "../services/api.js";
 import { insertAccountNewStudent } from "../services/api.js";
+
 export default {
   methods: {
     Login: async function(logProp) {
@@ -98,7 +99,7 @@ export default {
   data: () => ({
     selected: null,
     textToast: null,
-    snackbar: false
+    snackbar: false,
   })
 };
 </script>
