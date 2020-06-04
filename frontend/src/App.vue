@@ -59,25 +59,17 @@ export default {
 
     insertAccountNewStudent: async function(newStudent) {
       if (newStudent.tclass !== null) {
-        try{ 
+        try {
           await insertAccountNewStudent(newStudent);
-          this.textToast="L'ajout du compte est un succès"
+          this.textToast = "L'ajout du compte est un succès";
           this.$router.push("newStudent");
-          
-        }catch(error){
+        } catch (error) {
           this.textToast = "L'ajout du compte a échoué";
           this.$router.push("newStudent");
         }
-       /* const req = await insertAccountNewStudent(newStudent);
-        console.log(req);
-        if (req !== 200) {
-          this.textToast = "L'ajout du compte a échoué";
-          
-        } else {
-       
-        }*/
       } else {
         console.log("error");
+        this.textToast = "Aucune classe n'a été selectioné ";
         this.$router.push("newStudent");
       }
       this.snackbar = true;
