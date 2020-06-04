@@ -4,23 +4,23 @@
       <v-col cols="12" sm="8" md="4">
         <v-card class="elevation-12">
           <v-toolbar color="primary" dark flat>
-            <v-toolbar-title>Create Student Account</v-toolbar-title>
+            <v-toolbar-title>Créer compte étudiant</v-toolbar-title>
             <v-spacer />
           </v-toolbar>
 
           <v-card-text>
             <v-form>
               <v-text-field
-                v-model="newStudent.firstname"
-                :rules="fieldsRules"
-                label="FirstName"
-                name="firstname"
-              ></v-text-field>
-              <v-text-field
                 v-model="newStudent.lastname"
                 :rules="fieldsRules"
-                label="LastName"
+                label="Nom"
                 name="lastname"
+              ></v-text-field>
+              <v-text-field
+                v-model="newStudent.firstname"
+                :rules="fieldsRules"
+                label="Prénom"
+                name="firstname"
               ></v-text-field>
               <v-text-field
                 v-model="newStudent.email"
@@ -46,8 +46,8 @@
               </v-menu>
             </v-form>
             <v-card-actions>
-              <v-btn class="mr-4" @click="insertAccountNewStudent(newStudent)">submit</v-btn>
-              <v-btn @click="clear">clear</v-btn>
+              <v-btn class="mr-4" @click="insertAccountNewStudent(newStudent)">Confirmer</v-btn>
+              <!--<v-btn @click="clear">clear</v-btn>!-->
             </v-card-actions>
           </v-card-text>
           <v-text-field
@@ -96,6 +96,12 @@
         </v-card>
       </v-col>
     </v-row>
+    
+    <v-snackbar v-model="snackbar">
+      {{ text }}
+      <v-btn color="blue" text @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
+
   </v-container>
 </template>
 
@@ -119,12 +125,12 @@ export default {
       ],
       fieldsRules: [v => !!v || "This field is required"],
       checkbox: false,
-      //tclass: null,
       myClasses: null,
       allStudent: null,
       search: null,
     };
   },
+  props:{text:String,snackbar:Boolean},
 
   computed: {
     computeClass: function() {

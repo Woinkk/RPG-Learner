@@ -54,6 +54,16 @@ class student {
     return result;
   }
 
+  static async checkAddStudent (mail) {
+    const result = await PostgresStore.pool.query({
+      text: ` SELECT * FROM ${student.tableName}
+            WHERE email like $1 
+    `,
+      values: [mail]
+    });
+    return result;
+  }
+
 
   static async verifyStudent (mail, password) {
     const result = await PostgresStore.pool.query({
