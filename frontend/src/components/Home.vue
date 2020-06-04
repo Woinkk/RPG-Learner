@@ -7,7 +7,7 @@
         <v-card color="#4c727e" dark>
           <v-card-title class="headline">Classe VS Classe</v-card-title>
 
-          <v-card-subtitle>Permet de créer un affrontement entre classe.</v-card-subtitle>
+          <v-card-subtitle>Permet de créer un affrontement entre classes.</v-card-subtitle>
 
           <v-card-actions>
             <v-menu open-on-hover top offset-y transition="fab-transition">
@@ -45,8 +45,14 @@
               </v-list>
             </v-menu>
             <v-spacer></v-spacer>
-            <v-icon @click="hidden = !hidden" v-if="hidden">mdi-eye-outline</v-icon>
-            <v-icon @click="hidden = !hidden" v-else>mdi-eye-off-outline</v-icon>
+            <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon @click="hidden = !hidden" v-if="hidden" v-on="on">mdi-eye-outline</v-icon>
+                  <v-icon @click="hidden = !hidden" v-else v-on="on">mdi-eye-off-outline</v-icon>
+                  </template>
+                <span v-if="hidden">Voir mes classes contres classes</span>
+                <span v-else>Cacher mes classes contres classes</span>
+            </v-tooltip>
             <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn v-if="ClassVClass.selectedAllClasses == null || ClassVClass.selectedMyClasses == null" disabled>Créer</v-btn>
