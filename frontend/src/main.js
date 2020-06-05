@@ -25,7 +25,7 @@ axios.defaults.withCredentials = true;
 
 const routes = [
   { path: '/', component: Accueil },
-  {path:'/login',component: Login},
+  {path: '/login', component: Login},
   {
     name: "home", path: '/home', component: Home,
     beforeEnter: async (to, from, next) => {
