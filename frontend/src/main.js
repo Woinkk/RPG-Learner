@@ -12,6 +12,7 @@ import ClassVClass from './components/ClassVClass';
 import QuizzModification from './components/QuizzModification';
 import { isConnected } from '../services/api.js';
 import Accueil from './components/Accueil';
+import Stats from './components/Stats';
 
 Vue.use(VueAxios, axios);
 
@@ -38,6 +39,16 @@ const routes = [
   },
   {
     path: '/newStudent', component: insertAccountNewStudent,
+    beforeEnter: async (to, from, next) => {
+      const req = await isConnected();
+      if (req.status === 200 && req.connected === "teacher") {
+        next();
+        return
+      }
+    },
+  },
+  {
+    path: '/stats', component: Stats,
     beforeEnter: async (to, from, next) => {
       const req = await isConnected();
       if (req.status === 200 && req.connected === "teacher") {

@@ -4,14 +4,17 @@
     <v-app-bar app color="primary" dark>
       <Navbar />
       <v-spacer />
-      <router-link to="/login" style="color:Black">
+      <router-link to="/login">
         <v-btn color="primary">
           <!--<router-link v-if="connected" to="/account" style="colo:black">Account</router-link>!-->
           Connexion
         </v-btn>
       </router-link>
-      <router-link to="/newStudent" style="color:Black">
+      <router-link to="/newStudent">
         <v-btn color="primary"><v-icon>mdi-account-plus-outline</v-icon></v-btn>
+      </router-link>
+      <router-link to="/stats">
+        <v-btn color="primary"><v-icon>mdi-chart-line</v-icon></v-btn>
       </router-link>
     </v-app-bar>
 
