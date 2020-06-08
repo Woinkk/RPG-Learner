@@ -42,7 +42,7 @@
             <AddSubject @createSubject="createSubject" @reload="LoadMatiereAndSubject"></AddSubject>
             <v-spacer></v-spacer>
             <v-icon @click="switchToModification">mdi-eye-outline</v-icon>
-            <v-btn v-if="CanCreate" @click="GoToQuizzCreation">Créer</v-btn>
+            <v-btn v-if="CanCreate" @click="GoToQuizzCreation" dark>Créer</v-btn>
             <v-btn v-else disabled>Créer</v-btn>
           </v-card-actions>
         </v-card>

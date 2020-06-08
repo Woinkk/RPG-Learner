@@ -1,6 +1,6 @@
 <template>
       <v-col cols="12">
-        <v-card color="secondary" dark>
+        <v-card color="secondary">
           <v-card-title class="headline">Modifier un quizz</v-card-title>
 
           <v-card-subtitle>Un quizz est une série de question.</v-card-subtitle>
@@ -9,7 +9,7 @@
             <v-spacer></v-spacer>
             <v-icon @click="switchToCreation">mdi-eye-off-outline</v-icon>
           </v-card-actions>
-        <v-card>
+        <v-card dark>
         <v-card-title>
             Mes quizz
             <v-spacer></v-spacer>

@@ -56,7 +56,7 @@
             <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn v-if="ClassVClass.selectedAllClasses == null || ClassVClass.selectedMyClasses == null" disabled>Créer</v-btn>
-                  <v-btn v-else v-on="on" @click=createClassVClass(ClassVClass)>Créer</v-btn>
+                  <v-btn v-else v-on="on" @click=createClassVClass(ClassVClass) dark>Créer</v-btn>
                 </template>
                 <span>Créer un nouveau Classe VS Classe</span>
               </v-tooltip>
