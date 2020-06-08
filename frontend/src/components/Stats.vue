@@ -1,7 +1,7 @@
 <template>
 <v-card
       class="mx-auto text-center"
-      color="green"
+      color="secondary"
       dark
       max-width="600"
   >

@@ -1,7 +1,7 @@
 
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="primary">
       <Navbar />
       <v-spacer />
       <router-link to="/login">
@@ -14,7 +14,9 @@
         <v-btn color="primary">
           <v-icon>mdi-account-plus-outline</v-icon>
         </v-btn>
-        <v-btn color="primary"><v-icon>mdi-chart-line</v-icon></v-btn>
+      </router-link>
+      <router-link to="/stats">
+      <v-btn color="primary"><v-icon>mdi-chart-line</v-icon></v-btn>
       </router-link>
     </v-app-bar>
 
