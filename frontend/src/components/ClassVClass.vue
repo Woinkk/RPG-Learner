@@ -39,7 +39,7 @@
       :key="i"
       cols="12">
           <v-card
-            color="#385F73"
+            color="primary"
             dark
           >
             <v-card-title class="headline">{{item.name}}</v-card-title>

@@ -1,17 +1,22 @@
 
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="primary">
       <Navbar />
       <v-spacer />
-      <router-link to="/login" style="color:Black">
+      <router-link to="/login">
         <v-btn color="primary">
           <!--<router-link v-if="connected" to="/account" style="colo:black">Account</router-link>!-->
           Connexion
         </v-btn>
       </router-link>
-      <router-link to="/newStudent" style="color:Black">
-        <v-btn color="primary"><v-icon>mdi-account-plus-outline</v-icon></v-btn>
+      <router-link to="/newStudent">
+        <v-btn color="primary">
+          <v-icon>mdi-account-plus-outline</v-icon>
+        </v-btn>
+      </router-link>
+      <router-link to="/stats">
+      <v-btn color="primary"><v-icon>mdi-chart-line</v-icon></v-btn>
       </router-link>
     </v-app-bar>
 
@@ -57,17 +62,23 @@ export default {
 
     insertAccountNewStudent: async function(newStudent) {
       if (newStudent.tclass !== null) {
-        const req = await insertAccountNewStudent(newStudent);
-        console.log(req);
-        if (req !== 200) {
+        try {
+          await insertAccountNewStudent(newStudent);
+          this.textToast = "L'ajout du compte est un succès";
           this.$router.push("newStudent");
-        } else {
+        } catch (error) {
+          this.textToast = "L'ajout du compte a échoué";
           this.$router.push("newStudent");
         }
       } else {
         console.log("error");
+        this.textToast = "Aucune classe n'a été selectioné ";
         this.$router.push("newStudent");
       }
+      this.snackbar = true;
+      setTimeout(() => {
+        this.snackbar = false;
+      }, 2000);
     },
     ShowQuizzCreation: function(selected) {
       this.selected = selected;
@@ -99,7 +110,7 @@ export default {
   data: () => ({
     selected: null,
     textToast: null,
-    snackbar: false,
+    snackbar: false
   })
 };
 </script>
