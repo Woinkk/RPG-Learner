@@ -54,6 +54,14 @@ class student {
     return result;
   }
 
+  static async verifyStudentCharacter (idStudent){
+    const result = await PostgresStore.pool.query({
+        text: `SELECT type FROM ${student.tableName}
+              WHERE id = $1`,
+              values:[idStudent]
+    });
+    return result;
+  }
 
   static async verifyStudent (mail, password) {
     const result = await PostgresStore.pool.query({
