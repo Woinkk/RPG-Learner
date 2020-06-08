@@ -4,7 +4,7 @@
       <CreateQuizz @switchMode= "switchToModification" v-if="CreationMode === true" @goToQuizzCreation="goToQuizzCreation" @createSubject="createSubject"></CreateQuizz>
       <ModifyQuizz @switchMode= "switchToCreation" v-else></ModifyQuizz>
       <v-col cols="12">
-        <v-card color="#4c727e" dark>
+        <v-card color="secondary">
           <v-card-title class="headline">Classe VS Classe</v-card-title>
 
           <v-card-subtitle>Permet de créer un affrontement entre classes.</v-card-subtitle>

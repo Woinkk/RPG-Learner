@@ -1,6 +1,6 @@
 <template>
       <v-col cols="12">
-        <v-card color="#295665" dark>
+        <v-card color="secondary" dark>
           <v-card-title class="headline">Modifier un quizz</v-card-title>
 
           <v-card-subtitle>Un quizz est une série de question.</v-card-subtitle>
