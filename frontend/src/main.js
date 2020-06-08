@@ -12,6 +12,7 @@ import ClassVClass from './components/ClassVClass';
 import QuizzModification from './components/QuizzModification';
 import { isConnected } from '../services/api.js';
 import Accueil from './components/Accueil';
+import AccueilEleve from './components/AccueilEleve';
 
 Vue.use(VueAxios, axios);
 
@@ -76,7 +77,11 @@ const routes = [
         return
       }
     }
-  }
+  },
+
+  {
+    path: '/AccueilEleve', component: AccueilEleve
+  },
 ];
 
 const router = new VueRouter({
