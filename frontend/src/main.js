@@ -98,7 +98,11 @@ const routes = [
         return
       }
     }
-  }
+  },
+
+  {
+    path: '/AccueilEleve', component: AccueilEleve
+  },
 ];
 
 const router = new VueRouter({
