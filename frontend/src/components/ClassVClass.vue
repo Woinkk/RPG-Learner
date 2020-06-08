@@ -1,5 +1,5 @@
 <template>
-  <v-sheet
+  <!--<v-sheet
     height="100%"
     class="overflow-hidden"
     style="position: relative;"
@@ -159,7 +159,170 @@
       </v-expansion-panel>
     </v-expansion-panels>
     </v-navigation-drawer>
-  </v-sheet>
+  </v-sheet>-->
+
+  <v-stepper v-model="e6" vertical>
+    <v-stepper-step :complete="e6 > 1" step="1">Choix de la date et heure</v-stepper-step>
+    <v-stepper-content step="1">
+      <v-card color="grey lighten-1">
+      <v-card-actions align="center">
+        <v-date-picker v-model="savings.pickerDate" landscape=true locale="fr"></v-date-picker>
+        <v-time-picker v-model="savings.pickerTime" format=24hr landscape=true></v-time-picker>
+      </v-card-actions>
+      </v-card>
+      <v-btn v-if="savings.pickerDate !== null && savings.pickerTime !== null" color="primary" @click="e6 = 2"><v-icon>mdi-hand-okay</v-icon></v-btn>
+      <v-btn v-else color="primary" @click="e6 = 2" disabled><v-icon>mdi-hand-okay</v-icon></v-btn>
+    </v-stepper-content>
+
+    <v-stepper-step :complete="e6 > 2" step="2">Choix des quizzs</v-stepper-step>
+    <v-stepper-content step="2">
+      <v-card color="grey lighten-1">
+        <v-card-actions style="overflow-y:scroll;max-height:75%">
+          <v-expansion-panels accordion=true style="width:25%">
+            <v-expansion-panel
+            :key=1
+            >
+            <v-expansion-panel-header>Vos quizzs</v-expansion-panel-header>
+            <v-expansion-panel-content>
+                
+                <v-expansion-panels accordion=true>
+                <v-expansion-panel
+                  v-for="(item,i) in computeMine"
+                  :key="i"
+                >
+                  <v-expansion-panel-header>{{item.name}}</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    Nombre de Question(s): {{item.nmbQuestions}}
+                    <v-btn @click=addQuizz(item) class="mx-2" fab small dark color="red" v-on="on">
+                        <v-icon dark>mdi-plus</v-icon>
+                    </v-btn>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+
+            </v-expansion-panel-content>
+            </v-expansion-panel>
+            <v-expansion-panel
+            :key=2
+            >
+            <v-expansion-panel-header>Les autres quizzs</v-expansion-panel-header>
+            <v-expansion-panel-content>
+                
+                <v-expansion-panels accordion=true>
+                <v-expansion-panel
+                  v-for="(item,i) in computeAll"
+                  :key="i"
+                >
+                  <v-expansion-panel-header>{{item.name}}</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    Nombre de Question(s): {{item.nmbQuestions}}
+                    <v-btn @click=addQuizz(item) class="mx-2" fab small dark color="red" v-on="on">
+                        <v-icon dark>mdi-plus</v-icon>
+                    </v-btn>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
+
+          <v-col 
+          v-for="(item, i) in savings.quizzList"
+          :key="i"
+          >
+          <v-card
+            color="primary"
+            style="width:auto"
+            dark
+          >
+            <v-card-title class="headline">{{item.name}}</v-card-title>
+
+            <v-card-subtitle>Nombre de question(s): {{item.nmbQuestions}}. Sur le sujet: {{item.subject}}.</v-card-subtitle>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn @click=deleteQuizz(item) class="mx-2" fab small dark color="red" v-on="on">
+                  <v-icon dark>mdi-delete</v-icon>
+                </v-btn>
+              </template>
+              <span>Retirer ce Quizz</span>
+            </v-tooltip>
+
+            <v-tooltip bottom v-if="i !== 0">
+              <template v-slot:activator="{ on }">
+                <v-btn @click=plusPos(item) class="mx-2" fab small dark color="red" v-on="on">
+                  <v-icon dark>mdi-sort-numeric-descending</v-icon>
+                </v-btn>
+              </template>
+              <span>Placer ce Quizz plus tôt</span>
+            </v-tooltip>
+
+            <v-tooltip bottom v-if="i !== savings.quizzList.length - 1">
+              <template v-slot:activator="{ on }">
+                <v-btn @click=subPos(item) class="mx-2" fab small dark color="red" v-on="on">
+                  <v-icon dark>mdi-sort-numeric-ascending</v-icon>
+                </v-btn>
+              </template>
+              <span>Placer ce Quizz plus tard</span>
+            </v-tooltip>
+          </v-card>
+        </v-col>
+        </v-card-actions>
+      </v-card>
+      <v-btn color="primary" @click="e6 = 3"><v-icon>mdi-hand-okay</v-icon></v-btn>
+      <v-btn text @click="e6 = 1"><v-icon>mdi-arrow-up-bold-circle-outline</v-icon></v-btn>
+    </v-stepper-content>
+
+    <v-stepper-step :complete="e6 > 3" step="3">Confirmation</v-stepper-step>
+    <v-stepper-content step="3">
+      <v-card color="grey lighten-1" class="mb-12">
+        <v-card-actions>
+          <v-carousel
+          cycle
+          height="400"
+          hide-delimiter-background
+          show-arrows-on-hover
+          >
+          <v-carousel-item>
+            <v-sheet height="100%">
+              <v-row class="fill-height" align="center" justify="center">
+                <div class="display-3">Le {{savings.pickerDate}} à {{savings.pickerTime}}.</div>
+              </v-row>
+            </v-sheet>
+          </v-carousel-item>
+          <v-carousel-item>
+            <v-sheet height="100%">
+              <v-row class="fill-height" align="center" justify="center">
+                <div class="display-3">{{classe1}} <v-icon size="250">mdi-flash-outline</v-icon> {{classe2}}</div>
+              </v-row>
+            </v-sheet>
+          </v-carousel-item>
+          <v-carousel-item>
+            <v-sheet height="100%">
+              <v-row class="fill-height" align="center" justify="center">
+                <div class="display-3">Il contient {{savings.quizzList.length}} quizz(s).</div>
+              </v-row>
+            </v-sheet>
+          </v-carousel-item>
+        </v-carousel>
+        </v-card-actions>
+      </v-card>
+      <v-btn color="primary" @click="saving()"><v-icon>mdi-content-save-all</v-icon></v-btn>
+      <v-btn text @click="e6 = 2"><v-icon>mdi-arrow-up-bold-circle-outline</v-icon></v-btn>
+    </v-stepper-content>
+    <v-snackbar
+      v-model="snackbar"
+      timeout=2000
+    >
+      {{ text }}
+      <v-btn
+        color="blue"
+        text
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
+  </v-stepper>
 </template>
 
 <script>
@@ -169,6 +332,7 @@ import {GetSubjectByQuizz} from "../../services/api.js";
 import {SavingClassVClass} from "../../services/api.js";
 import {classVClassLoader} from "../../services/api.js";
 import {GetQuizzById} from "../../services/api.js";
+import {myClassVClassSpecific} from "../../services/api.js";
 export default {
   computed: {
     computeMine: function() {
@@ -218,11 +382,21 @@ export default {
       } else if(resp === 200) {
         this.text = "Sauvegarde Quizzs et date effectuée.";
         this.snackbar = true;
+        setTimeout(() => {
+          this.$router.push({ name: "home" });
+        }, 2000);
       }
       return;
     },
     showTime: async function() {
       console.log(this.savings.pickerTime);
+    },
+    MyClassVClass: async function() {
+      const req = await myClassVClassSpecific();
+      if(req !== null) {
+        this.classe1 = req[0];
+        this.classe2 = req[1];
+      }
     },
     allQuizz: async function () {
         const req = await AllQuizz();
@@ -310,6 +484,7 @@ export default {
   created() {
     this.loader();
     this.allQuizz();
+    this.MyClassVClass();
   },
   
   name: 'App',
@@ -322,10 +497,12 @@ export default {
         drawer: false,
         myQuizzes: null,
         otherQuizzes: null,
-        hidden: true,
         savings: {quizzList: [], pickerTime: null, pickerDate:new Date().toISOString().substr(0, 10)},
         snackbar: false,
         text: null,
+        classe1: null,
+        classe2: null,
+        e6: 1,
       }
     },
 };
