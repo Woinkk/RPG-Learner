@@ -3,8 +3,8 @@
 
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <v-btn @click="showDialog" class="mx-2" fab small dark color="indigo" v-on="on">
-            <v-icon dark>mdi-plus</v-icon>
+          <v-btn @click="showDialog" class="mx-2" fab small dark v-on="on">
+            <v-icon>mdi-plus</v-icon>
           </v-btn>
         </template>
         <span>Créer un nouveau sujet</span>
