@@ -24,6 +24,7 @@ async function postLogin (req, res) {
     req.session.userId = teacher.id;
     req.session.whoIsConnected= "teacher";
     console.log(req.session);
+    teacher.user = "teacher";
     res.json(teacher);
     return;
   }
@@ -31,6 +32,9 @@ async function postLogin (req, res) {
   if (student) {
     req.session.userId = student.id;
     req.session.whoIsConnected = "student";
+    const character = await Student.verifyStudentCharacter(student.id);
+    student.type = character.rows[0].type;
+    student.user = "student";
     res.json(student);
     return;
   }

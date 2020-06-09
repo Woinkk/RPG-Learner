@@ -5,7 +5,6 @@
     "email": "bury@intechinfo.fr",
     "password": "mdp",
     "pseudo" : "Gràpe",
-    "type" : "Skeleton",
     "idclasses" : 1
     },
 
@@ -15,7 +14,6 @@
     "email": "jeanne@intechinfo.fr",
     "password": "mdp1",
     "pseudo" : "Sherlock",
-    "type" : "Human",
     "idclasses" : 2
     }
 ]

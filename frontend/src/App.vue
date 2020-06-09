@@ -44,11 +44,18 @@ export default {
   methods: {
     Login: async function(logProp) {
       try {
-        await login(logProp);
+        const req = await login(logProp);
         this.textToast = "Vous êtes connecté(e)";
         console.log(this.textToast);
         setTimeout(() => {
-          this.$router.push({ name: "home" });
+          if(req.data.user === "teacher"){
+            this.$router.push({ name: "home" });
+          }else if(req.data.type === null){
+            this.$router.push({name: "AccueilEleve"})
+          }else{
+            this.$router.push({name: "AccueilEleve"})
+          }
+          
         }, 2000);
       } catch (error) {
         this.textToast = "La connexion a échoué";

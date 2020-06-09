@@ -24,11 +24,11 @@ class student {
       text:
         `
       INSERT INTO ${student.tableName}
-      (firstname,lastname,email,password,pseudo,type,idclasses)
-      VALUES($1,$2,$3,$4,$5,$6,$7)      
+      (firstname,lastname,email,password,pseudo,idclasses)
+      VALUES($1,$2,$3,$4,$5,$6)      
 
       `,
-      values: [json.firstname, json.lastname, json.email, hashedPassword, json.pseudo, json.type, json.idclasses]
+      values: [json.firstname, json.lastname, json.email, hashedPassword, json.pseudo, json.idclasses]
     });
     return result;
   }
