@@ -12,6 +12,7 @@ import ClassVClass from './components/ClassVClass';
 import QuizzModification from './components/QuizzModification';
 import { isConnected } from '../services/api.js';
 import Accueil from './components/Accueil';
+import AccueilEleve from './components/AccueilEleve.vue';
 import Stats from './components/Stats';
 import CardsStudent from './components/CardsStudent.vue';
 
@@ -99,9 +100,15 @@ const routes = [
       }
     }
   },
-
   {
-    path: '/AccueilEleve', component: AccueilEleve
+    name: 'AccueilEleve', path: '/AccueilEleve', component: AccueilEleve,
+    beforeEnter: async (to, from, next) => {
+      const req = await isConnected();
+      if (req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }
   },
 ];
 
