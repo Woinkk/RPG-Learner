@@ -78,6 +78,15 @@ class quizz {
 
      return result.rows;
    }
+
+   static async byIdTeacherIfStudentHasIt (quizzId, teacherId) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT * FROM ${quizz.tableName} 
+      WHERE id = $1 AND idteacher = $2`,
+      values: [quizzId, teacherId]
+    });
+    return result;
+  }
 }
 quizz.tableName = 'quizz';
 

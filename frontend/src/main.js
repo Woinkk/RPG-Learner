@@ -14,16 +14,15 @@ import { isConnected } from '../services/api.js';
 import Accueil from './components/Accueil';
 import Stats from './components/Stats';
 import CardsStudent from './components/CardsStudent.vue';
+import VueApexCharts from 'vue-apexcharts';
 
 Vue.use(VueAxios, axios);
-
 axios.defaults.withCredentials = true;
-
 Vue.use(VueRouter);
-Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
 
-axios.defaults.withCredentials = true;
+Vue.component('apexchart', VueApexCharts);
+
 
 const routes = [
   { path: '/', component: Accueil },

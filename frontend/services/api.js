@@ -125,6 +125,11 @@ function classesStudents (content) {
     .then(response => response.data);
 }
 
+function statsStudent (content) {
+  return axios.post(`${SERVER_URL}/statsStudent`, content)
+    .then(response => response.data);
+}
+
 export {
   login,
   classVClassLoader,
@@ -152,6 +157,7 @@ export {
   classesStudents,
   isConnected,
   myClassVClassSpecific,
+  statsStudent,
 };
 
 
