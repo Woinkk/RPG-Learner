@@ -1,5 +1,5 @@
 <template>
-    <v-container class="grey lighten-5">
+    <v-container>
         <v-row>
             <v-col
                 name="character-container"
@@ -11,8 +11,7 @@
                 <v-card
                 class="d-flex justify-center"
                 width="97%"
-                outlined
-                tile
+                flat
                 >
                 .col-6 .col-md-5
                 <v-card-text style="position: absolute; bottom: 0px;">
@@ -21,9 +20,15 @@
                         outlined
                         tile
                         >
-                        HP: 2<br>
-                        Vitesse: 2<br>
-                        Force: 1<br>
+                        <v-row style="position: relative; left: 2.5%;">
+                            <v-img max-width="25" max-height="25" src="../assets/heart-RPG.png"></v-img>: 2<br>
+                        </v-row>
+                        <v-row style="position: relative; left: 2.5%;">
+                            <v-img max-width="25" max-height="25" src="../assets/speed-boot-RPG.png"></v-img>: 2<br>
+                        </v-row>
+                        <v-row style="position: relative; left: 2.5%;">
+                            <v-img max-width="25" max-height="25" src="../assets/strength-RPG.png"></v-img>: 1<br>
+                        </v-row>
                         Point de compétence disponible: 0<br>
                         </v-card>
                     </div>
@@ -37,8 +42,7 @@
             >
                 <v-card
                 class="d-flex justify-center"
-                outlined
-                tile
+                flat
                 >
                     <CardsStudent></CardsStudent>
                 </v-card>
