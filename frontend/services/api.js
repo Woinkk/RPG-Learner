@@ -6,6 +6,14 @@ function login (logProp) {
   return axios.post(`${SERVER_URL}/login`, logProp)
     .then(response => response);
 }
+function modifyAccount(modifyProp){
+  return axios.put(`${SERVER_URL}/account`,modifyProp)
+  .then(response=>response.status)
+}
+function logout(){
+  return axios.delete(`${SERVER_URL}/logout`)
+  .then(response => response.status);
+}
 
 function myClasses (content) {
   return axios.post(`${SERVER_URL}/myClasses`, content)
@@ -146,6 +154,8 @@ export {
   myClassVClass,
   classesStudents,
   isConnected,
+  modifyAccount,
+  logout,
 };
 
 
