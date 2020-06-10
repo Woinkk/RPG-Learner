@@ -3,7 +3,6 @@
  <v-card
     dark
     class="mx-auto"
-    max-width="400"
   >
     <v-img
       class="white--text align-end"
@@ -27,7 +26,6 @@
     <v-card
     dark
     class="mx-auto"
-    max-width="400"
     >
     <v-img
         class="white--text align-end"
@@ -51,7 +49,6 @@
     <v-card
     dark
     class="mx-auto"
-    max-width="400"
     >
     <v-img
         class="white--text align-end"

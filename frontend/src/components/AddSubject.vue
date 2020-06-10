@@ -80,7 +80,7 @@ export default {
         return {
         snackbarGood: false,
         snackbarError: false,
-        timeout: "2000",
+        timeout: 2000,
         dialog: false,
         subject: null,
         }

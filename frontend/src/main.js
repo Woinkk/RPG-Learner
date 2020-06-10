@@ -6,15 +6,18 @@ import App from './App.vue';
 import vuetify from './plugins/vuetify';
 import Login from './components/Login';
 import Home from './components/Home';
+import Account from './components/Account';
 import insertAccountNewStudent from './components/insertAccountNewStudent';
 import QuizzCreation from './components/QuizzCreation';
 import ClassVClass from './components/ClassVClass';
 import QuizzModification from './components/QuizzModification';
 import { isConnected } from '../services/api.js';
 import Accueil from './components/Accueil';
+import AccueilEleve from './components/AccueilEleve.vue';
 import Stats from './components/Stats';
 import CardsStudent from './components/CardsStudent.vue';
 import VueApexCharts from 'vue-apexcharts';
+
 
 Vue.use(VueAxios, axios);
 axios.defaults.withCredentials = true;
@@ -26,7 +29,16 @@ Vue.component('apexchart', VueApexCharts);
 
 const routes = [
   { path: '/', component: Accueil },
-  {path:'/login',component: Login},
+  { path: '/login', component: Login },
+  { path: '/account', component: Account,
+    beforeEnter: async(to,from,next)=>{
+      const req= await isConnected();
+      if (req.status === 200){
+        next();
+        return
+      }
+    }
+  },
   {
     name: "home", path: '/home', component: Home,
     beforeEnter: async (to, from, next) => {
@@ -35,6 +47,7 @@ const routes = [
         next();
         return
       }
+      
     },
   },
   {
@@ -97,7 +110,17 @@ const routes = [
         return
       }
     }
-  }
+  },
+  {
+    name: 'AccueilEleve', path: '/AccueilEleve', component: AccueilEleve,
+    beforeEnter: async (to, from, next) => {
+      const req = await isConnected();
+      if (req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }
+  },
 ];
 
 const router = new VueRouter({

@@ -1,0 +1,18 @@
+[
+    {
+        "pointdevie": 2,
+        "experience": 2,
+        "vitesse": 1,
+        "force": 1,
+        "pointdecompetence": 2,
+        "idstudent": 1
+    }, 
+    {
+        "pointdevie": 1,
+        "experience": 1,
+        "vitesse": 1,
+        "force": 1,
+        "pointdecompetence": 1,
+        "idstudent": 2
+    }
+]

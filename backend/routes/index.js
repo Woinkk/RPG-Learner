@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const postLogin = require('../controllers/post.login.js');
+const putModifyPassword =require('../controllers/put.modifyPassword.js')
 const postInsertNewStudent = require('../controllers/post.insertNewStudent.js');
 const postMyClasses = require('../controllers/post.myClasses.js');
 const postOtherClasses = require('../controllers/post.otherClasses.js');
@@ -50,7 +51,18 @@ router.get('/who', function (req, res, next) {
   }
 });
 
+router.delete('/logout', (req, res) => {
+  if (req.session.userId) {
+    delete req.session.userId;
+    delete req.session.whoIsConnected;
+    res.status(200).send('Disconnected');
+  } else {
+    res.status(401).send('Already disconnected');
+  }
+});
+
 router.post('/login', postLogin);
+router.put ('/account',putModifyPassword);
 router.put('/createNewStudent', postInsertNewStudent);
 router.post('/myClasses', postMyClasses);
 router.post('/otherClasses', postOtherClasses);

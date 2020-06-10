@@ -24,11 +24,11 @@ class student {
       text:
         `
       INSERT INTO ${student.tableName}
-      (firstname,lastname,email,password,pseudo,type,idclasses)
-      VALUES($1,$2,$3,$4,$5,$6,$7)      
+      (firstname,lastname,email,password,pseudo,idclasses)
+      VALUES($1,$2,$3,$4,$5,$6)      
 
       `,
-      values: [json.firstname, json.lastname, json.email, hashedPassword, json.pseudo, json.type, json.idclasses]
+      values: [json.firstname, json.lastname, json.email, hashedPassword, json.pseudo, json.idclasses]
     });
     return result;
   }
@@ -96,6 +96,30 @@ class student {
       console.log('pas gg');
       return null;
     }
+  }
+
+
+  static async modifyStudentPassword(modifyProp,mail){
+    const hashedPassword = await bcrypt.hash(modifyProp.password, 10);
+    const result = await PostgresStore.pool.query({
+      text:`UPDATE ${teacher.tableName}
+      SET password =$1
+      WHERE email like $2
+      `,
+      values:[hashedPassword,mail]
+    })
+    return result
+  }
+  
+
+
+  static async getEmailById(id){
+    const result = await PostgresStore.pool.query({
+      text:`SELECT email FROM ${teacher.tableName}
+      WHERE id = $1`,
+      values:[id]
+    })
+    return result
   }
 }
 student.tableName = 'student';

@@ -14,6 +14,7 @@ const classVclass = require ('./classVclass.js');
 const classLevel = require('./classLevel.js');
 const answerStudent = require('./answerStudent.js');
 const quizzClassVClass = require('./quizzClassVClass.js');
+const stats =require('./stats.js');
 
 module.exports = [
   item,
@@ -32,4 +33,5 @@ module.exports = [
   teacher_class,
   classVclass,
   quizzClassVClass,
+  stats,
 ];
