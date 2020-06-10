@@ -13,6 +13,9 @@ import ClassVClass from './components/ClassVClass';
 import QuizzModification from './components/QuizzModification';
 import { isConnected } from '../services/api.js';
 import Accueil from './components/Accueil';
+import AccueilEleve from './components/AccueilEleve.vue';
+import Stats from './components/Stats';
+import CardsStudent from './components/CardsStudent.vue';
 
 
 Vue.use(VueAxios, axios);
@@ -59,6 +62,16 @@ const routes = [
     },
   },
   {
+    path: '/stats', component: Stats,
+    beforeEnter: async (to, from, next) => {
+      const req = await isConnected();
+      if (req.status === 200 && req.connected === "teacher") {
+        next();
+        return
+      }
+    },
+  },
+  {
     path: '/QuizzCreation', component: QuizzCreation,
     beforeEnter: async (to, from, next) => {
       const req = await isConnected();
@@ -88,7 +101,27 @@ const routes = [
         return
       }
     }
-  }
+  },
+  {
+    path: '/CardsStudent', component: CardsStudent,
+    beforeEnter: async (to, from, next) => {
+      const req = await isConnected();
+      if (req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }
+  },
+  {
+    name: 'AccueilEleve', path: '/AccueilEleve', component: AccueilEleve,
+    beforeEnter: async (to, from, next) => {
+      const req = await isConnected();
+      if (req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }
+  },
 ];
 
 const router = new VueRouter({

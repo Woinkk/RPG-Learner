@@ -81,6 +81,11 @@ function getSubject () {
   .then(response => response.data);
 }
 
+function myClassVClassSpecific () {
+  return axios.post(`${SERVER_URL}/myClassVClassSpecific`)
+  .then(response => response.data);
+}
+
 function createQuizz (completeQuizz) {
   return axios.put(`${SERVER_URL}/createQuizz`, completeQuizz)
   .then(response => response);
@@ -154,7 +159,7 @@ export {
   myClassVClass,
   classesStudents,
   isConnected,
-  modifyAccount,
+  myClassVClassSpecific,
   logout,
 };
 

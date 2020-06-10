@@ -1,6 +1,6 @@
 <template>
       <v-col cols="12">
-        <v-card color="#295665" dark>
+        <v-card color="secondary">
           <v-card-title class="headline">Créer un quizz</v-card-title>
 
           <v-card-subtitle>Un quizz est une série de question.</v-card-subtitle>
@@ -42,7 +42,7 @@
             <AddSubject @createSubject="createSubject" @reload="LoadMatiereAndSubject"></AddSubject>
             <v-spacer></v-spacer>
             <v-icon @click="switchToModification">mdi-eye-outline</v-icon>
-            <v-btn v-if="CanCreate" @click="GoToQuizzCreation">Créer</v-btn>
+            <v-btn v-if="CanCreate" @click="GoToQuizzCreation" dark>Créer</v-btn>
             <v-btn v-else disabled>Créer</v-btn>
           </v-card-actions>
         </v-card>

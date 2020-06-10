@@ -1,7 +1,7 @@
 
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="primary">
       <Navbar />
       <v-spacer />
 
@@ -19,10 +19,13 @@
           <span>Menu</span>
         </v-tooltip>
       </router-link>
-      <router-link to="/newStudent" style="color:Black">
+      <router-link to="/newStudent">
         <v-btn color="primary">
           <v-icon>mdi-account-plus-outline</v-icon>
         </v-btn>
+      </router-link>
+      <router-link to="/stats">
+      <v-btn color="primary"><v-icon>mdi-chart-line</v-icon></v-btn>
       </router-link>
     </v-app-bar>
 
@@ -61,14 +64,21 @@ export default {
   methods: {
     Login: async function(logProp) {
       try {
-        await login(logProp);
+        const req = await login(logProp);
         this.textToast = "Vous êtes connecté(e)";
         console.log(this.textToast);
         this.connected = true;
         console.log(this.connected);
         setTimeout(() => {
-          this.$router.push({ name: "home" });
-        }, 1500);
+          if(req.data.user === "teacher"){
+            this.$router.push({ name: "home" });
+          }else if(req.data.type === null){
+            this.$router.push({name: "AccueilEleve"})
+          }else{
+            this.$router.push({name: "AccueilEleve"})
+          }
+          
+        }, 2000);
       } catch (error) {
         this.textToast = "La connexion a échoué";
         this.$router.push("login");

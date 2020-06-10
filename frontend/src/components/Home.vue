@@ -4,7 +4,7 @@
       <CreateQuizz @switchMode= "switchToModification" v-if="CreationMode === true" @goToQuizzCreation="goToQuizzCreation" @createSubject="createSubject"></CreateQuizz>
       <ModifyQuizz @switchMode= "switchToCreation" v-else></ModifyQuizz>
       <v-col cols="12">
-        <v-card color="#4c727e" dark>
+        <v-card color="secondary">
           <v-card-title class="headline">Classe VS Classe</v-card-title>
 
           <v-card-subtitle>Permet de créer un affrontement entre classes.</v-card-subtitle>
@@ -56,7 +56,7 @@
             <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn v-if="ClassVClass.selectedAllClasses == null || ClassVClass.selectedMyClasses == null" disabled>Créer</v-btn>
-                  <v-btn v-else v-on="on" @click=createClassVClass(ClassVClass)>Créer</v-btn>
+                  <v-btn v-else v-on="on" @click=createClassVClass(ClassVClass) dark>Créer</v-btn>
                 </template>
                 <span>Créer un nouveau Classe VS Classe</span>
               </v-tooltip>

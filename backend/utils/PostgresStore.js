@@ -147,6 +147,12 @@ class PostgresStore {
       await quizzClassVClass.insert(sampleQuizzClassVclass[i]);
     }
     console.log('quizzClassVclass');
+    const stats = require('../models/stats.js');
+    const sampleStats = require('../insert_json/stats.json');
+    for (let i = 0; i < sampleStats.length; i++) {
+      await stats.insert(sampleStats[i]);
+    }
+    console.log('Stats');
     console.log('Insert was a success !');
   }
 }

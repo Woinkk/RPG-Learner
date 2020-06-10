@@ -25,6 +25,7 @@ const postEditClassVClass = require('../controllers/post.editClassVClass.js');
 const postClassVClassLoader = require('../controllers/post.classVClassLoader.js');
 const postGetQuizzById = require('../controllers/post.getQuizzById.js');
 const postClassesStudents =  require('../controllers/post.classesStudents.js');
+const postMyClassVClassSpecific = require('../controllers/post.myClassVClassSpecific.js');
 
 async function isAuthenticated(req, res, next) {
   if (req.session.userId) {
@@ -75,6 +76,7 @@ router.post('/editClassVClass', postEditClassVClass);
 router.post('/classVClassLoader', postClassVClassLoader);
 router.post('/GetQuizzById', postGetQuizzById);
 router.put('/createQuizz', putCreateQuizz);
+router.post('/myClassVClassSpecific', postMyClassVClassSpecific)
 router.post('/classesStudents', postClassesStudents);
 router.put('/createSubject', putCreateSubject);
 router.get('/getMatiere', getMatiere);
