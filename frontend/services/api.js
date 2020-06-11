@@ -166,6 +166,7 @@ export {
   isConnected,
   myClassVClassSpecific,
   logout,
+  modifyAccount
   statsStudent,
   modifyAccount,
 };
