@@ -167,6 +167,7 @@ export {
   myClassVClassSpecific,
   logout,
   statsStudent,
+  modifyAccount,
 };
 
 

@@ -84,11 +84,12 @@ export default {
         myClasse: null,
         selectedClasse: null,
         value: null,
+        selectedStudent: null,
         allStudent: null,
         search: null,
         series: [{
           name: "Pourcentage de bonnes réponses",
-          data: []
+          data: [],
         }],
         chartOptions: {
           chart: {
@@ -115,8 +116,18 @@ export default {
             },
           },
           xaxis: {
+            title: {
+              text: 'Quizz par ordre chronologique'
+            },
             categories: [],
-          }
+          },
+          yaxis: {
+            title: {
+                text: '%'
+            },
+            min: 0,
+            max: 100
+          },
         },
       }),
     computed: {
@@ -141,6 +152,7 @@ export default {
         },
         selectStudent: async function (student) {
           const req = await statsStudent(student);
+          this.chartOptions.title.text = "Pourcentage de bonne réponse de "+ student.firstname +" "+ student.lastname +" par quizz"
           this.chartOptions.xaxis.categories = [];
           this.series[0].data = [];
           if(req !== null) {
