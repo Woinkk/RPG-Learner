@@ -36,6 +36,17 @@ class result {
 
     return results.rows;
   }
+
+  static async getByIdStudents (idstudent) {
+    const results = await PostgresStore.pool.query({
+      text: `
+        SELECT * FROM ${result.tableName}
+        WHERE idstudent = $1
+      `,
+      values: [idstudent]
+    });
+    return results.rows;
+  }
 }
 result.tableName = 'result';
 
