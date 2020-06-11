@@ -161,6 +161,7 @@ export {
   isConnected,
   myClassVClassSpecific,
   logout,
+  modifyAccount
 };
 
 
