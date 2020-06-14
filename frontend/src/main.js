@@ -16,6 +16,7 @@ import Accueil from './components/Accueil';
 import AccueilEleve from './components/AccueilEleve.vue';
 import Stats from './components/Stats';
 import CardsStudent from './components/CardsStudent.vue';
+import LootChest from './components/LootChest.vue';
 import VueApexCharts from 'vue-apexcharts';
 
 
@@ -103,6 +104,16 @@ const routes = [
   },
   {
     path: '/CardsStudent', component: CardsStudent,
+    beforeEnter: async (to, from, next) => {
+      const req = await isConnected();
+      if (req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }
+  },
+  {
+    path: '/LootChest', component: LootChest,
     beforeEnter: async (to, from, next) => {
       const req = await isConnected();
       if (req.status === 200 && req.connected === "student") {
