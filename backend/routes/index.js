@@ -27,6 +27,8 @@ const postGetQuizzById = require('../controllers/post.getQuizzById.js');
 const postClassesStudents =  require('../controllers/post.classesStudents.js');
 const postMyClassVClassSpecific = require('../controllers/post.myClassVClassSpecific.js');
 const postStatsStudent = require('../controllers/post.statsStudent.js');
+const putUseItem = require('../controllers/put.useItem.js');
+const postInventory = require('../controllers/post.inventory.js')
 
 async function isAuthenticated(req, res, next) {
   if (req.session.userId) {
@@ -87,6 +89,9 @@ router.get('/getQuizz', getQuizz);
 router.get('/getQuizz/:id', getQuizzById);
 router.delete('/deleteQuizz/:id', deleteQuizz);
 router.put('/modifyQuizz/:id', putModifyQuizz);
+router.put('/useItem', putUseItem);
+router.post('/inventory', postInventory);
+
 
 /* GET home page. */
 

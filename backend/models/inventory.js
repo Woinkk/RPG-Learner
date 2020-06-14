@@ -26,6 +26,15 @@ class inventory {
     });
     return result;
   }
+
+  static async inventory(idStudent){
+    const result = await PostgresStore.pool.query({
+      text:`SELECT * FROM ${inventory.tableName}
+      WHERE idstudent = $1`,
+      value:[idstudent]
+    })
+    return result
+  }
 }
 inventory.tableName = 'inventory';
 
