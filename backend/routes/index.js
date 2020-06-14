@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const postLogin = require('../controllers/post.login.js');
-const putModifyPassword =require('../controllers/put.modifyPassword.js')
+const putModifyPassword = require('../controllers/put.modifyPassword.js')
 const postInsertNewStudent = require('../controllers/post.insertNewStudent.js');
 const postMyClasses = require('../controllers/post.myClasses.js');
 const postOtherClasses = require('../controllers/post.otherClasses.js');
@@ -24,7 +24,7 @@ const putModifyQuizz = require('../controllers/put.modifyQuizz.js');
 const postEditClassVClass = require('../controllers/post.editClassVClass.js');
 const postClassVClassLoader = require('../controllers/post.classVClassLoader.js');
 const postGetQuizzById = require('../controllers/post.getQuizzById.js');
-const postClassesStudents =  require('../controllers/post.classesStudents.js');
+const postClassesStudents = require('../controllers/post.classesStudents.js');
 const postMyClassVClassSpecific = require('../controllers/post.myClassVClassSpecific.js');
 const postStatsStudent = require('../controllers/post.statsStudent.js');
 const putUseItem = require('../controllers/put.useItem.js');
@@ -46,7 +46,7 @@ router.get('/who', function (req, res, next) {
     } else if (req.session.whoIsConnected === "student") {
       var connected = req.session.whoIsConnected
     }
-    var result={status: 200 ,connected:connected}
+    var result = { status: 200, connected: connected }
     res.json(result);
   } else {
     res.status(401).send('unauthorized(1)');
@@ -64,7 +64,7 @@ router.delete('/logout', (req, res) => {
 });
 
 router.post('/login', postLogin);
-router.put ('/account',putModifyPassword);
+router.put('/account', putModifyPassword);
 router.put('/createNewStudent', postInsertNewStudent);
 router.post('/myClasses', postMyClasses);
 router.post('/otherClasses', postOtherClasses);

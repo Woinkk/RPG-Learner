@@ -27,13 +27,23 @@ class inventory {
     return result;
   }
 
-  static async inventory(idStudent){
+  static async getInventoryByIdStudent(idStudent){
     const result = await PostgresStore.pool.query({
       text:`SELECT * FROM ${inventory.tableName}
       WHERE idstudent = $1`,
-      value:[idstudent]
+      values:[idStudent]
     })
     return result
+  }
+  static async addItem (idstudent,iditem){
+    const result = await PostgresStore.pool.query({
+      text:`INSERT INTO ${inventory.tableName}
+      (idsutdent,iditem)
+      VALUES($1,$2)`,
+      values:[idstudent,iditem]
+      
+    })
+    return result;
   }
 }
 inventory.tableName = 'inventory';

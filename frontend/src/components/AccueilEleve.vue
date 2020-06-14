@@ -25,8 +25,14 @@
                         Vitesse: 2<br>
                         Force: 1<br>
                         Point de compétence disponible: 0<br>
+                        <inventory></inventory>
                         </v-card>
+
+                        
                     </div>
+                    
+                       
+                    
                 </v-card-text>
                 </v-card>
             </v-col>
@@ -49,11 +55,13 @@
 
 
 <script>
+import inventory from "./Inventory"
 import CardsStudent from "./CardsStudent";
 export default {
   name: "CreateQuizz",
   components: {
       CardsStudent,
+      inventory,
   },
   data: () => ({
 
