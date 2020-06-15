@@ -17,7 +17,20 @@
         <v-card-title class="headline">Inventaire</v-card-title>
 
         <v-card-text>
-          <v-list></v-list>
+          <v-list v-for="(item,i) in listInventory" :key="i">
+            <v-tooltip bottom>
+              <template v-slot:activator="{on}">
+                <img v-on="on" :src="item.img" width="15%" height="15%" />
+                <v-tooltip bottom>
+                  <template v-slot:activator="{on}">
+                <v-icon v-on="on" @click="useItem(item.name)">mdi-alpha-u-circle-outline</v-icon>
+                  </template>
+                  Utiliser
+                </v-tooltip>
+              </template>
+              {{item.name}}
+            </v-tooltip>
+          </v-list>
         </v-card-text>
 
         <v-card-actions>
@@ -36,37 +49,38 @@ export default {
   name: "Inventory",
   data() {
     return {
+      publicPath: process.env.BASE_URL,
       inventory: false,
       listInventory: [],
-      icon: null,
+      icon: {}
     };
   },
   methods: {
-    useItem: async function() {
+    useItem: async function(itemName) {
       //Change la quantité d'un item de l'inventaire
+      console.log(itemName)
     },
     showInventory: async function() {
-      
-      try{ 
-       const req = await inventory()
-       
-       for(let i =0; i < req.length;i++){
-         this.listInventory.push(req[i].name)
-         switch (req[i].name){
-           case "Heal Potion" :
-             this.icon ="";
-             break;
-             default:
-               break;
-         }
-       }
-      console.log("listInventory" ,this.listInventory)
+      try {
+        const req = await inventory();
 
-      }catch(error){
-        console.log ("error")
+        for (let i = 0; i < req.length; i++) {
+
+          let itemProp = { name: req[i].name, img: null };
+          switch (req[i].name) {
+            case "Heal Potion":
+              itemProp.img = "/img/heal.93fc517c.png";
+              break;
+            default:
+              break;
+          }
+          console.log("itemProp", itemProp.img);
+          this.listInventory.push(itemProp);
+        }
+        console.log("listInventory", this.listInventory);
+      } catch (error) {
+        console.log("error");
       }
-     
-
 
       //console.log("invent", req);
       /* if (req !== null){

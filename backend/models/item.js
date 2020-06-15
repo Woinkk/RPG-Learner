@@ -26,8 +26,9 @@ class item {
 
   static async getItemById(idItem){
     const result = await PostgresStore.pool.query({
-      text :`SELECT * FROM ${item.tableName}
-      WHERE id = $1`,
+      text :`SELECT *, COUNT(*) as count FROM ${item.tableName}
+      WHERE id = $1
+      GROUP BY id`,
       values:[idItem]
     })
     return result;
