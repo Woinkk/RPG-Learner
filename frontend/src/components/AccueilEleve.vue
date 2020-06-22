@@ -21,13 +21,28 @@
                         tile
                         >
                         <v-row style="position: relative; left: 2.5%;">
-                            <v-img max-width="25" max-height="25" src="../assets/heart-RPG.png"></v-img>: 2<br>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on }">
+                                    <v-img max-width="20" max-height="20" src="../assets/heart-RPG.png" v-on="on"></v-img>
+                                </template>
+                            <span>Point de vie</span>
+                            </v-tooltip>: 2<br>
                         </v-row>
                         <v-row style="position: relative; left: 2.5%;">
-                            <v-img max-width="25" max-height="25" src="../assets/speed-boot-RPG.png"></v-img>: 2<br>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on }">
+                                    <v-img max-width="20" max-height="20" src="../assets/speed-boot-RPG.png" v-on="on"></v-img>
+                                </template>
+                            <span>Vitesse</span>
+                            </v-tooltip>: 2<br>
                         </v-row>
                         <v-row style="position: relative; left: 2.5%;">
-                            <v-img max-width="25" max-height="25" src="../assets/strength-RPG.png"></v-img>: 1<br>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on }">
+                                    <v-img max-width="20" max-height="20" src="../assets/strength-RPG.png" v-on="on"></v-img>
+                                </template>
+                            <span>Force</span>
+                            </v-tooltip>: 1<br>
                         </v-row>
                         Point de compétence disponible: 0<br>
                         </v-card>

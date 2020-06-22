@@ -15,6 +15,7 @@ import Accueil from './components/Accueil';
 import AccueilEleve from './components/AccueilEleve.vue';
 import Stats from './components/Stats';
 import CardsStudent from './components/CardsStudent.vue';
+import FightingInterface from "./components/FightingInterface.vue";
 
 Vue.use(VueAxios, axios);
 
@@ -102,6 +103,16 @@ const routes = [
   },
   {
     name: 'AccueilEleve', path: '/AccueilEleve', component: AccueilEleve,
+    beforeEnter: async (to, from, next) => {
+      const req = await isConnected();
+      if (req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }
+  },
+  {
+    name: 'FightingInterface', path: '/FightingInterface', component: FightingInterface,
     beforeEnter: async (to, from, next) => {
       const req = await isConnected();
       if (req.status === 200 && req.connected === "student") {
