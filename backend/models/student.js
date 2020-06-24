@@ -108,6 +108,30 @@ class student {
       return null;
     }
   }
+
+
+  static async modifyStudentPassword(modifyProp,mail){
+    const hashedPassword = await bcrypt.hash(modifyProp.password, 10);
+    const result = await PostgresStore.pool.query({
+      text:`UPDATE ${teacher.tableName}
+      SET password =$1
+      WHERE email like $2
+      `,
+      values:[hashedPassword,mail]
+    })
+    return result
+  }
+  
+
+
+  static async getEmailById(id){
+    const result = await PostgresStore.pool.query({
+      text:`SELECT email FROM ${teacher.tableName}
+      WHERE id = $1`,
+      values:[id]
+    })
+    return result
+  }
 }
 student.tableName = 'student';
 

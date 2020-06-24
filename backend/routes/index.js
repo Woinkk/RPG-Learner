@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const postLogin = require('../controllers/post.login.js');
+const putModifyPassword = require('../controllers/put.modifyPassword.js')
 const postInsertNewStudent = require('../controllers/post.insertNewStudent.js');
 const postMyClasses = require('../controllers/post.myClasses.js');
 const postOtherClasses = require('../controllers/post.otherClasses.js');
@@ -23,8 +24,12 @@ const putModifyQuizz = require('../controllers/put.modifyQuizz.js');
 const postEditClassVClass = require('../controllers/post.editClassVClass.js');
 const postClassVClassLoader = require('../controllers/post.classVClassLoader.js');
 const postGetQuizzById = require('../controllers/post.getQuizzById.js');
-const postClassesStudents =  require('../controllers/post.classesStudents.js');
+const postClassesStudents = require('../controllers/post.classesStudents.js');
 const postMyClassVClassSpecific = require('../controllers/post.myClassVClassSpecific.js');
+const postStatsStudent = require('../controllers/post.statsStudent.js');
+const putUseItem = require('../controllers/put.useItem.js');
+const postInventory = require('../controllers/post.inventory.js');
+const postAddItem = require('../controllers/post.addItem.js');
 
 async function isAuthenticated(req, res, next) {
   if (req.session.userId) {
@@ -42,14 +47,25 @@ router.get('/who', function (req, res, next) {
     } else if (req.session.whoIsConnected === "student") {
       var connected = req.session.whoIsConnected
     }
-    var result={status: 200 ,connected:connected}
+    var result = { status: 200, connected: connected }
     res.json(result);
   } else {
     res.status(401).send('unauthorized(1)');
   }
 });
 
+router.delete('/logout', (req, res) => {
+  if (req.session.userId) {
+    delete req.session.userId;
+    delete req.session.whoIsConnected;
+    res.status(200).send('Disconnected');
+  } else {
+    res.status(401).send('Already disconnected');
+  }
+});
+
 router.post('/login', postLogin);
+router.put('/account', putModifyPassword);
 router.put('/createNewStudent', postInsertNewStudent);
 router.post('/myClasses', postMyClasses);
 router.post('/otherClasses', postOtherClasses);
@@ -66,6 +82,7 @@ router.post('/GetQuizzById', postGetQuizzById);
 router.put('/createQuizz', putCreateQuizz);
 router.post('/myClassVClassSpecific', postMyClassVClassSpecific)
 router.post('/classesStudents', postClassesStudents);
+router.post('/statsStudent', postStatsStudent);
 router.put('/createSubject', putCreateSubject);
 router.get('/getMatiere', getMatiere);
 router.get('/getSubject', getSubject);
@@ -73,6 +90,10 @@ router.get('/getQuizz', getQuizz);
 router.get('/getQuizz/:id', getQuizzById);
 router.delete('/deleteQuizz/:id', deleteQuizz);
 router.put('/modifyQuizz/:id', putModifyQuizz);
+router.put('/useItem', putUseItem);
+router.post('/inventory', postInventory);
+router.post('/addItem', postAddItem);
+
 
 /* GET home page. */
 

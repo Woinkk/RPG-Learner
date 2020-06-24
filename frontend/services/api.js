@@ -2,95 +2,103 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 const SERVER_URL = 'http://localhost:3000';
 
-function login (logProp) {
+function login(logProp) {
   return axios.post(`${SERVER_URL}/login`, logProp)
     .then(response => response);
 }
+function modifyAccount(modifyProp) {
+  return axios.put(`${SERVER_URL}/account`, modifyProp)
+    .then(response => response.status)
+}
+function logout() {
+  return axios.delete(`${SERVER_URL}/logout`)
+    .then(response => response.status);
+}
 
-function myClasses (content) {
+function myClasses(content) {
   return axios.post(`${SERVER_URL}/myClasses`, content)
     .then(response => response.data);
 }
 
-function otherClasses (content) {
+function otherClasses(content) {
   return axios.post(`${SERVER_URL}/otherClasses`, content)
     .then(response => response.data);
 }
 
-function createClassVClass (ClassVClass) {
+function createClassVClass(ClassVClass) {
   return axios.post(`${SERVER_URL}/ClassVClass`, ClassVClass)
     .then(response => response.status);
 }
 
-function AllQuizz (content) {
+function AllQuizz(content) {
   return axios.post(`${SERVER_URL}/allQuizz`, content)
     .then(response => response.data);
 }
 
-function GetNmbQuestionsByQuizz (content) {
+function GetNmbQuestionsByQuizz(content) {
   return axios.post(`${SERVER_URL}/NmbQueByQui`, content)
     .then(response => response.data);
 }
 
-function GetSubjectByQuizz (content) {
+function GetSubjectByQuizz(content) {
   return axios.post(`${SERVER_URL}/SubjectByQuizz`, content)
     .then(response => response.data);
 }
 
-function SavingClassVClass (content) {
+function SavingClassVClass(content) {
   return axios.post(`${SERVER_URL}/SavingClassVClass`, content)
     .then(response => response.status);
 }
 
-function deleteClassVClass (content) {
+function deleteClassVClass(content) {
   return axios.post(`${SERVER_URL}/deleteClassVClass`, content)
     .then(response => response.status);
 }
 
-function myClassVClass (content) {
+function myClassVClass(content) {
   return axios.post(`${SERVER_URL}/myClassVClass`, content)
     .then(response => response.data);
 }
 
 function insertAccountNewStudent(newStudent) {
-  return axios.put(`${SERVER_URL}/createNewStudent`,newStudent)
+  return axios.put(`${SERVER_URL}/createNewStudent`, newStudent)
     .then(response => response.status)
-    
+
 }
 
-function createSubject (subject) {
-  return axios.put(`${SERVER_URL}/createSubject`, {subject: subject})
-  .then(response => response);
+function createSubject(subject) {
+  return axios.put(`${SERVER_URL}/createSubject`, { subject: subject })
+    .then(response => response);
 }
 
-function getMatiere () {
+function getMatiere() {
   return axios.get(`${SERVER_URL}/getMatiere`)
-  .then(response => response.data);
+    .then(response => response.data);
 }
 
-function getSubject () {
+function getSubject() {
   return axios.get(`${SERVER_URL}/getSubject`)
-  .then(response => response.data);
+    .then(response => response.data);
 }
 
-function myClassVClassSpecific () {
+function myClassVClassSpecific() {
   return axios.post(`${SERVER_URL}/myClassVClassSpecific`)
-  .then(response => response.data);
+    .then(response => response.data);
 }
 
-function createQuizz (completeQuizz) {
+function createQuizz(completeQuizz) {
   return axios.put(`${SERVER_URL}/createQuizz`, completeQuizz)
-  .then(response => response);
+    .then(response => response);
 }
 
 function getQuizz() {
   return axios.get(`${SERVER_URL}/getQuizz`)
-  .then(response => response.data);
+    .then(response => response.data);
 }
 
 function getQuizzByIdToModify(quizzId) {
   return axios.get(`${SERVER_URL}/getQuizz/${quizzId}`)
-  .then(response => response.data);
+    .then(response => response.data);
 }
 
 function modifyQuizz(quizzId, Quizz) {
@@ -100,29 +108,48 @@ function modifyQuizz(quizzId, Quizz) {
 function deleteQuizz(quizzId) {
   return axios.delete(`${SERVER_URL}/deleteQuizz/${quizzId}`)
 }
-function isConnected(){
+function isConnected() {
   return axios.get(`${SERVER_URL}/who`)
-  .then(response => response.data);
+    .then(response => response.data);
 }
 
-function editClassVClass (content) {
+function editClassVClass(content) {
   return axios.post(`${SERVER_URL}/editClassVClass`, content)
     .then(response => response.status);
 }
 
-function classVClassLoader (content) {
+function classVClassLoader(content) {
   return axios.post(`${SERVER_URL}/classVClassLoader`, content)
     .then(response => response.data);
 }
 
-function GetQuizzById (content) {
+function GetQuizzById(content) {
   return axios.post(`${SERVER_URL}/GetQuizzById`, content)
     .then(response => response.data);
 }
 
-function classesStudents (content) {
+function classesStudents(content) {
   return axios.post(`${SERVER_URL}/classesStudents`, content)
     .then(response => response.data);
+}
+
+function statsStudent(content) {
+  return axios.post(`${SERVER_URL}/statsStudent`, content)
+    .then(response => response.data);
+}
+
+function useItem() {
+  return axios.put(`${SERVER_URL}/useItem`)
+    .then(response => response.data);
+}
+function inventory() {
+  return axios.post(`${SERVER_URL}/inventory`)
+    .then(response => response.data)
+}
+
+function addItem(content) {
+  return axios.post(`${SERVER_URL}/addItem`,content)
+    .then(response => response.data)
 }
 
 export {
@@ -152,6 +179,12 @@ export {
   classesStudents,
   isConnected,
   myClassVClassSpecific,
+  logout,
+  modifyAccount,
+  statsStudent,
+  useItem,
+  inventory,
+  addItem,
 };
 
 

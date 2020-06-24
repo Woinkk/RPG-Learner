@@ -1,10 +1,10 @@
 <template>
-      <div class="d-flex align-center">
-        <router-link to='/'>
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
+  <div class="d-flex align-center">
+    <router-link to="/">
+      <v-img
+        alt="Vuetify Logo"
+        class="shrink mr-2"
+        contain
           src="../assets/logoRPG.png"
           transition="scale-transition"
           width="40"
@@ -15,6 +15,7 @@
 
       </div>
 </template>
+
 
 <script>
 export default {
