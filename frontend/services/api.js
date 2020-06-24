@@ -147,6 +147,11 @@ function inventory() {
     .then(response => response.data)
 }
 
+function addItem(content) {
+  return axios.post(`${SERVER_URL}/addItem`,content)
+    .then(response => response.data)
+}
+
 export {
   login,
   classVClassLoader,
@@ -179,6 +184,7 @@ export {
   statsStudent,
   useItem,
   inventory,
+  addItem,
 };
 
 

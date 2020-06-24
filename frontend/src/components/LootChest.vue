@@ -4,31 +4,31 @@
             <img v-if="potion1 === 'heal' && gif2" src="../assets/heal.gif">
             <img v-else-if="potion1 === 'xp' && gif2" src="../assets/xp.gif">
             <img v-else-if="potion1 === 'force' && gif2" src="../assets/force.gif">
-            <img v-else-if="potion1 === 'heal'" src="../assets/heal.png">
-            <img v-else-if="potion1 === 'xp'" src="../assets/xp.png">
-            <img v-else-if="potion1 === 'force'" src="../assets/force.png">
+            <img v-else-if="potion1 === 'heal'" @click="addPotion('heal1')" src="../assets/heal.png">
+            <img v-else-if="potion1 === 'xp'" @click="addPotion('xp1')" src="../assets/xp.png">
+            <img v-else-if="potion1 === 'force'" @click="addPotion('force1')" src="../assets/force.png">
             <img v-if="this.gif"  align="center" src="../assets/chest_opening.gif"/>
             <img v-else align="center" src="../assets/chest_open.gif"/>
             <img v-if="potion2 === 'heal' && gif2" src="../assets/heal.gif">
             <img v-else-if="potion2 === 'xp' && gif2" src="../assets/xp.gif">
             <img v-else-if="potion2 === 'force' && gif2" src="../assets/force.gif">
-            <img v-else-if="potion2 === 'heal'" src="../assets/heal.png">
-            <img v-else-if="potion2 === 'xp'" src="../assets/xp.png">
-            <img v-else-if="potion2 === 'force'" src="../assets/force.png">
+            <img v-else-if="potion2 === 'heal'" @click="addPotion('heal2')" src="../assets/heal.png">
+            <img v-else-if="potion2 === 'xp'" @click="addPotion('xp2')" src="../assets/xp.png">
+            <img v-else-if="potion2 === 'force'" @click="addPotion('force2')" src="../assets/force.png">
         </div>
         <img v-if="potion3 === 'heal' && gif2" src="../assets/heal.gif">
         <img v-else-if="potion3 === 'xp' && gif2" src="../assets/xp.gif">
         <img v-else-if="potion3 === 'force' && gif2" src="../assets/force.gif">
         <img v-else-if="potion3 === 'resu' && gif2" src="../assets/resu.gif">
-        <img v-else-if="potion3 === 'heal'" src="../assets/heal.png">
-        <img v-else-if="potion3 === 'xp'" src="../assets/xp.png">
-        <img v-else-if="potion3 === 'force'" src="../assets/force.png">
-        <img v-else-if="potion3 === 'resu'" src="../assets/resu.png">
+        <img v-else-if="potion3 === 'heal'" @click="addPotion('heal3')" src="../assets/heal.png">
+        <img v-else-if="potion3 === 'xp'" @click="addPotion('xp3')" src="../assets/xp.png">
+        <img v-else-if="potion3 === 'force'" @click="addPotion('force3')" src="../assets/force.png">
+        <img v-else-if="potion3 === 'resu'" @click="addPotion('resu3')" src="../assets/resu.png">
     </v-container>
 </template>
 
 <script>
-
+import {addItem} from '../../services/api.js';
 export default {
     name: "LootChest",
     components: {
@@ -45,6 +45,39 @@ export default {
     
     },
     methods: {
+        addPotion: async function(potion) {
+            if(potion === "heal1") {
+                this.potion1 = null;
+                addItem({"id":1});
+            } else if(potion === "heal2") {
+                this.potion2 = null;
+                addItem({"id":1});
+            } else if(potion === "heal3") {
+                this.potion3 = null;
+                addItem({"id":1});
+            } else if(potion === "xp1") {
+                this.potion1 = null;
+                addItem({"id":3});
+            } else if(potion === "xp2") {
+                this.potion2 = null;
+                addItem({"id":3});
+            } else if(potion === "xp3") {
+                this.potion3 = null;
+                addItem({"id":3});
+            } else if(potion === "force1") {
+                this.potion1 = null;
+                addItem({"id":4});
+            } else if(potion === "force2") {
+                this.potion2 = null;
+                addItem({"id":4});
+            } else if(potion === "force3") {
+                this.potion3 = null;
+                addItem({"id":4});
+            } else if(potion === "resu3") {
+                this.potion3 = null;
+                addItem({"id":2});
+            }
+        },
         potions: async function() {
             let random1 = Math.floor(Math.random() * 100);
             let random2 = Math.floor(Math.random() * 100);
