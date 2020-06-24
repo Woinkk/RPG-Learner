@@ -9,7 +9,7 @@ width: 0px;
     bottom: -250px;
     height: 110%;
     width: 50%;
-    -webkit-animation: rotation 20s infinite linear;
+    animation: rotation 20s infinite linear;
 }
 
 .player{
@@ -40,7 +40,7 @@ width: 0px;
   outline-style: hidden;
 }
 
-@-webkit-keyframes rotation {
+@keyframes rotation {
 		from {
 				-webkit-transform: rotate(0deg);
 		}
@@ -95,6 +95,7 @@ width: 0px;
             <v-card-text class="text-center">
               Connecte toi avec toute ton école, combas toi contre d'autres classes, tes camarades avec ton personnage personnalisé. <br>
               Prépare toi, car ton aventure ne fais que commencer !
+
             </v-card-text>
           </v-card>
         </v-lazy>
@@ -124,8 +125,6 @@ export default {
       this.$router.push('/login');
     }
   },
-  created() {
-      document.documentElement.style.overflow = 'hidden';
-    }
+  
 };
 </script>

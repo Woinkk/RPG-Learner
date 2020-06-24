@@ -15,7 +15,7 @@ import Accueil from './components/Accueil';
 import AccueilEleve from './components/AccueilEleve.vue';
 import Stats from './components/Stats';
 import CardsStudent from './components/CardsStudent.vue';
-
+import Character from './components/CharacterCreator.vue';
 Vue.use(VueAxios, axios);
 
 axios.defaults.withCredentials = true;
@@ -110,6 +110,16 @@ const routes = [
       }
     }
   },
+  {
+    name: 'Character',path: '/Character', component: Character,
+    beforeEnter: async(to,from,next) =>{
+      const req = await isConnected();
+      if(req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }
+  }
 ];
 
 const router = new VueRouter({

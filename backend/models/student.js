@@ -45,6 +45,17 @@ class student {
     return result;
   }
 
+  static async insertCharacter(idStudent,character){
+    const result = await PostgresStore.pool.query({
+      text: `UPDATE INTO ${student.tableName}
+      (type)
+      VALUES($1)
+      WHERE  id = $2
+      `,
+      values:[character,idStudent]
+    })
+  }
+
   static async getStudentsByClasses (idclasses) {
     const result = await PostgresStore.pool.query({
       text: `SELECT * FROM ${student.tableName}

@@ -53,7 +53,7 @@ export default {
           }else if(req.data.type === null){
             this.$router.push({name: "AccueilEleve"})
           }else{
-            this.$router.push({name: "AccueilEleve"})
+            this.$router.push({name: "Character"})
           }
           
         }, 2000);
