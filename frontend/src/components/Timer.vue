@@ -70,6 +70,7 @@ export default {
     },
 
     timeLeft() {
+      this.$emit("timePassed", this.timePassed);
       return this.TIME_LIMIT - this.timePassed;
     },
 

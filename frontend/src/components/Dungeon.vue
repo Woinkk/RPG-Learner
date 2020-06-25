@@ -6,15 +6,18 @@
 
 
 <script>
+import FightingInterface from "../components/FightingInterface.vue";
+
 export default {
   name: "Dungeon",
   components: {
-      
+      FightingInterface,
   },
   data: () => ({
-    idEleve: "",
+    idStudent: "",
     quizz: [],
     answer: [],
+    timePassed: 0,
   }),
   methods: {
     

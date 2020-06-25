@@ -29,7 +29,7 @@
                     <v-btn large style="position: absolute; bottom: 0%; left: 0%; margin:15px;">Réponse 3</v-btn>
                     <v-btn large style="position: absolute; bottom: 0%; right: 0%; margin:15px;">Réponse 4</v-btn>
                     <div style="margin-left: auto; margin-right: auto; width: 21em;">
-                        <Timer :time="20"/>
+                        <Timer :time="20" v-on:timePassed="timePassed"/>
                     </div>
                 </v-card-text>
             </v-card>
@@ -50,10 +50,9 @@ export default {
 
   }),
   methods: {
-    
-  },
-  mounted: {
-      
+    timePassed: async function (timePassed) {
+        console.log(timePassed);
+    }
   }
 };
 </script>
