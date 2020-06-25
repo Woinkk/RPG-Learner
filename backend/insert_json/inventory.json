@@ -1,10 +1,12 @@
 [
     {
         "idstudent":1,
-        "iditem":1
+        "iditem":1,
+        "quantity":2
     },
     {
         "idstudent":2,
-        "iditem":2
+        "iditem":2,
+        "quantity":1
     }
 ]

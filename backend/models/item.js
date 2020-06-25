@@ -23,6 +23,26 @@ class item {
     });
     return result;
   }
+
+  static async getItemById(idItem){
+    const result = await PostgresStore.pool.query({
+      text :`SELECT *, COUNT(*) as count FROM ${item.tableName}
+      WHERE id = $1
+      GROUP BY id`,
+      values:[idItem]
+    })
+    return result;
+
+  }
+  static async getIdItemByName(itemName){
+    const result = await PostgresStore.pool.query({
+      text:`SELECT * FROM ${item.tableName}
+      WHERE name = $1
+      `,
+      values:[itemName]
+    })
+    return result;
+  }
 }
 
 item.tableName = 'item';

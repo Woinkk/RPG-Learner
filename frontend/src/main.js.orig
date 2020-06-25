@@ -16,10 +16,14 @@ import Accueil from './components/Accueil';
 import AccueilEleve from './components/AccueilEleve.vue';
 import Stats from './components/Stats';
 import CardsStudent from './components/CardsStudent.vue';
-import FightingInterface from "./components/FightingInterface.vue";
+<<<<<<< HEAD
 import Character from './components/CharacterCreator.vue';
+Vue.use(VueAxios, axios);
+=======
 import LootChest from './components/LootChest.vue';
 import VueApexCharts from 'vue-apexcharts';
+
+>>>>>>> 2a74d62fc3d5f03296725890c66f10d625147c39
 
 Vue.use(VueAxios, axios);
 axios.defaults.withCredentials = true;
@@ -125,16 +129,6 @@ const routes = [
   },
   {
     name: 'AccueilEleve', path: '/AccueilEleve', component: AccueilEleve,
-    beforeEnter: async (to, from, next) => {
-      const req = await isConnected();
-      if (req.status === 200 && req.connected === "student") {
-        next();
-        return
-      }
-    }
-  },
-  {
-    name: 'FightingInterface', path: '/FightingInterface', component: FightingInterface,
     beforeEnter: async (to, from, next) => {
       const req = await isConnected();
       if (req.status === 200 && req.connected === "student") {

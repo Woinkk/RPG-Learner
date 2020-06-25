@@ -4,11 +4,20 @@
     <v-app-bar app color="primary">
       <Navbar />
       <v-spacer />
-      <router-link to="/login">
-        <v-btn color="primary">
-          <!--<router-link v-if="connected" to="/account" style="colo:black">Account</router-link>!-->
-          Connexion
-        </v-btn>
+
+      <router-link v-if="!this.connected" class="d-flex pa-2" justify-end to="/login">
+        <v-btn color="primary">Connexion</v-btn>
+      </router-link>
+
+      <router-link v-else class="d-flex pa-2" justify-end :to="{path:currentRouteName}">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn color="primary" dark v-on="on" @click.stop="drawer=!drawer">
+              <v-icon>mdi-account-settings-outline</v-icon>
+            </v-btn>
+          </template>
+          <span>Menu</span>
+        </v-tooltip>
       </router-link>
       <router-link to="/newStudent">
         <v-btn color="primary">
@@ -21,6 +30,17 @@
     </v-app-bar>
 
     <v-content>
+      <v-navigation-drawer right v-model="drawer" absolute temporary>
+        <v-divider></v-divider>
+        <v-list-item v-for="item in items" :key="item.title">
+          <v-btn text @click="moveTo(item.path)">
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-btn>
+        </v-list-item>
+      </v-navigation-drawer>
+
       <router-view
         @login="Login"
         v-bind:text="textToast"
@@ -37,18 +57,27 @@
 
 <script>
 import Navbar from "./components/Navbar";
-import { login, createSubject, createQuizz } from "../services/api.js";
+import { login, createSubject, createQuizz, logout } from "../services/api.js";
 import { insertAccountNewStudent } from "../services/api.js";
 
 export default {
   methods: {
     Login: async function(logProp) {
       try {
-        await login(logProp);
+        const req = await login(logProp);
         this.textToast = "Vous êtes connecté(e)";
         console.log(this.textToast);
+        this.connected = true;
+        console.log(this.connected);
         setTimeout(() => {
-          this.$router.push({ name: "home" });
+          if(req.data.user === "teacher"){
+            this.$router.push({ name: "home" });
+          }else if(req.data.type === null){
+            this.$router.push({name: "AccueilEleve"})
+          }else{
+            this.$router.push({name: "Character"})
+          }
+          
         }, 2000);
       } catch (error) {
         this.textToast = "La connexion a échoué";
@@ -93,6 +122,20 @@ export default {
       console.log(completeQuizz);
       await createQuizz(completeQuizz);
       this.$router.push("home");
+    },
+    moveTo(path) {
+      if (path === "/logout") {
+        console.log("OUAIS");
+        this.Logout();
+        this.$router.push("/");
+      } else {
+        console.log("path" + path);
+        this.$router.push(path);
+      }
+    },
+    Logout: async function() {
+      await logout();
+      this.connected = false;
     }
   },
 
@@ -100,6 +143,11 @@ export default {
     this.$on("login", function(logProp) {
       this.Login(logProp);
     });
+  },
+  computed: {
+    currentRouteName() {
+      return this.$route.name;
+    }
   },
 
   name: "App",
@@ -110,7 +158,14 @@ export default {
   data: () => ({
     selected: null,
     textToast: null,
-    snackbar: false
+    snackbar: false,
+    connected: false,
+    drawer: null,
+    items: [
+      { title: "Home", path: "/home" },
+      { title: "Compte", path: "/account" },
+      { title: "Déconexion", path: "/logout" }
+    ]
   })
 };
 </script>
