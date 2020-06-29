@@ -14,6 +14,18 @@
                 flat
                 >
                 .col-6 .col-md-5
+                <div class="character-container">
+                    <div :style="characterStyle" class="character character-body" id="character-body"></div>
+                    <div :style="characterStyle" class="character character-ears" id="character-ears"></div>
+                    <div :style="characterStyle" class="character character-eyes" id="character-eyes"></div>
+                    <div :style="characterStyle" class="character character-nose" id="character-nose"></div>
+                    <div :style="characterStyle" class="character character-pants" id="character-pants"></div>
+                    <div :style="characterStyle" class="character character-shirt" id="character-shirt"></div>
+                    <div :style="characterStyle" class="character character-shoes" id="character-shoes"></div>
+                    <div :style="characterStyle" class="character character-weapon" id="character-weapon"></div>
+                    <div :style="characterStyle" class="character character-facialHair" id="character-facialHair"></div>
+                    <div :style="characterStyle" class="character character-hair" id="character-hair"></div>
+                </div>
                 <v-card-text style="position: absolute; bottom: 0px;">
                     <div>
                         <v-card
@@ -75,18 +87,113 @@
 
 <script>
 import inventory from "./Inventory"
+import {skinPerso} from '../../services/api.js'
 import CardsStudent from "./CardsStudent";
 export default {
-  name: "CreateQuizz",
+  name: "AccueilEleve",
   components: {
       CardsStudent,
       inventory,
   },
   data: () => ({
-
+      image: "",
+      currentCharacterSpriteX:0,
+      currentCharacterSpriteY:0,
   }),
+  computed: {
+      characterStyle: function(){
+            return {
+            backgroundPositionX:(-64*this.currentCharacterSpriteX)+"px",
+            backgroundPositionY:(-64*this.currentCharacterSpriteY)+"px",            
+            };
+        }
+  },
   methods: {
+      skinPerso: async function() {
+          const perso = await skinPerso();
+          this.image = require.context('../assets/',true, /\.png$/)
+          document.getElementById("character-hair").style.backgroundImage= "url("+this.image("./SpriteCharacter/hair/"+perso.hairStyle+"/"+perso.hairColor+".png")+")";
+          document.getElementById("character-hair").style.backgroundImage= "url("+this.image("./SpriteCharacter/hair/"+perso.hairStyle+"/"+perso.hairColor+".png")+")";
+          document.getElementById("character-ears").style.backgroundImage= "url("+this.image("./SpriteCharacter/ears/"+perso.ears+".png")+")";
+          document.getElementById("character-eyes").style.backgroundImage= "url("+this.image("./SpriteCharacter/eyes/"+perso.eyes+".png")+")";
+          document.getElementById("character-nose").style.backgroundImage= "url("+this.image("./SpriteCharacter/nose/"+perso.nose+".png")+")";
+          document.getElementById("character-facialHair").style.backgroundImage = "url("+this.image("./SpriteCharacter/facialHair/" + perso.facialHairStyle +"/"+ perso.facialHairColor+ ".png")+")";
+          document.getElementById("character-facialHair").style.backgroundImage = "url("+this.image("./SpriteCharacter/facialHair/" + perso.facialHairStyle +"/"+ perso.facialHairColor+ ".png")+")";
+          if(perso.genre === "male") {
+            document.getElementById("character-pants").style.backgroundImage = "url("+this.image("./SpriteCharacter/male/pants/" + perso.pants + ".png")+")";
+            document.getElementById("character-shirt").style.backgroundImage = "url("+this.image("./SpriteCharacter/male/shirt/" + perso.shirt + ".png")+")";
+            document.getElementById("character-shoes").style.backgroundImage = "url("+this.image("./SpriteCharacter/male/shoes/" + perso.shoes + ".png")+")";
+            document.getElementById("character-weapon").style.backgroundImage = "url("+this.image("./SpriteCharacter/male/weapon/" + perso.weapon + ".png")+")";
+            document.getElementById("character-body").style.backgroundImage = "url("+this.image("./SpriteCharacter/male/body/" + perso.race + ".png")+")";
+          } else {
+            document.getElementById("character-pants").style.backgroundImage = "url("+this.image("./SpriteCharacter/female/pants/" + perso.pants + ".png")+")";
+            document.getElementById("character-shirt").style.backgroundImage = "url("+this.image("./SpriteCharacter/female/shirt/" + perso.shirt + ".png")+")";
+            document.getElementById("character-shoes").style.backgroundImage = "url("+this.image("./SpriteCharacter/female/shoes/" + perso.shoes + ".png")+")";
+            document.getElementById("character-weapon").style.backgroundImage = "url("+this.image("./SpriteCharacter/female/weapon/" + perso.weapon + ".png")+")";
+            document.getElementById("character-body").style.backgroundImage = "url("+this.image("./SpriteCharacter/female/body/" + perso.race + ".png")+")";
+          }
+          this.currentCharacterSpriteX = 0;
+          this.currentCharacterSpriteY = 8;
+          this.currentCharacterSpriteX = (this.currentCharacterSpriteX + 1) % 9;
+          if(this.currentCharacterSpriteX === 0) this.currentCharacterSpriteY = (this.currentCharacterSpriteY+1) % 12;
+          if(this.currentCharacterSpriteY === 0) this.currentCharacterSpriteY +=8;
+      }
     
+  },
+  created() {
+      this.skinPerso();
+      setInterval(()=>{
+          this.currentCharacterSpriteX = (this.currentCharacterSpriteX + 1) % 9;
+          if(this.currentCharacterSpriteX === 0) this.currentCharacterSpriteY = (this.currentCharacterSpriteY+1) % 12;
+          if(this.currentCharacterSpriteY === 0) this.currentCharacterSpriteY += 8;
+      },175)
   }
 };
 </script>
+<style scoped>
+
+:root{
+}
+.character{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 64px;
+  height: 64px;
+}
+.character-body{
+  background-image: url(../assets/SpriteCharacter/male/body/light.png);
+}
+.character-hair{
+    background-image: url(../assets/SpriteCharacter/hair/bangs/blonde.png);
+}
+.character-ears{
+    background-image: url(../assets/SpriteCharacter/ears/bigears_light.png);
+}
+.character-eyes{
+    background-image: url(../assets/SpriteCharacter/eyes/blue.png);
+}
+.character-nose{
+    background-image: url(../assets/SpriteCharacter/nose/bignose_light.png);
+}
+.character-pants{
+    background-image: url(../assets/SpriteCharacter/male/pants/magenta_pants.png);
+}
+.character-shirt{
+    background-image: url(../assets/SpriteCharacter/male/shirt/brown_longsleeve.png);
+}
+.character-facialHair{
+    background-image: url(../assets/SpriteCharacter/facialHair/beard/blonde.png);
+}
+.character-shoes{
+    background-image: url(../assets/SpriteCharacter/male/shoes/black_shoes.png);
+}
+.character-weapon{
+    background-image: url(../assets/SpriteCharacter/male/weapon/bow.png);
+}
+.character-container{
+  position: relative;
+  left: 45%;
+  zoom: 200%;
+}
+</style>

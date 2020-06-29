@@ -169,10 +169,6 @@
     <div v-if="this.genre === 'male'">
         <v-btn @click='shoesM("black_shoes")'>Chaussures noires</v-btn>
         <v-btn @click='shoesM("brown_shoes")'>Chaussures marrons</v-btn>
-        <v-btn @click='shoesM("slippers_black")'>Chaussons noirs</v-btn>
-        <v-btn @click='shoesM("slippers_brown")'>Chaussons marrons</v-btn>
-        <v-btn @click='shoesM("slippers_gray")'>Chaussons gris</v-btn>
-        <v-btn @click='shoesM("slippers_white")'>Chaussons blanc</v-btn>
     </div>
 
     <div v-else>
@@ -288,10 +284,10 @@ import {savingCharacter} from '../../services/api.js';
         eyes:"blue",
         nose:"bignose_light",
         pants:"magenta_pants",
-        shirt:"",
+        shirt:"brown_longsleeve",
         facialHairColor:"blonde",
         facialHairStyle:"beard",
-        shoes:"",
+        shoes:"black_shoes",
         weapon:"bow",
         image:"",
         animation:"",
@@ -373,7 +369,6 @@ import {savingCharacter} from '../../services/api.js';
        },
        hairColors(event){
          this.hairColor = event;
-         console.log(this.hairColor);
          this.image = require.context('../assets/',true, /\.png$/)
          document.getElementById("character-hair").style.backgroundImage= "url("+this.image("./SpriteCharacter/hair/"+this.hairStyle+"/"+this.hairColor+".png")+")";
 

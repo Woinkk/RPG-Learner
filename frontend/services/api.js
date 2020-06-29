@@ -157,6 +157,11 @@ function savingCharacter(content) {
     .then(response => response.data)
 }
 
+function skinPerso(content) {
+  return axios.post(`${SERVER_URL}/skinPerso`,content)
+    .then(response => response.data)
+}
+
 export {
   login,
   classVClassLoader,
@@ -168,6 +173,7 @@ export {
   getMatiere,
   getSubject,
   createClassVClass,
+  skinPerso,
   //MyQuizz,
   createQuizz,
   getQuizz,

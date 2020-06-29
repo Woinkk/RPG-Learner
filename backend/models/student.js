@@ -11,7 +11,7 @@ class student {
           email TEXT,
           password TEXT,
           pseudo TEXT,
-          type TEXT,
+          type JSON,
           idclasses INT,
           FOREIGN KEY (idclasses) REFERENCES classes (id)
   
@@ -122,6 +122,14 @@ class student {
     return result
   }
   
+  static async getSkin(id){
+    const result = await PostgresStore.pool.query({
+      text:`SELECT type FROM ${student.tableName}
+      WHERE id = $1`,
+      values:[id]
+    })
+    return result;
+  }
 
 
   static async getEmailById(id){
