@@ -314,6 +314,7 @@ import {savingCharacter} from '../../services/api.js';
             "facialHairStyle":this.facialHairStyle, "shoes":this.shoes, "weapon":this.weapon
           };
           await savingCharacter(perso);
+          this.$router.push({name: "AccueilEleve"})
 
 
       },
