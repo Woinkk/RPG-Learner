@@ -152,6 +152,11 @@ function addItem(content) {
     .then(response => response.data)
 }
 
+function savingCharacter(content) {
+  return axios.post(`${SERVER_URL}/savingCharacter`,content)
+    .then(response => response.data)
+}
+
 export {
   login,
   classVClassLoader,
@@ -185,6 +190,7 @@ export {
   useItem,
   inventory,
   addItem,
+  savingCharacter,
 };
 
 
