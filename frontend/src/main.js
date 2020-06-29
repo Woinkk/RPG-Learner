@@ -18,6 +18,7 @@ import Stats from './components/Stats';
 import CardsStudent from './components/CardsStudent.vue';
 import Character from './components/CharacterCreator.vue';
 import LootChest from './components/LootChest.vue';
+import insertAccountNewTeacher from './components/insertAccountNewTeacher.vue';
 import VueApexCharts from 'vue-apexcharts';
 
 Vue.use(VueAxios, axios);
@@ -134,6 +135,16 @@ const routes = [
   },
   {
     name: 'Character',path: '/Character', component: Character,
+    beforeEnter: async(to,from,next) =>{
+      const req = await isConnected();
+      if(req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }
+  },
+  {
+    name: 'newTeacher',path: '/newTeacher', component: insertAccountNewTeacher,
     beforeEnter: async(to,from,next) =>{
       const req = await isConnected();
       if(req.status === 200 && req.connected === "student") {
