@@ -72,10 +72,10 @@ export default {
         setTimeout(() => {
           if(req.data.user === "teacher"){
             this.$router.push({ name: "home" });
-          }else if(req.data.type === null){
+          }else if(req.data.type !== null){
             this.$router.push({name: "AccueilEleve"})
           }else{
-            this.$router.push({name: "Character"})
+            this.$router.push({name: "CharacterCreator"})
           }
           
         }, 2000);
