@@ -157,6 +157,16 @@ function addItem(content) {
     .then(response => response.data)
 }
 
+function savingCharacter(content) {
+  return axios.post(`${SERVER_URL}/savingCharacter`,content)
+    .then(response => response.data)
+}
+
+function skinPerso(content) {
+  return axios.post(`${SERVER_URL}/skinPerso`,content)
+    .then(response => response.data)
+}
+
 export {
   login,
   classVClassLoader,
@@ -168,6 +178,7 @@ export {
   getMatiere,
   getSubject,
   createClassVClass,
+  skinPerso,
   //MyQuizz,
   createQuizz,
   getQuizz,
@@ -191,6 +202,7 @@ export {
   inventory,
   addItem,
   GetFullQuizzById,
+  savingCharacter,
 };
 
 

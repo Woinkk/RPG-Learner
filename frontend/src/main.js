@@ -17,7 +17,7 @@ import AccueilEleve from './components/AccueilEleve.vue';
 import Stats from './components/Stats';
 import CardsStudent from './components/CardsStudent.vue';
 import FightingInterface from "./components/FightingInterface.vue";
-import Character from './components/CharacterCreator.vue';
+import CharacterCreator from './components/CharacterCreator.vue';
 import LootChest from './components/LootChest.vue';
 import VueApexCharts from 'vue-apexcharts';
 import Dungeon from "./components/Dungeon.vue";
@@ -146,7 +146,7 @@ const routes = [
     }
   },
   {
-    name: 'Character',path: '/Character', component: Character,
+    name: 'CharacterCreator',path: '/CharacterCreator', component: CharacterCreator,
     beforeEnter: async(to,from,next) =>{
       const req = await isConnected();
       if(req.status === 200 && req.connected === "student") {

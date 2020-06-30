@@ -1,271 +1,258 @@
 <template>
 <div>
-  <div>
-    <select name="genre" id="genre" @change="genreM($event)">
-      <option value="male">male</option>
-      <option value="female">female</option>
-    </select>
-  </div>
-  
-  <div>
-      <select name="body" id="body" @change="bodyM($event)">
-        <option value="light">light</option>
-        <option value="dark">dark</option>
-        <option value="dark2">dark2</option>
-        <option value="darkelf">darkelf</option>
-        <option value="darkelf2">darkelf2</option>
-        <option value="orc">orc</option>
-        <option value="red_orc">red_orc</option>
-        <option value="tanned">tanned</option>
-        <option value="tanned2">tanned2</option>
-      </select>
-    </div>
+  <v-stepper v-model="e1">
 
-    <div>
-        <select name="hairType" id="hairType" @change="hairTypes($event)">
-        <option value="bangs">bangs</option>
-        <option value="bangslong">bangslong</option>
-        <option value="bangslong2">bangslong2</option>
-        <option value="bangsshort">bangsshort</option>
-        <option value="bedhead">bedhead</option>
-        <option value="bunches">bunches</option>
-        <option value="jewfro">jewfro</option>
-        <option value="long">long</option>
-        <option value="longhawk">longhawk</option>
-        <option value="longknot">longknot</option>
-        <option value="loose">loose</option>
-        <option value="messy1">messy1</option>
-        <option value="messy2">messy2</option>
-        <option value="mohawk">mohawk</option>
-        <option value="page">page</option>
-        <option value="page2">page2</option>
-        <option value="parted">parted</option>
-        <option value="pixie">pixie</option>
-        <option value="plain">plain</option>
-        <option value="ponytail">ponytail</option>
-        <option value="ponytail2">ponytail2</option>
-        <option value="princess">princess</option>
-        <option value="shorthawk">shorthawk</option>
-        <option value="shortknot">shortknot</option>
-        <option value="shoulderl">shoulderl</option>
-        <option value="shoulderr">shoulderr</option>
-        <option value="swoop">swoop</option>
-        <option value="unkempt">unkempt</option>
-        <option value="xlong">xlong</option>
-        <option value="xlongknot">xlongknot</option>
-        </select>
-    </div>
+      <v-stepper-header>
+      <v-stepper-step :complete="e1 > 1" step="1">Genre</v-stepper-step>
 
-    <div>
-      <select name="hairColor" id="hairColor" @change="hairColors($event)">
-        <option value="blonde">blonde</option>
-        <option value="black">black</option>
-        <option value="blonde2">blonde2</option>
-        <option value="blue">blue</option>
-        <option value="blue2">blue2</option>
-        <option value="brown">brown</option>
-        <option value="brown2">brwon2</option>
-        <option value="brunette">brunette</option>
-        <option value="brunette2">brunette2</option>
-        <option value="dark-blonde">dark-blonde</option>
-        <option value="gold">gold</option>
-        <option value="gray">gray</option>
-        <option value="gray2">gray2</option>
-        <option value="green">green</option>²
-        <option value="green2">green2</option>
-        <option value="light-blonde">light-blonde</option>
-        <option value="light-blonde2">light-blonde2</option>
-        <option value="pink">pink</option>
-        <option value="pink2">pink2</option>
-        <option value="purple">purple</option>
-        <option value="raven">raven</option>
-        <option value="raven2">raven2</option>
-        <option value="redhead">redhead</option>
-        <option value="redhead2">redhead2</option>
-        <option value="ruby-red">ruby-red</option>
-        <option value="white">white</option>
-        <option value="white-blonde">white-blonde</option>
-        <option value="white-blonde2">white-blonde2</option>
-        <option value="white-cyan">white-cyan</option>
-      </select>
-    </div>
+      <v-divider></v-divider>
 
-    <div>
-      <select name="ears" id="ears" @change="earsM($event)">
-        <option value="bigears_light">bigears_light</option>  
-        <option value="bigears_dark">bigears_dark</option>
-        <option value="bigears_dark2">bigears_dark2</option>
-        <option value="bigears_darkelf">bigears_darkelf</option>
-        <option value="bigears_darkelf2">bigears_darkelf2</option>
-        <option value="bigears_tanned">bigears_tanned</option>
-        <option value="bigears_tanned2">bigears_tanned2</option>
-        <option value="elvenears_dark">elvenears_dark</option>
-        <option value="elvenears_dark2">elvenears_dark2</option>
-        <option value="elvenears_darkelf">elvenears_darkelf</option>
-        <option value="elvenears_darkelf2">elvenears_darkelf2</option>
-        <option value="elvenears_light">elvenears_light</option>
-        <option value="elvenears_tanned">elvenears_tanned</option>
-        <option value="elvenears_tanned2">elvenears_tanned2</option>
-      </select>
-    </div>
+      <v-stepper-step :complete="e1 > 2" step="2">Couleur de peau</v-stepper-step>
 
-    <div>
-      <select name="eyes" id="eyes" @change="eyesM($event)">
-        <option value="blue">blue</option>
-        <option value="brown">brown</option>  
-        <option value="gray">gray</option>  
-        <option value="green">green</option>  
-        <option value="orange">orange</option>  
-        <option value="purple">purple</option>  
-        <option value="red">red</option>  
-        <option value="yellow">yellow</option>
-      </select>
-    </div>
-    <div>
-      <select name="nose" id="nose" @change="noseM($event)">
-        <option value="bignose_light">bignose_light</option>
-        <option value="bignose_dark">bignose_dark</option>
-        <option value="bignose_dark2">bignose_dark2</option>
-        <option value="bignose_darkelf">bignose_darkelf</option>
-        <option value="bignose_darkelf2">bignose_darkelf2</option>
-        <option value="bignose_tanned">bignose_tanned</option>
-        <option value="bignose_tanned2">bignose_tanned2</option>
-        <option value="buttonnose_dark">buttonnose_dark</option>
-        <option value="buttonnose_dark2">buttonnose_dark2</option>
-        <option value="buttonnose_darkelf">buttonnose_darkelf</option>
-        <option value="buttonnose_darkelf2">buttonnose_darkelf2</option>
-        <option value="buttonnose_light">buttonnose_light</option>
-        <option value="buttonnose_tanned">buttonnose_tanned</option>
-        <option value="buttonnose_tanned2">buttonnose_tanned2</option>
-        <option value="straightnose_dark">straightnose_dark</option>
-        <option value="straightnose_dark2">straightnose_dark2</option>
-        <option value="straightnose_darkelf">straightnose_darkelf</option>
-        <option value="straightnose_darkelf2">straightnose_darkelf2</option>
-        <option value="straightnose_light">straightnose_light</option>
-        <option value="straightnose_tanned">straightnose_tanned</option>
-        <option value="straightnose_tanned2">straightnose_tanned2</option>
-      </select>
-    </div>
-    <div>
-      <select name="pants" id="pants" @change="pantsM($event)">
-        <option value="magenta_pants">magenta_pants</option>
-        <option value="red_pants">red_pants</option>
-        <option value="teal_pants">teal_pants</option>
-        <option value="white_pants">white_pants</option>
+      <v-divider></v-divider>
 
-      </select>
+      <v-stepper-step :complete="e1 > 3" step="3">Cheveux</v-stepper-step>
+
+      <v-divider></v-divider>
+
+      <v-stepper-step :complete="e1 > 4" step="4">Visage</v-stepper-step>
+
+      <v-divider></v-divider>
+
+      <v-stepper-step :complete="e1 > 5" step="5">Tenue</v-stepper-step>
+
+      <v-divider></v-divider>
+
+      <v-stepper-step :complete="e1 > 6" step="6">Pilosité</v-stepper-step>
+
+      <v-divider></v-divider>
+
+      <v-stepper-step :complete="e1 > 7" step="7">Arme</v-stepper-step>
+
+      <v-divider></v-divider>
+
+      <v-stepper-step step="8">Finalisation</v-stepper-step>
+      </v-stepper-header>
+
+     <v-stepper-items>
+      <v-stepper-content step="1">
+      <v-card color="grey lighten-1">
+      <v-card-actions align="center">
+      <div>
+      <v-btn @click="genreM('male')"><v-icon>mdi-gender-male</v-icon></v-btn>
+      <v-btn @click="genreM('female')"><v-icon>mdi-gender-female</v-icon></v-btn>
+      </div>
+      </v-card-actions>
+      </v-card>
+      <v-btn color="primary" @click="e1 = 2"><v-icon>mdi-hand-okay</v-icon></v-btn>
+    </v-stepper-content>
+
+      <v-stepper-content step="2">
+      <v-card color="grey lighten-1">
+      <v-card-actions align="center">
+      <div>
+      <v-btn @click="bodyM('light')">Claire</v-btn>
+      <v-btn @click="bodyM('dark')">Foncé</v-btn>
+      <v-btn @click="bodyM('darkelf')">Elfe sombre</v-btn>
+      <v-btn @click="bodyM('orc')">Orque</v-btn>
+      <v-btn @click="bodyM('red_orc')">Orque foncé</v-btn>
+      <v-btn @click="bodyM('tanned2')">Bronzé</v-btn>
     </div>
+    </v-card-actions>
+    </v-card>
+    <v-btn color="primary" @click="e1 = 3"><v-icon>mdi-hand-okay</v-icon></v-btn>
+    <v-btn text @click="e1 = 1"><v-icon>mdi-arrow-up-bold-circle-outline</v-icon></v-btn>
+    </v-stepper-content>
+
+      <v-stepper-content step="3">
+      <v-card color="grey lighten-1">
+      <v-card-actions align="center">
+      <div>
+        <v-btn @click="hairTypes('bangs')">Pagailles</v-btn>
+        <v-btn @click="hairTypes('bangslong2')">Pagailles longs</v-btn>
+        <v-btn @click="hairTypes('bedhead')">Au réveil</v-btn>
+        <v-btn @click="hairTypes('long')">Long</v-btn>
+        <v-btn @click="hairTypes('longhawk')">Crête longue</v-btn>
+        <v-btn @click="hairTypes('loose')">Détachés</v-btn>
+        <v-btn @click="hairTypes('ponytail')">Queu de cheval</v-btn>
+        <v-btn @click="hairTypes('princess')">Princess</v-btn>
+        <v-btn @click="hairTypes('shorthawk')">Crête courte</v-btn>
+        <v-btn @click="hairTypes('xlong')">Très long</v-btn>
+        <v-btn @click="hairTypes('xlongknot')">Très longue queu de cheval</v-btn>
+    </div>
+    <br>
+    <div>
+        <v-btn @click='hairColors("blonde")'>Blond</v-btn>
+        <v-btn @click='hairColors("black")'>Noir</v-btn>
+        <v-btn @click='hairColors("blue")'>Bleu</v-btn>
+        <v-btn @click='hairColors("brunette")'>Brun</v-btn>
+        <v-btn @click='hairColors("gray")'>Gris</v-btn>
+        <v-btn @click="hairColors('green')">Vert</v-btn>
+        <v-btn @click='hairColors("pink")'>Rose</v-btn>
+        <v-btn @click='hairColors("raven")'>Foncé</v-btn>
+        <v-btn @click='hairColors("redhead")'>Rouge</v-btn>
+        <v-btn @click='hairColors("white")'>Blanc</v-btn>
+    </div>
+    </v-card-actions>
+    </v-card>
+    <v-btn color="primary" @click="e1 = 4"><v-icon>mdi-hand-okay</v-icon></v-btn>
+    <v-btn text @click="e1 = 2"><v-icon>mdi-arrow-up-bold-circle-outline</v-icon></v-btn>
+    </v-stepper-content>
+
+      <v-stepper-content step="4">
+      <v-card color="grey lighten-1">
+      <v-card-actions align="center">
+    <div>
+        <v-btn @click='earsM("bigears_light")'>Oreilles claires</v-btn>  
+        <v-btn @click='earsM("bigears_dark")'>Oreilles foncées</v-btn>
+        <v-btn @click='earsM("bigears_darkelf")'>Oreilles elfe sombre</v-btn>
+        <v-btn @click='earsM("elvenears_dark")'>Oreilles d'elfe foncées</v-btn>
+        <v-btn @click='earsM("elvenears_light")'>Oreilles d'elfe claires</v-btn>
+        <v-btn @click='earsM("elvenears_tanned2")'>Oreilles d'elfe bronzées</v-btn>
+    </div>
+    <br>
+    <div>
+        <v-btn @click='eyesM("blue")'>Bleu</v-btn>
+        <v-btn @click='eyesM("brown")'>Marron</v-btn>  
+        <v-btn @click='eyesM("gray")'>Gris</v-btn>  
+        <v-btn @click='eyesM("green")'>Vert</v-btn>  
+        <v-btn @click='eyesM("orange")'>Orange</v-btn>  
+        <v-btn @click='eyesM("purple")'>Violet</v-btn>  
+        <v-btn @click='eyesM("red")'>Rouge</v-btn>  
+        <v-btn @click='eyesM("yellow")'>Jaune</v-btn>
+    </div>
+    <br>
+    <div>
+        <v-btn @click='noseM("bignose_light")'>Nez clair</v-btn>
+        <v-btn @click='noseM("bignose_dark")'>Nez foncé</v-btn>
+        <v-btn @click='noseM("bignose_darkelf")'>Nez d'elfe sombre</v-btn>
+        <v-btn @click='noseM("bignose_tanned2")'>Nez bronzé</v-btn>
+        <v-btn @click='noseM("buttonnose_light")'>Nez plat clair</v-btn>
+        <v-btn @click='noseM("buttonnose_dark")'>Nez plat foncé</v-btn>
+        <v-btn @click='noseM("buttonnose_darkelf")'>Nez plat d'elfe sombre</v-btn>
+        <v-btn @click='noseM("buttonnose_tanned2")'>Nez plat bronzé</v-btn>
+        <v-btn @click='noseM("straightnose_light")'>Nez droit clair</v-btn>
+        <v-btn @click='noseM("straightnose_dark")'>Nez droit foncé</v-btn>
+        <v-btn @click='noseM("straightnose_darkelf")'>Nez droit d'elfe sombre</v-btn>
+        <v-btn @click='noseM("straightnose_tanned2")'>Nez droit bronzé</v-btn>
+    </div>
+    </v-card-actions>
+    </v-card>
+    <v-btn color="primary" @click="e1 = 5"><v-icon>mdi-hand-okay</v-icon></v-btn>
+    <v-btn text @click="e1 = 3"><v-icon>mdi-arrow-up-bold-circle-outline</v-icon></v-btn>
+    </v-stepper-content>
+
+      <v-stepper-content step="5">
+      <v-card color="grey lighten-1">
+      <v-card-actions align="center">
+    <div>
+        <v-btn @click='pantsM("magenta_pants")'>Pantalon magenta</v-btn>
+        <v-btn @click='pantsM("red_pants")'>Pantalon rouge</v-btn>
+        <v-btn @click='pantsM("teal_pants")'>Pantalon gris</v-btn>
+        <v-btn @click='pantsM("white_pants")'>Pantalon blanc</v-btn>
+    </div>
+    <br>
     <div v-if="this.genre === 'male'">
-      <select name="shirtMale" id="shirtMale" @change="shirtM($event)">
-        <option value="">choisi un t-shirt</option>
-        <option value="brown_longsleeve">brown_longsleeve</option>
-        <option value="maroon_longsleeve">maroon_longsleeve</option>
-        <option value="teal_longsleeve">teal_longsleeve</option>
-        <option value="white_longsleeve">white_longsleeve</option>
-      </select>
+        <v-btn @click='shirtM("brown_longsleeve")'>T-shirt manche longue marron</v-btn>
+        <v-btn @click='shirtM("teal_longsleeve")'>T-shirt manche longue gris</v-btn>
+        <v-btn @click='shirtM("white_longsleeve")'>T-shirt manche longue blanc</v-btn>
     </div>
     <div v-else>
-      <select name="shirtFemale" id="shirtFemale" @change="shirtM($event)">
-        <option value="">choisi un t-shirt</option>
-        <option value="brown_pirate">brown_pirate</option>
-        <option value="brown_sleeveless">brown_sleeveless</option>
-        <option value="maroon_pirate">maroon_pirate</option>
-        <option value="maroon_sleeveless">maroon_sleeveless</option>
-        <option value="teal_pirate">teal_pirate</option>
-        <option value="teal_sleeveless">teal_sleeveless</option>
-        <option value="white_pirate">white_pirate</option>
-        <option value="white_sleeveless">white_sleeveless</option>
-      </select>
+        <v-btn @click='shirtM("brown_pirate")'>T-shirt marron</v-btn>
+        <v-btn @click='shirtM("brown_sleeveless")'>T-shirt marrion sans manche</v-btn>
+        <v-btn @click='shirtM("teal_pirate")'>T-shirt gris</v-btn>
+        <v-btn @click='shirtM("teal_sleeveless")'>T-shirt gris sans manche</v-btn>
+        <v-btn @click='shirtM("white_pirate")'>T-shirt blanc</v-btn>
+        <v-btn @click='shirtM("white_sleeveless")'>T-shirt blanc sans manche</v-btn>
     </div>
-    <div>
-      <select name="facialHair" id="facialHair" @change="facialHairStyleM($event)">
-        <option value="beard">beard</option>
-        <option value="bigstache">bigstache</option>
-        <option value="mustache">mustache</option>
-      </select>
-    </div>
-     <div>
-      <select name="facialHairColor" id="facialHairColor" @change="facialHairColorsM($event)">
-        <option value="blonde">blonde</option>
-        <option value="black">black</option>
-        <option value="blonde2">blonde2</option>
-        <option value="blue">blue</option>
-        <option value="blue2">blue2</option>
-        <option value="brown">brown</option>
-        <option value="brown2">brwon2</option>
-        <option value="brunette">brunette</option>
-        <option value="brunette2">brunette2</option>
-        <option value="dark-blonde">dark-blonde</option>
-        <option value="gold">gold</option>
-        <option value="gray">gray</option>
-        <option value="gray2">gray2</option>
-        <option value="green">green</option>²
-        <option value="green2">green2</option>
-        <option value="light-blonde">light-blonde</option>
-        <option value="light-blonde2">light-blonde2</option>
-        <option value="pink">pink</option>
-        <option value="pink2">pink2</option>
-        <option value="purple">purple</option>
-        <option value="raven">raven</option>
-        <option value="raven2">raven2</option>
-        <option value="redhead">redhead</option>
-        <option value="redhead2">redhead2</option>
-        <option value="ruby-red">ruby-red</option>
-        <option value="white">white</option>
-        <option value="white-blonde">white-blonde</option>
-        <option value="white-blonde2">white-blonde2</option>
-        <option value="white-cyan">white-cyan</option>
-      </select>
-    </div>
-
+    <br>
     <div v-if="this.genre === 'male'">
-      <select name="shoesMale" id="shoesMale" @change="shoesM($event)">
-        <option value="black_shoes">black_shoes</option>
-        <option value="brown_shoes">brown_shoes</option>
-        <option value="maroon_shoes">maroon_shoes</option>
-      </select>
+        <v-btn @click='shoesM("black_shoes")'>Chaussures noires</v-btn>
+        <v-btn @click='shoesM("brown_shoes")'>Chaussures marrons</v-btn>
     </div>
 
     <div v-else>
-      <select name="shoesFemale" id="shoesFemale" @change="shoesM($event)">
-        <option value="black_shoes">black_shoes</option>
-        <option value="brown_shoes">brown_shoes</option>
-        <option value="maroon_shoes">maroon_shoes</option>
-        <option value="slippers_black">slippers_black</option>
-        <option value="slippers_brown">slippers_brown</option>
-        <option value="slippers_gray">slippers_gray</option>
-        <option value="slippers_white">slippers_white</option>
-      </select>
+        <v-btn @click='shoesM("black_shoes")'>Chaussures noires</v-btn>
+        <v-btn @click='shoesM("brown_shoes")'>Chaussures marrons</v-btn>
+        <v-btn @click='shoesM("slippers_black")'>Chaussons noirs</v-btn>
+        <v-btn @click='shoesM("slippers_brown")'>Chaussons marrons</v-btn>
+        <v-btn @click='shoesM("slippers_gray")'>Chaussons gris</v-btn>
+        <v-btn @click='shoesM("slippers_white")'>Chaussons blanc</v-btn>
     </div>
+    </v-card-actions>
+    </v-card>
+    <v-btn color="primary" @click="e1 = 6"><v-icon>mdi-hand-okay</v-icon></v-btn>
+    <v-btn text @click="e1 = 4"><v-icon>mdi-arrow-up-bold-circle-outline</v-icon></v-btn>
+    </v-stepper-content>
 
+    <v-stepper-content step="6">
+    <v-card color="grey lighten-1">
+    <v-card-actions align="center">
     <div>
-      <select name="weapon" id="weapon" @change="weaponM($event)">
-        <option value="bow">bow</option>
-        <option value="bow_skeleton">bow_skeleton</option>
-        <option value="dagger">dagger</option>
-        <option value="greatbow">greatbow</option>
-        <option value="recurvebow">recurvebow</option>
-        <option value="spear">spear</option>
-        <option value="steelwand">steelwand</option>
-        <option value="woodwand">woodwand</option>
-      </select>
+        <v-btn @click='facialHairStyleM("beard")'>Barbe</v-btn>
+        <v-btn @click='facialHairStyleM("mustache")'>Moustache</v-btn>
+        <v-btn @click='facialHairStyleM("bigstache")'>Grosse moustache</v-btn>
     </div>
+    <br>
+    <v-spacer>
+    </v-spacer>
+    <div>
+        <v-btn @click='facialHairColorsM("blonde")'>Blond</v-btn>
+        <v-btn @click='facialHairColorsM("black")'>Noir</v-btn>
+        <v-btn @click='facialHairColorsM("blue")'>Bleu</v-btn>
+        <v-btn @click='facialHairColorsM("brunette")'>Brun</v-btn>
+        <v-btn @click='facialHairColorsM("gray")'>Gris</v-btn>
+        <v-btn @click="facialHairColorsM('green')">Vert</v-btn>
+        <v-btn @click='facialHairColorsM("pink")'>Rose</v-btn>
+        <v-btn @click='facialHairColorsM("raven")'>Foncée</v-btn>
+        <v-btn @click='facialHairColorsM("redhead")'>Rouge</v-btn>
+        <v-btn @click='facialHairColorsM("white")'>Blanc</v-btn>
+    </div>
+    </v-card-actions>
+    </v-card>
+    <v-btn color="primary" @click="e1 = 7"><v-icon>mdi-hand-okay</v-icon></v-btn>
+    <v-btn text @click="e1 = 5"><v-icon>mdi-arrow-up-bold-circle-outline</v-icon></v-btn>
+    </v-stepper-content>
 
+      <v-stepper-content step="7">
+      <v-card color="grey lighten-1">
+      <v-card-actions align="center">
     <div>
-      <select name="animation" id="animation" @change="animationChange($event)">
-        <option value="spellcast">spellcast</option>
-        <option value="trust">trust</option>
-        <option value="walk">walk</option>
-        <option value="slash">slash</option>
-        <option value="shoot">shoot</option>
-        <option value="hurt">hurt</option>
-      </select>
+        <v-btn @click='weaponM("bow")'>Arc</v-btn>
+        <v-btn @click='weaponM("greatbow")'>Arc amélioré</v-btn>
+        <v-btn @click='weaponM("recurvebow")'>Arc professionnel</v-btn>
+        <v-btn @click='weaponM("dagger")'>Dague</v-btn>
+        <v-btn @click='weaponM("spear")'>Lance</v-btn>
+        <v-btn @click='weaponM("woodwand")'>Baguette en bois</v-btn>
+        <v-btn @click='weaponM("steelwand")'>Baguette en fer</v-btn>
     </div>
-    
+    </v-card-actions>
+    </v-card>
+    <v-btn color="primary" @click="e1 = 8"><v-icon>mdi-hand-okay</v-icon></v-btn>
+    <v-btn text @click="e1 = 6"><v-icon>mdi-arrow-up-bold-circle-outline</v-icon></v-btn>
+    </v-stepper-content>
+
+      <v-stepper-content step="8">
+      <v-card color="grey lighten-1">
+      <v-card-actions align="center">
+    <div>
+        <v-btn @click='animationChange("spellcast")'>Lancement de sort</v-btn>
+        <v-btn @click='animationChange("trust")'>Planter</v-btn>
+        <v-btn @click='animationChange("walk")'>Marcher</v-btn>
+        <v-btn @click='animationChange("slash")'>Couper</v-btn>
+        <v-btn @click='animationChange("shoot")'>Tirer</v-btn>
+        <v-btn @click='animationChange("hurt")'>Perdre</v-btn>
+    </div>
+    </v-card-actions>
+    </v-card>
+    <v-btn color="primary" @click="saving()"><v-icon>mdi-content-save-all</v-icon></v-btn>
+    <v-btn text @click="e1 = 7"><v-icon>mdi-arrow-up-bold-circle-outline</v-icon></v-btn>
+    </v-stepper-content>
+     </v-stepper-items>
+    </v-stepper>
 
     <div class="character-container">
       <div :style="characterStyle" class="character character-body" id="character-body"></div>
-      <div :style="characterStyle" class="character character-hair" id="character-hair"></div>
       <div :style="characterStyle" class="character character-ears" id="character-ears"></div>
       <div :style="characterStyle" class="character character-eyes" id="character-eyes"></div>
       <div :style="characterStyle" class="character character-nose" id="character-nose"></div>
@@ -274,19 +261,19 @@
       <div :style="characterStyle" class="character character-shoes" id="character-shoes"></div>
       <div :style="characterStyle" class="character character-weapon" id="character-weapon"></div>
       <div :style="characterStyle" class="character character-facialHair" id="character-facialHair"></div>
-
-
+      <div :style="characterStyle" class="character character-hair" id="character-hair"></div>
     </div>
-    
   </div>
 </template>
 <script>
+import {savingCharacter} from '../../services/api.js';
   export default {
     name:"CharacterCreator",
     components:{
       
     },
     data: () => ({
+        e1: 1,
         currentCharacterSpriteX:0,
         currentCharacterSpriteY:0,
         genre:"male",
@@ -297,10 +284,10 @@
         eyes:"blue",
         nose:"bignose_light",
         pants:"magenta_pants",
-        shirt:"",
+        shirt:"brown_longsleeve",
         facialHairColor:"blonde",
         facialHairStyle:"beard",
-        shoes:"",
+        shoes:"black_shoes",
         weapon:"bow",
         image:"",
         animation:"",
@@ -316,8 +303,19 @@
         }
     },
     methods:{
+      saving: async function() {
+          let perso = {
+            "genre":this.genre, "hairColor":this.hairColor, "hairStyle":this.hairStyle, "race":this.race, "ears":this.ears,
+            "eyes":this.eyes, "nose":this.nose, "pants":this.pants, "shirt":this.shirt, "facialHairColor":this.facialHairColor,
+            "facialHairStyle":this.facialHairStyle, "shoes":this.shoes, "weapon":this.weapon
+          };
+          await savingCharacter(perso);
+          this.$router.push({name: "AccueilEleve"})
+
+
+      },
       animationChange(event){
-        switch (event.target.value) {
+        switch (event) {
           case "spellcast":
             this.animation = "spellcast"
           break;
@@ -350,7 +348,7 @@
         }
       },
       genreM(event){
-        this.genre = event.target.value
+        this.genre = event;
         this.image = require.context('../assets/',true, /\.png$/)
         if(this.genre === "male"){
           document.getElementById("character-body").style.backgroundImage= "url("+this.image("./SpriteCharacter/male/body/"+this.race+".png");
@@ -365,34 +363,34 @@
         }
       },
        hairTypes(event){
-         this.hairStyle = event.target.value
+         this.hairStyle = event;
          this.image = require.context('../assets/',true, /\.png$/)
          document.getElementById("character-hair").style.backgroundImage= "url("+this.image("./SpriteCharacter/hair/"+this.hairStyle+"/"+this.hairColor+".png")+")";
        },
        hairColors(event){
-         this.hairColor = event.target.value
+         this.hairColor = event;
          this.image = require.context('../assets/',true, /\.png$/)
          document.getElementById("character-hair").style.backgroundImage= "url("+this.image("./SpriteCharacter/hair/"+this.hairStyle+"/"+this.hairColor+".png")+")";
 
        },
        earsM(event){
-        this.ears = event.target.value
+        this.ears = event;
         this.image = require.context('../assets/',true, /\.png$/)
         document.getElementById("character-ears").style.backgroundImage= "url("+this.image("./SpriteCharacter/ears/"+this.ears+".png")+")";
        },
        eyesM(event){
-          this.eyes = event.target.value
+          this.eyes = event;
           this.image = require.context('../assets/',true, /\.png$/)
           document.getElementById("character-eyes").style.backgroundImage= "url("+this.image("./SpriteCharacter/eyes/"+this.eyes+".png")+")";
        },
        noseM(event){
-          this.nose = event.target.value
+          this.nose = event;
           this.image = require.context('../assets/',true, /\.png$/)
           document.getElementById("character-nose").style.backgroundImage= "url("+this.image("./SpriteCharacter/nose/"+this.nose+".png")+")";
 
        },
        pantsM(event){
-          this.pants = event.target.value
+          this.pants = event;
           this.image = require.context('../assets/',true, /\.png$/)
           if(this.genre === "male"){
            document.getElementById("character-pants").style.backgroundImage = "url("+this.image("./SpriteCharacter/male/pants/" + this.pants + ".png")+")";
@@ -401,7 +399,7 @@
           }
        },
        shirtM(event){
-          this.shirt = event.target.value
+          this.shirt = event;
           this.image = require.context('../assets/',true, /\.png$/)
           if(this.genre === "male"){
             document.getElementById("character-shirt").style.backgroundImage = "url("+this.image("./SpriteCharacter/male/shirt/" + this.shirt + ".png")+")";
@@ -410,19 +408,19 @@
           }
        },
        facialHairColorsM(event){
-          this.facialHairColor = event.target.value
+          this.facialHairColor = event;
           this.image = require.context('../assets/',true, /\.png$/)
           document.getElementById("character-facialHair").style.backgroundImage = "url("+this.image("./SpriteCharacter/facialHair/" + this.facialHairStyle +"/"+ this.facialHairColor+ ".png")+")";
 
         
        },
        facialHairStyleM(event){
-          this.facialHairStyle = event.target.value
+          this.facialHairStyle = event;
           this.image = require.context('../assets/',true, /\.png$/)
           document.getElementById("character-facialHair").style.backgroundImage = "url("+this.image("./SpriteCharacter/facialHair/" + this.facialHairStyle +"/"+ this.facialHairColor+ ".png")+")";
        },
        shoesM(event){
-          this.shoes = event.target.value
+          this.shoes = event;
           this.image = require.context('../assets/',true, /\.png$/)
           if(this.genre === "male"){
             document.getElementById("character-shoes").style.backgroundImage = "url("+this.image("./SpriteCharacter/male/shoes/" + this.shoes + ".png")+")";
@@ -431,7 +429,7 @@
           }         
        },
        weaponM(event){
-          this.weapon = event.target.value
+          this.weapon = event;
           this.image = require.context('../assets/',true, /\.png$/)
           if(this.genre === "male"){
             document.getElementById("character-weapon").style.backgroundImage = "url("+this.image("./SpriteCharacter/male/weapon/" + this.weapon + ".png")+")";
@@ -441,7 +439,7 @@
        },
        bodyM(event){
          this.image = require.context('../assets/',true, /\.png$/)
-         this.race = event.target.value
+         this.race = event;
          if(this.genre === "male"){
            document.getElementById("character-body").style.backgroundImage = "url("+this.image("./SpriteCharacter/male/body/" + this.race + ".png")+")";
 
@@ -543,5 +541,7 @@
 }
 .character-container{
   position: relative;
+  left: 45%;
+  zoom: 200%;
 }
 </style>    
