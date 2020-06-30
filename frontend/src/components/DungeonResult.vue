@@ -14,6 +14,7 @@
             <v-text>Question {{index+1}}</v-text>
           </h3>
           <v-text>{{item.question}}</v-text>
+          Bonne réponse: <v-text>{{item.question}}</v-text>Votre réponse: <v-text>{{item.question}}</v-text>
         </div>
       </div>
     </v-container>
