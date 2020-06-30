@@ -6,15 +6,16 @@
                 class="d-flex justify-center"
                 cols="6"
                 md="5"
-                
             >
                 <v-card
                 class="d-flex justify-center"
-                width="97%"
+                width="100%"
+                height="95%"
+                outlined
                 flat
                 >
-                .col-6 .col-md-5
-                <div class="character-container">
+                <img class="earth justify-center" src="https://images.fineartamerica.com/images/artworkimages/medium/1/pixel-earth-design-martin-capek-transparent.png"/>
+                <div class="character-container justify-center">
                     <div :style="characterStyle" class="character character-body" id="character-body"></div>
                     <div :style="characterStyle" class="character character-ears" id="character-ears"></div>
                     <div :style="characterStyle" class="character character-eyes" id="character-eyes"></div>
@@ -104,15 +105,14 @@ export default {
       characterStyle: function(){
             return {
             backgroundPositionX:(-64*this.currentCharacterSpriteX)+"px",
-            backgroundPositionY:(-64*this.currentCharacterSpriteY)+"px",            
+            backgroundPositionY:(-64*11)+"px",            
             };
         }
   },
   methods: {
       skinPerso: async function() {
           const perso = await skinPerso();
-          this.image = require.context('../assets/',true, /\.png$/)
-          document.getElementById("character-hair").style.backgroundImage= "url("+this.image("./SpriteCharacter/hair/"+perso.hairStyle+"/"+perso.hairColor+".png")+")";
+          this.image = require.context('../assets/',true, /\.png$/);
           document.getElementById("character-hair").style.backgroundImage= "url("+this.image("./SpriteCharacter/hair/"+perso.hairStyle+"/"+perso.hairColor+".png")+")";
           document.getElementById("character-ears").style.backgroundImage= "url("+this.image("./SpriteCharacter/ears/"+perso.ears+".png")+")";
           document.getElementById("character-eyes").style.backgroundImage= "url("+this.image("./SpriteCharacter/eyes/"+perso.eyes+".png")+")";
@@ -134,13 +134,11 @@ export default {
           }
           this.currentCharacterSpriteX = 0;
           this.currentCharacterSpriteY = 8;
-          this.currentCharacterSpriteX = (this.currentCharacterSpriteX + 1) % 9;
-          if(this.currentCharacterSpriteX === 0) this.currentCharacterSpriteY = (this.currentCharacterSpriteY+1) % 12;
-          if(this.currentCharacterSpriteY === 0) this.currentCharacterSpriteY +=8;
       }
     
   },
   created() {
+      document.documentElement.style.overflow = 'scroll';
       this.skinPerso();
       setInterval(()=>{
           this.currentCharacterSpriteX = (this.currentCharacterSpriteX + 1) % 9;
@@ -151,9 +149,6 @@ export default {
 };
 </script>
 <style scoped>
-
-:root{
-}
 .character{
   position: absolute;
   top: 0;
@@ -193,7 +188,20 @@ export default {
 }
 .character-container{
   position: relative;
-  left: 45%;
-  zoom: 200%;
+  left: -15%;
+  zoom: 350%;
+}
+@keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
+.earth{
+    position: absolute;
+    top: 12%;
+    animation: rotation 20s infinite linear;
 }
 </style>

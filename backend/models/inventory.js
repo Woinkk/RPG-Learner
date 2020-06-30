@@ -75,6 +75,15 @@ class inventory {
     return result
 
   }
+  static async useItem(quantity,idStudent,idItem){
+    const result =await PostgresStore.pool.query({
+      text:`UPDATE ${inventory.tableName}
+      SET quantity =$1
+      WHERE idstudent = $2 and iditem = $3 `,
+      values:[quantity,idStudent,idItem]
+    })
+
+  }
 }
 inventory.tableName = 'inventory';
 

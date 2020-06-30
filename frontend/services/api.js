@@ -135,6 +135,11 @@ function GetQuizzById(content) {
     .then(response => response.data);
 }
 
+function GetFullQuizzById(idQuizz) {
+  return axios.get(`${SERVER_URL}/GetFullQuizz/${idQuizz}`)
+    .then(response => response.data)
+}
+
 function classesStudents(content) {
   return axios.post(`${SERVER_URL}/classesStudents`, content)
     .then(response => response.data);
@@ -215,6 +220,7 @@ export {
   useItem,
   inventory,
   addItem,
+  GetFullQuizzById,
   savingCharacter,
 };
 
