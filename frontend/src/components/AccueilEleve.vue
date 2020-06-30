@@ -138,6 +138,7 @@ export default {
     
   },
   created() {
+      document.documentElement.style.overflow = 'scroll';
       this.skinPerso();
       setInterval(()=>{
           this.currentCharacterSpriteX = (this.currentCharacterSpriteX + 1) % 9;
@@ -148,9 +149,6 @@ export default {
 };
 </script>
 <style scoped>
-
-:root{
-}
 .character{
   position: absolute;
   top: 0;
