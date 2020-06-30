@@ -14,8 +14,8 @@
                 height="95%"
                 flat
                 >
-                <img class="earth" src="https://images.fineartamerica.com/images/artworkimages/medium/1/pixel-earth-design-martin-capek-transparent.png"/>
-                <div class="character-container">
+                <img class="earth justify-center" src="https://images.fineartamerica.com/images/artworkimages/medium/1/pixel-earth-design-martin-capek-transparent.png"/>
+                <div class="character-container justify-center">
                     <div :style="characterStyle" class="character character-body" id="character-body"></div>
                     <div :style="characterStyle" class="character character-ears" id="character-ears"></div>
                     <div :style="characterStyle" class="character character-eyes" id="character-eyes"></div>
@@ -190,7 +190,7 @@ export default {
 }
 .character-container{
   position: relative;
-  left: -35%;
+  left: -15%;
   zoom: 350%;
 }
 @keyframes rotation {
@@ -204,7 +204,6 @@ export default {
 .earth{
     position: absolute;
     top: 12%;
-    right:1%;
     animation: rotation 20s infinite linear;
 }
 </style>
