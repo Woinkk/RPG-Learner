@@ -11,7 +11,7 @@ class student {
           email TEXT,
           password TEXT,
           pseudo TEXT,
-          type TEXT,
+          type JSON,
           idclasses INT,
           FOREIGN KEY (idclasses) REFERENCES classes (id)
   
@@ -43,6 +43,17 @@ class student {
       values:[newStudent.firstname,newStudent.lastname,newStudent.email,hashedPassword,newStudent.idclasses]
     })
     return result;
+  }
+
+  static async insertCharacter(idStudent,character){
+    const result = await PostgresStore.pool.query({
+      text: `UPDATE INTO ${student.tableName}
+      (type)
+      VALUES($1)
+      WHERE  id = $2
+      `,
+      values:[character,idStudent]
+    })
   }
 
   static async getStudentsByClasses (idclasses) {
@@ -102,7 +113,7 @@ class student {
   static async modifyStudentPassword(modifyProp,mail){
     const hashedPassword = await bcrypt.hash(modifyProp.password, 10);
     const result = await PostgresStore.pool.query({
-      text:`UPDATE ${teacher.tableName}
+      text:`UPDATE ${student.tableName}
       SET password =$1
       WHERE email like $2
       `,
@@ -111,15 +122,31 @@ class student {
     return result
   }
   
+  static async getSkin(id){
+    const result = await PostgresStore.pool.query({
+      text:`SELECT type FROM ${student.tableName}
+      WHERE id = $1`,
+      values:[id]
+    })
+    return result;
+  }
 
 
   static async getEmailById(id){
     const result = await PostgresStore.pool.query({
-      text:`SELECT email FROM ${teacher.tableName}
+      text:`SELECT email FROM ${student.tableName}
       WHERE id = $1`,
       values:[id]
     })
     return result
+  }
+
+  static async saveCharacter(id, type) {
+    const result = await PostgresStore.pool.query({
+      text:`UPDATE ${student.tableName} SET type = $1 WHERE id = $2`,
+      values:[type, id]
+    })
+    return result;
   }
 }
 student.tableName = 'student';

@@ -39,13 +39,33 @@ class inventory {
   static async addItem (idStudent,idItem){
     const result = await PostgresStore.pool.query({
       text:`INSERT INTO ${inventory.tableName}
-      (idsutdent,iditem)
+      (idstudent,iditem)
       VALUES($1,$2)`,
       values:[idStudent,idItem]
       
     })
     return result;
   }
+
+  static async addItemCustom (idStudent,idItem, quantity){
+    const result = await PostgresStore.pool.query({
+      text:`INSERT INTO ${inventory.tableName}
+      (idstudent,iditem,quantity)
+      VALUES($1,$2,$3)`,
+      values:[idStudent,idItem,quantity]
+      
+    })
+    return result;
+  }
+
+  static async addQuantity(idStudent, idItem) {
+    const result = await PostgresStore.pool.query({
+      text:`UPDATE ${inventory.tableName} SET quantity = quantity + 1 WHERE idstudent = $1 AND iditem = $2`,
+      values:[idStudent,idItem]
+    })
+    return result;
+  }
+
   static async checkQuantity(idStudent,idItem){
     const result = await PostgresStore.pool.query({
       text:`SELECT quantity FROM ${inventory.tableName}

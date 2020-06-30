@@ -79,7 +79,7 @@ export default {
             this.$router.push({ name: "AccueilEleve" });
             this.whoIsConnected = "student";
           } else {
-            this.$router.push({ name: "AccueilEleve" });
+            this.$router.push({name: "CharacterCreator"})
             this.whoIsConnected = "student";
           }
         }, 2000);

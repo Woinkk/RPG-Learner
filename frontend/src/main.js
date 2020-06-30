@@ -16,9 +16,12 @@ import Accueil from './components/Accueil';
 import AccueilEleve from './components/AccueilEleve.vue';
 import Stats from './components/Stats';
 import CardsStudent from './components/CardsStudent.vue';
+import FightingInterface from "./components/FightingInterface.vue";
+import CharacterCreator from './components/CharacterCreator.vue';
 import LootChest from './components/LootChest.vue';
 import VueApexCharts from 'vue-apexcharts';
-
+import Dungeon from "./components/Dungeon.vue";
+import DungeonResult from "./components/DungeonResult.vue";
 
 Vue.use(VueAxios, axios);
 axios.defaults.withCredentials = true;
@@ -180,6 +183,46 @@ const routes = [
         router.push("login")
       }
     }
+  },
+  {
+    name: 'FightingInterface', path: '/FightingInterface', component: FightingInterface,
+    beforeEnter: async (to, from, next) => {
+      const req = await isConnected();
+      if (req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }
+  },
+  {
+    name: 'CharacterCreator',path: '/CharacterCreator', component: CharacterCreator,
+    beforeEnter: async(to,from,next) =>{
+      const req = await isConnected();
+      if(req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }
+  },
+  {
+    name: 'Dungeon',path: '/Dungeon/:id', component: Dungeon,
+   /* beforeEnter: async(to,from,next) =>{
+      const req = await isConnected();
+      if(req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }*/
+  },
+  {
+    name: 'DungeonResult',path: '/DungeonResult/:quizz', component: DungeonResult,
+   /* beforeEnter: async(to,from,next) =>{
+      const req = await isConnected();
+      if(req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }*/
   },
 ];
 

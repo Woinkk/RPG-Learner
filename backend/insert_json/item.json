@@ -8,11 +8,11 @@
         "effect": "Resurrecte your character"
     },
     {
-        "name": "Force Potion",
-        "effect": "Upgrade your next attack"
+        "name": "XP Potion",
+        "effect": "Gives you experience"
     },
     {
-        "name": "XP Potion",
-        "effect": "treats an amount of XP"
+        "name": "Strength Potion",
+        "effect": "Gives you more stength to make more damage"
     }
 ]

@@ -128,6 +128,11 @@ function GetQuizzById(content) {
     .then(response => response.data);
 }
 
+function GetFullQuizzById(idQuizz) {
+  return axios.get(`${SERVER_URL}/GetFullQuizz/${idQuizz}`)
+    .then(response => response.data)
+}
+
 function classesStudents(content) {
   return axios.post(`${SERVER_URL}/classesStudents`, content)
     .then(response => response.data);
@@ -147,6 +152,21 @@ function inventory() {
     .then(response => response.data)
 }
 
+function addItem(content) {
+  return axios.post(`${SERVER_URL}/addItem`,content)
+    .then(response => response.data)
+}
+
+function savingCharacter(content) {
+  return axios.post(`${SERVER_URL}/savingCharacter`,content)
+    .then(response => response.data)
+}
+
+function skinPerso(content) {
+  return axios.post(`${SERVER_URL}/skinPerso`,content)
+    .then(response => response.data)
+}
+
 export {
   login,
   classVClassLoader,
@@ -158,6 +178,7 @@ export {
   getMatiere,
   getSubject,
   createClassVClass,
+  skinPerso,
   //MyQuizz,
   createQuizz,
   getQuizz,
@@ -179,6 +200,9 @@ export {
   statsStudent,
   useItem,
   inventory,
+  addItem,
+  GetFullQuizzById,
+  savingCharacter,
 };
 
 
