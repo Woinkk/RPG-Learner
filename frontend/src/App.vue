@@ -20,12 +20,14 @@
         </v-tooltip>
       </router-link>
       <router-link to="/newStudent">
-        <v-btn color="primary">
+        <v-btn v-if="whoIsConnected ==='teacher' " color="primary">
           <v-icon>mdi-account-plus-outline</v-icon>
         </v-btn>
       </router-link>
       <router-link to="/stats">
-      <v-btn color="primary"><v-icon>mdi-chart-line</v-icon></v-btn>
+        <v-btn v-if="whoIsConnected ==='teacher'" color="primary">
+          <v-icon>mdi-chart-line</v-icon>
+        </v-btn>
       </router-link>
     </v-app-bar>
 
@@ -33,7 +35,7 @@
       <v-navigation-drawer right v-model="drawer" absolute temporary>
         <v-divider></v-divider>
         <v-list-item v-for="item in items" :key="item.title">
-          <v-btn text @click="moveTo(item.path)">
+          <v-btn  text @click="moveTo(item.path)">
             <v-list-item-content>
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
@@ -70,14 +72,16 @@ export default {
         this.connected = true;
         console.log(this.connected);
         setTimeout(() => {
-          if(req.data.user === "teacher"){
+          if (req.data.user === "teacher") {
             this.$router.push({ name: "home" });
-          }else if(req.data.type === null){
-            this.$router.push({name: "AccueilEleve"})
-          }else{
-            this.$router.push({name: "AccueilEleve"})
+            this.whoIsConnected = "teacher";
+          } else if (req.data.type === null) {
+            this.$router.push({ name: "AccueilEleve" });
+            this.whoIsConnected = "student";
+          } else {
+            this.$router.push({ name: "AccueilEleve" });
+            this.whoIsConnected = "student";
           }
-          
         }, 2000);
       } catch (error) {
         this.textToast = "La connexion a échoué";
@@ -160,6 +164,7 @@ export default {
     textToast: null,
     snackbar: false,
     connected: false,
+    whoIsConnected: "",
     drawer: null,
     items: [
       { title: "Home", path: "/home" },

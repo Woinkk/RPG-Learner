@@ -31,104 +31,153 @@ Vue.component('apexchart', VueApexCharts);
 const routes = [
   { path: '/', component: Accueil },
   { path: '/login', component: Login },
-  { path: '/account', component: Account,
-    beforeEnter: async(to,from,next)=>{
-      const req= await isConnected();
-      if (req.status === 200){
+  {
+    path: '/account', component: Account,
+    beforeEnter: async (to, from, next) => {
+      try {
+        await isConnected();
         next();
         return
+      } catch (error) {
+        router.push("login");
       }
+
     }
   },
   {
     name: "home", path: '/home', component: Home,
     beforeEnter: async (to, from, next) => {
-      const req = await isConnected();
-      if (req.status === 200 && req.connected === "teacher") {
-        next();
-        return
+      try {
+        const req = await isConnected();
+        if (req.status === 200 && req.connected === "teacher") {
+          next();
+          return
+        } else if (req.status === 200 && req.connected === "student") {
+          router.push("AccueilEleve")
+        }
+      } catch (error) {
+        router.push("login")
       }
-      
+
     },
   },
   {
     path: '/newStudent', component: insertAccountNewStudent,
     beforeEnter: async (to, from, next) => {
-      const req = await isConnected();
-      if (req.status === 200 && req.connected === "teacher") {
-        next();
-        return
+      try {
+        const req = await isConnected();
+        if (req.status === 200 && req.connected === "teacher") {
+          next();
+          return
+        }
+      } catch (error) {
+        router.push("login")
       }
+
     },
   },
   {
     path: '/stats', component: Stats,
     beforeEnter: async (to, from, next) => {
-      const req = await isConnected();
-      if (req.status === 200 && req.connected === "teacher") {
-        next();
-        return
+      try {
+        const req = await isConnected();
+        if (req.status === 200 && req.connected === "teacher") {
+          next();
+          return
+        }
+      } catch (error) {
+        router.push("login")
       }
+
     },
   },
   {
     path: '/QuizzCreation', component: QuizzCreation,
     beforeEnter: async (to, from, next) => {
-      const req = await isConnected();
-      if (req.status === 200 && req.connected === "teacher") {
-        next();
-        return
+      try {
+        const req = await isConnected();
+        if (req.status === 200 && req.connected === "teacher") {
+          next();
+          return
+        }
+      } catch (error) {
+        router.push("login")
       }
+
     },
   },
   {
     path: '/ClassVClass', component: ClassVClass,
     beforeEnter: async (to, from, next) => {
-      const req = await isConnected();
-      if (req.status === 200 && req.connected === "teacher") {
-        next();
-        return
+      try {
+        const req = await isConnected();
+        if (req.status === 200 && req.connected === "teacher") {
+          next();
+          return
+        }
+      } catch (error) {
+        router.push("login")
       }
+
     },
   },
 
   {
     path: '/QuizzModification/:id', component: QuizzModification,
     beforeEnter: async (to, from, next) => {
-      const req = await isConnected();
-      if (req.status === 200 && req.connected === "teacher") {
-        next();
-        return
+      try {
+        const req = await isConnected();
+        if (req.status === 200 && req.connected === "teacher") {
+          next();
+          return
+        }
+      } catch (error) {
+        router.push("login")
       }
-    }
+
+    },
   },
   {
     path: '/CardsStudent', component: CardsStudent,
     beforeEnter: async (to, from, next) => {
-      const req = await isConnected();
-      if (req.status === 200 && req.connected === "student") {
-        next();
-        return
+      try {
+        const req = await isConnected();
+        if (req.status === 200 && req.connected === "student") {
+          next();
+          return
+
+
+        }
+      } catch (error) {
+        router.push("login")
       }
     }
   },
   {
     path: '/LootChest', component: LootChest,
     beforeEnter: async (to, from, next) => {
-      const req = await isConnected();
-      if (req.status === 200 && req.connected === "student") {
-        next();
-        return
+      try {
+        const req = await isConnected();
+        if (req.status === 200 && req.connected === "student") {
+          next();
+          return
+        }
+      } catch (error) {
+        router.push("login")
       }
     }
   },
   {
     name: 'AccueilEleve', path: '/AccueilEleve', component: AccueilEleve,
     beforeEnter: async (to, from, next) => {
-      const req = await isConnected();
-      if (req.status === 200 && req.connected === "student") {
-        next();
-        return
+      try {
+        const req = await isConnected();
+        if (req.status === 200 && req.connected === "student") {
+          next();
+          return
+        }
+      } catch (error) {
+        router.push("login")
       }
     }
   },

@@ -23,7 +23,7 @@
                 <img v-on="on" :src="item.img" width="15%" height="15%" />
                 <v-tooltip bottom>
                   <template v-slot:activator="{on}">
-                <v-icon v-on="on" @click="useItem(item.name)">mdi-alpha-u-circle-outline</v-icon>
+                    <v-icon v-on="on" @click="useItem(item.name)">mdi-alpha-u-circle-outline</v-icon>
                   </template>
                   Utiliser
                 </v-tooltip>
@@ -44,42 +44,52 @@
 </template>
 
 <script>
-import { inventory } from "../../services/api.js";
+import { inventory, useItem } from "../../services/api.js";
 export default {
   name: "Inventory",
   data() {
     return {
-      publicPath: process.env.BASE_URL,
       inventory: false,
       listInventory: [],
-      icon: {}
+      icon: {},
+      itemProp: { name: null, img: null }
     };
   },
   methods: {
     useItem: async function(itemName) {
-      //Change la quantité d'un item de l'inventaire
-      console.log(itemName)
+      try {
+        const req = await useItem();
+        console.log("req", req);
+      } catch (error) {
+        console.log("error");
+      }
+
+      console.log(itemName);
     },
     showInventory: async function() {
       try {
         const req = await inventory();
-
         for (let i = 0; i < req.length; i++) {
-
-          let itemProp = { name: req[i].name, img: null };
-          switch (req[i].name) {
+          switch (req[i].result) {
             case "Heal Potion":
-              itemProp.img = "/img/heal.93fc517c.png";
+              this.listInventory.push( this.createItemProp(req[i].result,this.getImg("heal")));
+              break;
+            case "Resurection Potion":
+               this.listInventory.push( this.createItemProp(req[i].result,this.getImg("resu")));
+              break;
+            case "Force Potion":
+              this.listInventory.push( this.createItemProp(req[i].result,this.getImg("force")));
+              break;
+            case "XP Potion":
+              this.listInventory.push( this.createItemProp(req[i].result,this.getImg("xp")));
               break;
             default:
-              break;
+              console.log("default error");
           }
-          console.log("itemProp", itemProp.img);
-          this.listInventory.push(itemProp);
         }
         console.log("listInventory", this.listInventory);
       } catch (error) {
-        console.log("error");
+        console.log("error , try echec");
       }
 
       //console.log("invent", req);
@@ -90,6 +100,15 @@ export default {
       }else {
         this.listInventory.push("Vous n'avez aucun item")
       }*/
+    },
+    getImg: function(img) {
+      var images = require.context("../assets/", false, /\.png$/);
+      console.log(images);
+      return images("./" + img + ".png");
+    },
+    createItemProp: function (name,img){
+      let itemProp= {name :name,img:img}
+      return itemProp
     }
   },
   created() {
