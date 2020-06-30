@@ -6,11 +6,12 @@
                 class="d-flex justify-center"
                 cols="6"
                 md="5"
-                
             >
                 <v-card
                 class="d-flex justify-center"
                 width="97%"
+                height="100%"
+                outlined
                 flat
                 >
                 .col-6 .col-md-5

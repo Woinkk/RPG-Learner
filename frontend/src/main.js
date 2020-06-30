@@ -20,6 +20,8 @@ import FightingInterface from "./components/FightingInterface.vue";
 import Character from './components/CharacterCreator.vue';
 import LootChest from './components/LootChest.vue';
 import VueApexCharts from 'vue-apexcharts';
+import Dungeon from "./components/Dungeon.vue";
+import DungeonResult from "./components/DungeonResult.vue";
 
 Vue.use(VueAxios, axios);
 axios.defaults.withCredentials = true;
@@ -152,7 +154,27 @@ const routes = [
         return
       }
     }
-  }
+  },
+  {
+    name: 'Dungeon',path: '/Dungeon/:id', component: Dungeon,
+   /* beforeEnter: async(to,from,next) =>{
+      const req = await isConnected();
+      if(req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }*/
+  },
+  {
+    name: 'DungeonResult',path: '/DungeonResult/:quizz', component: DungeonResult,
+   /* beforeEnter: async(to,from,next) =>{
+      const req = await isConnected();
+      if(req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }*/
+  },
 ];
 
 const router = new VueRouter({
