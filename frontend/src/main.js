@@ -155,10 +155,10 @@ const routes = [
     }
   },
   {
-    name: 'newTeacher',path: '/newTeacher', component: insertAccountNewTeacher,
+    name: 'newTeacher',path: '/newTeacher',component: insertAccountNewTeacher,
     beforeEnter: async(to,from,next) =>{
       const req = await isConnected();
-      if(req.status === 200 && req.connected === "student") {
+      if(req.status === 200 && req.connected === "school") {
         next();
         return
       }

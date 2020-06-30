@@ -46,6 +46,7 @@
         v-bind:text="textToast"
         v-bind:snackbar="snackbar"
         @insertAccountNewStudent="insertAccountNewStudent"
+        @insertAccountNewTeacher="insertAccountNewTeacher"
         @goToQuizzCreation="ShowQuizzCreation"
         v-bind:selected="selected"
         @createSubject="createSubject"
@@ -58,7 +59,7 @@
 <script>
 import Navbar from "./components/Navbar";
 import { login, createSubject, createQuizz, logout } from "../services/api.js";
-import { insertAccountNewStudent } from "../services/api.js";
+import { insertAccountNewStudent, insertAccountNewTeacher } from "../services/api.js";
 
 export default {
   methods: {
@@ -70,8 +71,11 @@ export default {
         this.connected = true;
         console.log(this.connected);
         setTimeout(() => {
+          console.log(req.data.user)
           if(req.data.user === "teacher"){
             this.$router.push({ name: "home" });
+          }else if(req.data.user === "school"){
+            this.$router.push({ name:"newTeacher"})
           }else if(req.data.type !== null){
             this.$router.push({name: "AccueilEleve"})
           }else{
@@ -103,6 +107,26 @@ export default {
         console.log("error");
         this.textToast = "Aucune classe n'a été selectioné ";
         this.$router.push("newStudent");
+      }
+      this.snackbar = true;
+      setTimeout(() => {
+        this.snackbar = false;
+      }, 2000);
+    },
+    insertAccountNewTeacher: async function(newTeacher) {
+      if (newTeacher.matiere !== null) {
+        try {
+          await insertAccountNewTeacher(newTeacher);
+          this.textToast = "L'ajout du compte est un succès";
+          this.$router.push("newTeacher");
+        } catch (error) {
+          this.textToast = "L'ajout du compte a échoué";
+          this.$router.push("newTeacher");
+        }
+      } else {
+        console.log("error");
+        this.textToast = "Aucune matiere n'a été selectioné ";
+        this.$router.push("newTeacher");
       }
       this.snackbar = true;
       setTimeout(() => {

@@ -115,6 +115,35 @@ class teacher {
     })
     return result.rows[0].email
   }
+  static async checkAddTeacher (mail) {
+    const result = await PostgresStore.pool.query({
+      text: ` SELECT * FROM ${teacher.tableName}
+            WHERE email like $1 
+    `,
+      values: [mail]
+    });
+    return result;
+  }
+  static async insertAccountNewTeacher (newTeacher){
+    const hashedPassword = await bcrypt.hash(newTeacher.password,10)
+    const result = await PostgresStore.pool.query({
+      text: `INSERT INTO ${teacher.tableName}
+      (firstname,lastname,email,password,idmatiere)
+      VALUES($1,$2,$3,$4,$5)
+      `,
+      values:[newTeacher.firstname,newTeacher.lastname,newTeacher.email,hashedPassword,newTeacher.idMatiere]
+    })
+    return result;
+  }
+  static async getTeacherBySchool (idschool) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT * FROM ${teacher.tableName}
+      WHERE $1 = idschool`,
+      values: [idschool]
+    });
+    return result;
+  }
+
 }
 
 teacher.tableName = 'teacher';

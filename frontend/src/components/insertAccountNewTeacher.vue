@@ -30,15 +30,15 @@
               ></v-text-field>
               <v-menu open-on-hover top offset-y transition="fab-transition">
                 <template v-slot:activator="{ on }">
-                  <v-btn color="primary" dark v-on="on" v-if="newTeacher.subject === null">La Matière</v-btn>
-                  <v-btn color="primary" dark v-on="on" v-else>{{newTeacher.subject}}</v-btn>
+                  <v-btn color="primary" dark v-on="on" v-if="newTeacher.matiere === null">La Matière</v-btn>
+                  <v-btn color="primary" dark v-on="on" v-else>{{newTeacher.matiere}}</v-btn>
                 </template>
                 <v-list>
                   <v-list-item
-                    v-for="(item, index) in myClasses"
+                    v-for="(item, index) in myMatieres"
                     :key="index"
                     :rules="fieldsRules"
-                    @click="selectMyClasses(item.name)"
+                    @click="selectMyTeacher(item.name)"
                   >
                     <v-list-item-title>{{ item.name }}</v-list-item-title>
                   </v-list-item>
@@ -107,17 +107,18 @@
 
 
 <script>
-import { myClasses } from "../../services/api.js";
-import { classesStudents } from "../../services/api.js";
+import { getAllMatiere } from "../../services/api.js";
+// import { schoolTeachers } from "../../services/api.js";
+
 export default {
-  name: "NewStudent",
+  name: "NewTeacher",
   data: function() {
     return {
       newTeacher: {
         firstname: null,
         lastname: null,
         email: null,
-        subject: null
+        matiere: null
       },
       emailRules: [
         v => !!v || "Email is required",
@@ -125,8 +126,8 @@ export default {
       ],
       fieldsRules: [v => !!v || "This field is required"],
       checkbox: false,
-      myClasses: null,
-      allStudent: null,
+      myMatieres: null,
+      allTeacher: null,
       search: null,
     };
   },
@@ -134,9 +135,9 @@ export default {
 
   computed: {
     computeClass: function() {
-      if(this.allStudent !== null) {
-        if(this.search !== null && this.search !== "") return this.allStudent.filter(i => i.class === this.search);
-        else return this.allStudent;
+      if(this.allTeacher !== null) {
+        if(this.search !== null && this.search !== "") return this.allTeacher.filter(i => i.class === this.search);
+        else return this.allTeacher;
       } else {
         return[];
       }
@@ -149,27 +150,16 @@ export default {
         this.$emit("insertAccountNewTeacher", newTeacher);
       
     },
-    selectMyClasses: function(myClass) {
-      this.newTeacher.subject = myClass;
+    selectMyTeacher: function(myMatiere) {
+      this.newTeacher.matiere = myMatiere;
     },
 
-    MyClasses: async function() {
+    MyMatiere: async function() {
       console.log("lemyclasses");
-      var students;
-      var list = [];
-      const req = await myClasses();
+      const req = await getAllMatiere();
+      // this.allTeacher = await schoolTeachers();
       if (req !== null) {
-        this.myClasses = req;
-        for(let i = 0; i < req.length; i++) {
-          students = await classesStudents(req[i]);
-          if(students !== null) {
-            for(let j = 0; j < students.length; j++) {
-              students[j].class = req[i].name;
-              list.push(students[j]);
-            }
-          }
-        }
-        this.allStudent = list;
+        this.myMatieres = req;
       }
       return;
     },
@@ -179,12 +169,12 @@ export default {
       this.newTeacher.firstname = null;
       this.newTeacher.lastname = null;
       this.newTeacher.email = null;
-      this.newTeacher.subject = null;
+      this.newTeacher.matiere = null;
     }
   },
   created() {
     console.log("lecreated");
-    this.MyClasses();
+    this.MyMatiere();
   }
 };
 </script>
