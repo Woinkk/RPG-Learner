@@ -16,8 +16,6 @@ function logout() {
 }
 
 function myClasses(content) {
-  console.log("le content qui marche pas")
-  console.log(content)
   return axios.post(`${SERVER_URL}/myClasses`, content)
     .then(response => response.data);
 }

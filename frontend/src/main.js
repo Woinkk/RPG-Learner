@@ -58,6 +58,8 @@ const routes = [
           return
         } else if (req.status === 200 && req.connected === "student") {
           router.push("AccueilEleve")
+        }else if (req.status === 200 && req.connected === "school"){
+          router.push("newTeacher")
         }
       } catch (error) {
         router.push("login")
