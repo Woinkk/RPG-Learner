@@ -80,13 +80,13 @@ export default {
           if (req.data.user === "teacher") {
             this.$router.push({ name: "home" });
             this.whoIsConnected = "teacher";
+          } else if (req.data.user === "school") {
+            console.log("yo");
+            this.$router.push({ name: "newTeacher" });
+            this.whoIsConnected = "school";
           } else if (req.data.type !== null) {
             this.$router.push({ name: "AccueilEleve" });
             this.whoIsConnected = "student";
-          } else if (req.data.user === "school") {
-            console.log('yo')
-            this.$router.push({ name: "newTeacher" });
-            this.whoIsConnected = "school";
           } else {
             this.$router.push({ name: "CharacterCreator" });
             this.whoIsConnected = "student";
