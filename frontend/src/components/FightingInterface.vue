@@ -127,7 +127,7 @@ export default {
               this.xPerso += 2;
           } else if(this.characterState === "walkL") {
               this.xPerso -= 2;
-          } else if(this.characterState === "attack" && (this.weapon !== "bow" || this.weapon !== "greatbow" || this.weapon !== "recurvebow")) {
+          } else if(this.characterState === "attack" && (this.weapon !== "bow" && this.weapon !== "greatbow" && this.weapon !== "recurvebow")) {
               this.xPerso = 50;
           }
 
