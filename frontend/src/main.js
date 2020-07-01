@@ -19,6 +19,7 @@ import CardsStudent from './components/CardsStudent.vue';
 import FightingInterface from "./components/FightingInterface.vue";
 import CharacterCreator from './components/CharacterCreator.vue';
 import LootChest from './components/LootChest.vue';
+import insertAccountNewTeacher from './components/insertAccountNewTeacher.vue';
 import VueApexCharts from 'vue-apexcharts';
 import Dungeon from "./components/Dungeon.vue";
 import DungeonResult from "./components/DungeonResult.vue";
@@ -199,6 +200,16 @@ const routes = [
     beforeEnter: async(to,from,next) =>{
       const req = await isConnected();
       if(req.status === 200 && req.connected === "student") {
+        next();
+        return
+      }
+    }
+  },
+  {
+    name: 'newTeacher',path: '/newTeacher',component: insertAccountNewTeacher,
+    beforeEnter: async(to,from,next) =>{
+      const req = await isConnected();
+      if(req.status === 200 && req.connected === "school") {
         next();
         return
       }
