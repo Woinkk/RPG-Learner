@@ -38,12 +38,12 @@ export default {
     },
     getAnswer: async function (answer) {
       this.answer = [...this.answer, answer];
-      this.nextQuetion();
+      this.nextQuetion(answer.Index);
       this.endOfQuizz();
       console.log(this.answer);
     },
-    nextQuetion: async function () {
-      if(this.questions[this.index].good === this.answer[this.index]) {
+    nextQuetion: async function (answer) {
+      if(this.questions[this.index].good === answer) {
         this.$refs.FI.goodAnswer();
       } else {
         this.$refs.FI.badAnswer();
