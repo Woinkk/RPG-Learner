@@ -4,7 +4,7 @@
       <v-col cols="12" sm="8" md="4">
         <v-card class="elevation-12">
           <v-toolbar color="primary" dark flat>
-            <v-toolbar-title>Créer compte profésseur</v-toolbar-title>
+            <v-toolbar-title>Créer compte professeur</v-toolbar-title>
             <v-spacer />
           </v-toolbar>
 

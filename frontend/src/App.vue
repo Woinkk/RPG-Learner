@@ -84,7 +84,9 @@ export default {
             this.$router.push({ name: "AccueilEleve" });
             this.whoIsConnected = "student";
           } else if (req.data.user === "school") {
+            console.log('yo')
             this.$router.push({ name: "newTeacher" });
+            this.whoIsConnected = "school";
           } else {
             this.$router.push({ name: "CharacterCreator" });
             //this.whoIsConnected = "student";
