@@ -72,7 +72,8 @@
       </v-col>
       <v-col name="cards-container" cols="12" md="7">
         <v-card class="d-flex justify-center" flat>
-          <CardsStudent></CardsStudent>
+                    <CardsStudent v-if="this.selected === null" @goToDungeonSelection="goToDungeonSelection"></CardsStudent>
+                    <DungeonSelection v-else></DungeonSelection>
         </v-card>
       </v-col>
     </v-row>
@@ -84,16 +85,19 @@
 import inventory from "./Inventory";
 import { skinPerso } from "../../services/api.js";
 import CardsStudent from "./CardsStudent";
+import DungeonSelection from "./DungeonSelection";
 export default {
   name: "AccueilEleve",
   components: {
     CardsStudent,
-    inventory
+    inventory,
+      DungeonSelection,
   },
   data: () => ({
     image: "",
     currentCharacterSpriteX: 0,
-    currentCharacterSpriteY: 0
+    currentCharacterSpriteY: 0,
+    selected: null,
   }),
   computed: {
     characterStyle: function() {
@@ -196,6 +200,9 @@ export default {
       }
       this.currentCharacterSpriteX = 0;
       this.currentCharacterSpriteY = 8;
+      },
+      goToDungeonSelection: async function () {
+          this.selected = "DungeonSelection"
     }
   },
   created() {

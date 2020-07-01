@@ -28,6 +28,15 @@ class teacher_class {
     });
     return result;
   }
+
+  static async getIdTeacher (idclasses) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT idteacher FROM ${teacher_class.tableName}
+      WHERE $1 = idclasses`,
+      values: [idclasses]
+    });
+    return result.rows;
+  }
 }
 teacher_class.tableName = 'teacher_class';
 

@@ -182,6 +182,16 @@ function getAllMatiere(){
     .then(response => response.data)
 }
 
+function getAllQuizzByTeacherAndClasses() {
+  return axios.get(`${SERVER_URL}/getAllQuizzByTeacherAndClasses`)
+    .then(response => response.data)
+}
+
+function sendResult(content) {
+  return axios.put(`${SERVER_URL}/sendResult`, content)
+    .then(response => response.data)
+}
+
 export {
   login,
   classVClassLoader,
@@ -221,6 +231,8 @@ export {
   addItem,
   GetFullQuizzById,
   savingCharacter,
+  getAllQuizzByTeacherAndClasses,
+  sendResult,
 };
 
 

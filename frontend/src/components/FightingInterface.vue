@@ -18,11 +18,11 @@
                         color="rgba(0, 0, 0, 0)"
                     >
                         <v-card-text>
-                            <v-btn v-model="this.Reponse1" @click="sendAnswer(1)" style="position: absolute; top: 0%; left: 0%; margin:15px;">{{this.Reponse1}}</v-btn>
-                            <v-btn v-model="this.Reponse2" @click="sendAnswer(2)" large style="position: absolute; top: 0%; right: 0%; margin:15px;">{{this.Reponse2}}</v-btn>
+                            <v-btn v-model="this.Reponse1" @click="sendAnswer(Reponse1, 1)" style="position: absolute; top: 0%; left: 0%; margin:15px;">{{this.Reponse1}}</v-btn>
+                            <v-btn v-model="this.Reponse2" @click="sendAnswer(Reponse2, 2)" large style="position: absolute; top: 0%; right: 0%; margin:15px;">{{this.Reponse2}}</v-btn>
                             <br>
-                            <v-btn v-model="this.Reponse3" @click="sendAnswer(3)" large style="position: absolute; bottom: 0%; left: 0%; margin:15px;">{{this.Reponse3}}</v-btn>
-                            <v-btn v-model="this.Reponse4" @click="sendAnswer(4)" large style="position: absolute; bottom: 0%; right: 0%; margin:15px;">{{this.Reponse4}}</v-btn>
+                            <v-btn v-model="this.Reponse3" @click="sendAnswer(Reponse3, 3)" large style="position: absolute; bottom: 0%; left: 0%; margin:15px;">{{this.Reponse3}}</v-btn>
+                            <v-btn v-model="this.Reponse4" @click="sendAnswer(Reponse4, 4)" large style="position: absolute; bottom: 0%; right: 0%; margin:15px;">{{this.Reponse4}}</v-btn>
                             <div class="white--text" style="position: absolute; top:-20%; left:34%; margin-left: auto; margin-right: auto; width: 21em;">
                                 <Timer style="" :time="30" :key="this.Question" v-on:timePassed="timePassed"/>
                             </div>
@@ -78,8 +78,8 @@ export default {
         }
         console.log(timePassed);
     },
-    sendAnswer: async function (reponse) {
-        this.$emit('getAnswer', reponse);
+    sendAnswer: async function (reponse, indexrep) {
+        this.$emit('getAnswer', {Reponse: reponse, Index: indexrep});
     }
   },
   created () {

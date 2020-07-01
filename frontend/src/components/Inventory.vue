@@ -56,7 +56,8 @@ export default {
       icon: {},
       itemProp: { name: null, img: null },
       gifList: null,
-      gif: false
+      gif: false,
+      gifs:null,
       // used:false,
     };
   },
@@ -101,15 +102,19 @@ export default {
         switch (itemName) {
           case "Heal Potion":
             this.gifS = this.getGif("heal");
+            console.log("gifs heal",this.gifs)
             break;
           case "Resurection Potion":
             this.gifs = this.getGif("resu");
+            console.log("gifs",this.gifs)
             break;
           case "Strength Potion":
             this.gifs = this.getGif("force");
+            console.log("gifs",this.gifs)
             break;
           case "XP Potion":
             this.gifs = this.getGif("xp");
+            console.log("gifs",this.gifs)
             break;
           default:
         }
@@ -144,9 +149,6 @@ export default {
               tempList.push(
                 this.createItemProp(req[i].result, this.getImg("heal"))
               );
-              /*this.listInventory.push(
-                this.createItemProp(req[i].result, this.getImg("heal"))
-              );*/
               break;
             case "Resurection Potion":
               tempList.push(
@@ -180,7 +182,7 @@ export default {
     },
     getGif: function(gif) {
       var images = require.context("../assets/", false, /\.gif$/);
-      console.log(images);
+      console.log("images",images);
       return images("./" + gif + ".gif");
     },
     createItemProp: function(name, img) {
