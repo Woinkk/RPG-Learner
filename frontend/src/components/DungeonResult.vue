@@ -14,14 +14,20 @@
             <v-text>Question {{index+1}}</v-text>
           </h3>
           <v-text>{{item.question}}</v-text>
-          Bonne réponse: <v-text>{{item.question}}</v-text>Votre réponse: <v-text>{{item.question}}</v-text>
+          <br>
+          Bonne réponse: <v-text>{{getGood(item)}}</v-text>
+          <br>
+          Votre réponse: <v-text>{{answer[index].Reponse}}</v-text>
         </div>
+        <br>
+        <v-btn @click="goToAccueil">Retour a l'accueil</v-btn>
       </div>
     </v-container>
 </template>
 
 
 <script>
+import { sendResult } from "../../services/api.js";
 export default {
   name: "DungeonResult",
   components: {
@@ -33,9 +39,39 @@ export default {
     questions: [],
     answer: [],
     goodAnswer: 0,
+    good: null,
   }),
   methods: {
-
+    getTheRightAnswer: function (questions) {
+      for (let i = 0; i < questions.length; i++) {
+        const element = Object.keys(questions)[i];
+        console.log("WOOOOOOOO",element);
+        if (element.includes(this.questions.good)) {
+          console.log("CEST WOOOOOO",Object.values(questions)[element]);
+          return Object.values(questions)[element];
+        } else {
+          return null
+        }
+      }
+    },
+    getGood: function (item) {
+      if (item.good === 1) {
+        this.good = item.reponse1
+        return this.good
+      } else if (item.good === 2) {
+        this.good = item.reponse2
+        return this.good
+      } else if (item.good === 3) {
+        this.good = item.reponse3
+        return this.good
+      } else {
+        this.good = item.reponse4
+        return this.good
+      }
+    },
+    goToAccueil: function () {
+      this.$router.push({name: "AccueilEleve"})
+    }
   },
   created() {
     this.quizz = this.$route.params.quizz.quizz;
@@ -44,10 +80,13 @@ export default {
 
     for (let i = 0; i < this.answer.length; i++) {
       const answer = this.answer[i];
-      if (answer === this.questions[i].good) {
+      if (answer.Index === this.questions[i].good) {
         this.goodAnswer++;
       }
     }
+
+    sendResult({GoodAnswer: this.goodAnswer, IdQuizz: this.quizz[0].id})
+
   }
 };
 </script>
