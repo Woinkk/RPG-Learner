@@ -327,6 +327,12 @@ export default {
 .character-container{
   position: fixed;
   bottom: 45%;
-  zoom: 350%; 
+  -moz-transform: scale(3.5);
+  -o-transform: scale(3.5);
+  -webkit-transform: scale(3.5);
+  transform: scale(3.5); /* Standard Property */
+  transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    
 }
 </style>
