@@ -14,31 +14,22 @@ async function inventory(req, res) {
 
         let idStudent = req.session.userId;
         let items = [];
-       // let prop ={name:null,quantity:null}
+        // let prop ={name:null,quantity:null}
         const getInventory = await Inventory.getInventoryByIdStudent(idStudent)
         console.log("getInventory", getInventory)
         if (getInventory) {
             for (let i = 0; i < getInventory.rows.length; i++) {
-               /* const checkQuantity = await Inventory.checkQuantity(idStudent,getInventory.rows[i].iditem)
-                if (checkQuantity){
-                    for (let i = 0 ; i < checkQuantity.rows.length ; i++){
-                        prop.quantity=checkQuantity.rows[i].quantity
-                    }
-                    
-                }*/
                 const getItem = await Item.getItemById(getInventory.rows[i].iditem);
-                console.log("GET ITEM",getItem)
                 if (getItem) {
-                    for (let i = 0; i < getItem.rows.length; i++) {
-                        items.push(getItem.rows[i])
-                        
-                    }
-                    res.json(items)
-                   
+                    getInventory.rows[i].result = getItem.rows[0].name;
                 }
+
             }
+            console.log(getInventory.rows)
+            res.json(getInventory.rows)
             return
         }
+
         res.status(401)
             .send('Inventory not found');
     }

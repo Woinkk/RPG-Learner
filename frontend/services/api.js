@@ -16,6 +16,8 @@ function logout() {
 }
 
 function myClasses(content) {
+  console.log("le content qui marche pas")
+  console.log(content)
   return axios.post(`${SERVER_URL}/myClasses`, content)
     .then(response => response.data);
 }
@@ -64,6 +66,11 @@ function insertAccountNewStudent(newStudent) {
   return axios.put(`${SERVER_URL}/createNewStudent`, newStudent)
     .then(response => response.status)
 
+}
+
+function insertAccountNewTeacher(newTeacher) {
+  return axios.put(`${SERVER_URL}/createNewTeacher`, newTeacher)
+    .then(response => response.status)
 }
 
 function createSubject(subject) {
@@ -138,13 +145,18 @@ function classesStudents(content) {
     .then(response => response.data);
 }
 
+function schoolTeachers(content){
+   return axios.post(`${SERVER_URL}/schoolTeachers`, content)
+  .then(response => response.data);
+}
 function statsStudent(content) {
   return axios.post(`${SERVER_URL}/statsStudent`, content)
     .then(response => response.data);
 }
 
-function useItem() {
-  return axios.put(`${SERVER_URL}/useItem`)
+function useItem(itemName) {
+  console.log(itemName)
+  return axios.put(`${SERVER_URL}/useItem`,itemName)
     .then(response => response.data);
 }
 function inventory() {
@@ -167,6 +179,11 @@ function skinPerso(content) {
     .then(response => response.data)
 }
 
+function getAllMatiere(){
+  return axios.get(`${SERVER_URL}/getAllMatiere`)
+    .then(response => response.data)
+}
+
 function getAllQuizzByTeacherAndClasses() {
   return axios.get(`${SERVER_URL}/getAllQuizzByTeacherAndClasses`)
     .then(response => response.data)
@@ -182,10 +199,12 @@ export {
   classVClassLoader,
   editClassVClass,
   insertAccountNewStudent,
+  insertAccountNewTeacher,
   myClasses,
   otherClasses,
   createSubject,
   getMatiere,
+  getAllMatiere,
   getSubject,
   createClassVClass,
   skinPerso,
@@ -193,6 +212,7 @@ export {
   createQuizz,
   getQuizz,
   AllQuizz,
+  schoolTeachers,
   GetNmbQuestionsByQuizz,
   GetSubjectByQuizz,
   deleteClassVClass,
