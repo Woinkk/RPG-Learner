@@ -67,7 +67,7 @@
       <v-stepper-content step="3">
       <v-card color="grey lighten-1">
       <v-card-actions align="center">
-      <div>
+      <div v-if="this.race !== 'orc'">
         <v-btn @click="hairTypes('bangs')">Pagailles</v-btn>
         <v-btn @click="hairTypes('bangslong2')">Pagailles longs</v-btn>
         <v-btn @click="hairTypes('bedhead')">Au réveil</v-btn>
@@ -77,6 +77,17 @@
         <v-btn @click="hairTypes('ponytail')">Queu de cheval</v-btn>
         <v-btn @click="hairTypes('princess')">Princess</v-btn>
         <v-btn @click="hairTypes('shorthawk')">Crête courte</v-btn>
+        <v-btn @click="hairTypes('xlong')">Très long</v-btn>
+        <v-btn @click="hairTypes('xlongknot')">Très longue queu de cheval</v-btn>
+    </div>
+    <div v-else>
+      <v-btn @click="hairTypes('bangs')">Pagailles</v-btn>
+        <v-btn @click="hairTypes('bangslong2')">Pagailles longs</v-btn>
+        <v-btn @click="hairTypes('bedhead')">Au réveil</v-btn>
+        <v-btn @click="hairTypes('long')">Long</v-btn>
+        <v-btn @click="hairTypes('loose')">Détachés</v-btn>
+        <v-btn @click="hairTypes('ponytail')">Queu de cheval</v-btn>
+        <v-btn @click="hairTypes('princess')">Princess</v-btn>
         <v-btn @click="hairTypes('xlong')">Très long</v-btn>
         <v-btn @click="hairTypes('xlongknot')">Très longue queu de cheval</v-btn>
     </div>
@@ -154,14 +165,14 @@
     <br>
     <div v-if="this.genre === 'male'">
         <v-btn @click='shirtM("brown_longsleeve")'>T-shirt manche longue marron</v-btn>
-        <v-btn @click='shirtM("teal_longsleeve")'>T-shirt manche longue gris</v-btn>
+        <v-btn @click='shirtM("teal_longsleeve")'>T-shirt manche longue bleu</v-btn>
         <v-btn @click='shirtM("white_longsleeve")'>T-shirt manche longue blanc</v-btn>
     </div>
     <div v-else>
         <v-btn @click='shirtM("brown_pirate")'>T-shirt marron</v-btn>
         <v-btn @click='shirtM("brown_sleeveless")'>T-shirt marrion sans manche</v-btn>
-        <v-btn @click='shirtM("teal_pirate")'>T-shirt gris</v-btn>
-        <v-btn @click='shirtM("teal_sleeveless")'>T-shirt gris sans manche</v-btn>
+        <v-btn @click='shirtM("teal_pirate")'>T-shirt bleu</v-btn>
+        <v-btn @click='shirtM("teal_sleeveless")'>T-shirt bleu sans manche</v-btn>
         <v-btn @click='shirtM("white_pirate")'>T-shirt blanc</v-btn>
         <v-btn @click='shirtM("white_sleeveless")'>T-shirt blanc sans manche</v-btn>
     </div>
@@ -191,7 +202,6 @@
     <div>
         <v-btn @click='facialHairStyleM("beard")'>Barbe</v-btn>
         <v-btn @click='facialHairStyleM("mustache")'>Moustache</v-btn>
-        <v-btn @click='facialHairStyleM("bigstache")'>Grosse moustache</v-btn>
     </div>
     <br>
     <v-spacer>
