@@ -33,6 +33,8 @@ const postAddItem = require('../controllers/post.addItem.js');
 const getFullQuizzById = require('../controllers/get.FullQuizzById.js');
 const postSavingCharacter = require('../controllers/post.savingCharacter.js');
 const postSkinPerso = require('../controllers/post.skinPerso.js');
+const getAllQuizzByTeacherAndClasses = require("../controllers/get.AllQuizzByTeacherAndClasses");
+const putResultOfQuizz = require("../controllers/put.ResultOfQuizz");
 
 async function isAuthenticated(req, res, next) {
   if (req.session.userId) {
@@ -99,6 +101,8 @@ router.post('/inventory', postInventory);
 router.post('/addItem', postAddItem);
 router.get('/getFullQuizz/:id', getFullQuizzById);
 router.post('/savingCharacter', postSavingCharacter);
+router.get('/getAllQuizzByTeacherAndClasses', getAllQuizzByTeacherAndClasses);
+router.put('/sendResult', putResultOfQuizz);
 
 
 /* GET home page. */

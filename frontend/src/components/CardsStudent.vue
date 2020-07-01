@@ -2,6 +2,7 @@
 <v-container>
  <v-card
     dark
+    disabled
     class="mx-auto"
   >
     <v-img
@@ -43,11 +44,13 @@
 
     <v-card-actions>
         <!-- Action -->
+        <v-btn @click="goToDungeonSelection">Lancer un donjon !</v-btn>
     </v-card-actions>
     </v-card>
 
     <v-card
     dark
+    disabled
     class="mx-auto"
     >
     <v-img
@@ -84,7 +87,9 @@ export default {
     
     },
     methods: {
-        
+        goToDungeonSelection: async function () {
+          this.$emit("goToDungeonSelection")
+        }
   },
   created() {
 

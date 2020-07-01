@@ -57,6 +57,15 @@ class classes {
     });
     return result;
   }
+
+  static async getIdClassLevel (idClass) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT idclasslevel FROM ${classes.tableName} 
+      WHERE id = $1`,
+      values: [idClass]
+    });
+    return result.rows;
+  }
   
 }
 classes.tableName = 'classes';
