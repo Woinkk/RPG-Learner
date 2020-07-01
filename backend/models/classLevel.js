@@ -20,6 +20,16 @@ class classLevel {
     });
     return result;
   }
+
+  static async getLevelById (idClassLevel) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT level FROM ${classLevel.tableName}
+      WHERE id = $1`,
+      values: [idClassLevel]
+    });
+    return result.rows;
+  }
+
 }
 classLevel.tableName = 'classLevel';
 

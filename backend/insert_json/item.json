@@ -8,11 +8,12 @@
         "effect": "Resurrecte your character"
     },
     {
-        "name": "XP Potion",
-        "effect": "Gives you experience"
-    },
-    {
         "name": "Strength Potion",
         "effect": "Gives you more stength to make more damage"
+    },
+    {
+        "name": "XP Potion",
+        "effect": "Gives you experience"
     }
+    
 ]

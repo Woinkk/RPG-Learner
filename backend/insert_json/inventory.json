@@ -5,6 +5,21 @@
         "quantity":2
     },
     {
+        "idstudent":1,
+        "iditem":2,
+        "quantity":2
+    },
+    {
+        "idstudent":1,
+        "iditem":3,
+        "quantity":2
+    },
+    {
+        "idstudent":1,
+        "iditem":4,
+        "quantity":2
+    },
+    {
         "idstudent":2,
         "iditem":2,
         "quantity":1

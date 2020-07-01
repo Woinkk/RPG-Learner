@@ -19,13 +19,15 @@
           <span>Menu</span>
         </v-tooltip>
       </router-link>
-      <router-link to="/newStudent">
-        <v-btn color="primary">
+      <router-link class="d-flex pa-2" to="/newStudent">
+        <v-btn v-if="whoIsConnected ==='teacher' " color="primary">
           <v-icon>mdi-account-plus-outline</v-icon>
         </v-btn>
       </router-link>
-      <router-link to="/stats">
-      <v-btn color="primary"><v-icon>mdi-chart-line</v-icon></v-btn>
+      <router-link class="d-flex pa-2" to="/stats">
+        <v-btn v-if="whoIsConnected ==='teacher'" color="primary">
+          <v-icon>mdi-chart-line</v-icon>
+        </v-btn>
       </router-link>
     </v-app-bar>
 
@@ -46,6 +48,7 @@
         v-bind:text="textToast"
         v-bind:snackbar="snackbar"
         @insertAccountNewStudent="insertAccountNewStudent"
+        @insertAccountNewTeacher="insertAccountNewTeacher"
         @goToQuizzCreation="ShowQuizzCreation"
         v-bind:selected="selected"
         @createSubject="createSubject"
@@ -58,7 +61,10 @@
 <script>
 import Navbar from "./components/Navbar";
 import { login, createSubject, createQuizz, logout } from "../services/api.js";
-import { insertAccountNewStudent } from "../services/api.js";
+import {
+  insertAccountNewStudent,
+  insertAccountNewTeacher
+} from "../services/api.js";
 
 export default {
   methods: {
@@ -70,14 +76,19 @@ export default {
         this.connected = true;
         console.log(this.connected);
         setTimeout(() => {
-          if(req.data.user === "teacher"){
+          console.log(req.data.user);
+          if (req.data.user === "teacher") {
             this.$router.push({ name: "home" });
-          }else if(req.data.type !== null){
-            this.$router.push({name: "AccueilEleve"})
-          }else{
-            this.$router.push({name: "CharacterCreator"})
+            this.whoIsConnected = "teacher";
+          } else if (req.data.type !== null) {
+            this.$router.push({ name: "AccueilEleve" });
+            this.whoIsConnected = "student";
+          } else if (req.data.user === "school") {
+            this.$router.push({ name: "newTeacher" });
+          } else {
+            this.$router.push({ name: "CharacterCreator" });
+            //this.whoIsConnected = "student";
           }
-          
         }, 2000);
       } catch (error) {
         this.textToast = "La connexion a échoué";
@@ -103,6 +114,26 @@ export default {
         console.log("error");
         this.textToast = "Aucune classe n'a été selectioné ";
         this.$router.push("newStudent");
+      }
+      this.snackbar = true;
+      setTimeout(() => {
+        this.snackbar = false;
+      }, 2000);
+    },
+    insertAccountNewTeacher: async function(newTeacher) {
+      if (newTeacher.matiere !== null) {
+        try {
+          await insertAccountNewTeacher(newTeacher);
+          this.textToast = "L'ajout du compte est un succès";
+          this.$router.push("newTeacher");
+        } catch (error) {
+          this.textToast = "L'ajout du compte a échoué";
+          this.$router.push("newTeacher");
+        }
+      } else {
+        console.log("error");
+        this.textToast = "Aucune matiere n'a été selectioné ";
+        this.$router.push("newTeacher");
       }
       this.snackbar = true;
       setTimeout(() => {
@@ -160,6 +191,7 @@ export default {
     textToast: null,
     snackbar: false,
     connected: false,
+    whoIsConnected: "",
     drawer: null,
     items: [
       { title: "Home", path: "/home" },

@@ -148,6 +148,15 @@ class student {
     })
     return result;
   }
+
+  static async getIdClasses (idStudent) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT idclasses FROM ${student.tableName}
+      WHERE $1 = id`,
+      values: [idStudent]
+    });
+    return result.rows;
+  }
 }
 student.tableName = 'student';
 

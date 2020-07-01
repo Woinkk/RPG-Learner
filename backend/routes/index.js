@@ -4,6 +4,7 @@ var router = express.Router();
 const postLogin = require('../controllers/post.login.js');
 const putModifyPassword = require('../controllers/put.modifyPassword.js')
 const postInsertNewStudent = require('../controllers/post.insertNewStudent.js');
+const postInsertNewTeacher = require('../controllers/post.insertNewTeacher.js')
 const postMyClasses = require('../controllers/post.myClasses.js');
 const postOtherClasses = require('../controllers/post.otherClasses.js');
 const postClassVClass = require('../controllers/post.classVClass.js');
@@ -13,6 +14,7 @@ const postSubjectByQuizz = require('../controllers/post.subjectByQUizz.js');
 const putCreateSubject = require('../controllers/put.createSubject.js');
 const putCreateQuizz = require('../controllers/put.createQuizz.js');
 const getMatiere = require('../controllers/get.matiere.js');
+const getAllMatiere = require('../controllers/get.AllMatiere.js');
 const getSubject = require('../controllers/get.subject.js');
 const getQuizz = require('../controllers/get.quizz.js');
 const deleteQuizz = require('../controllers/delete.quizz.js');
@@ -25,6 +27,7 @@ const postEditClassVClass = require('../controllers/post.editClassVClass.js');
 const postClassVClassLoader = require('../controllers/post.classVClassLoader.js');
 const postGetQuizzById = require('../controllers/post.getQuizzById.js');
 const postClassesStudents = require('../controllers/post.classesStudents.js');
+const schoolTeachers = require('../controllers/post.schoolTeachers.js');
 const postMyClassVClassSpecific = require('../controllers/post.myClassVClassSpecific.js');
 const postStatsStudent = require('../controllers/post.statsStudent.js');
 const putUseItem = require('../controllers/put.useItem.js');
@@ -33,6 +36,8 @@ const postAddItem = require('../controllers/post.addItem.js');
 const getFullQuizzById = require('../controllers/get.FullQuizzById.js');
 const postSavingCharacter = require('../controllers/post.savingCharacter.js');
 const postSkinPerso = require('../controllers/post.skinPerso.js');
+const getAllQuizzByTeacherAndClasses = require("../controllers/get.AllQuizzByTeacherAndClasses");
+const putResultOfQuizz = require("../controllers/put.ResultOfQuizz");
 
 async function isAuthenticated(req, res, next) {
   if (req.session.userId) {
@@ -48,6 +53,8 @@ router.get('/who', function (req, res, next) {
     if (req.session.whoIsConnected === "teacher") {
       var connected = req.session.whoIsConnected;
     } else if (req.session.whoIsConnected === "student") {
+      var connected = req.session.whoIsConnected
+    }else if (req.session.whoIsConnected === "school") {
       var connected = req.session.whoIsConnected
     }
     var result = { status: 200, connected: connected }
@@ -71,6 +78,7 @@ router.post('/login', postLogin);
 router.post('/skinPerso', postSkinPerso);
 router.put('/account', putModifyPassword);
 router.put('/createNewStudent', postInsertNewStudent);
+router.put('/createNewTeacher', postInsertNewTeacher);
 router.post('/myClasses', postMyClasses);
 router.post('/otherClasses', postOtherClasses);
 router.post('/ClassVClass', postClassVClass);
@@ -84,11 +92,13 @@ router.post('/editClassVClass', postEditClassVClass);
 router.post('/classVClassLoader', postClassVClassLoader);
 router.post('/GetQuizzById', postGetQuizzById);
 router.put('/createQuizz', putCreateQuizz);
+router.post('/schoolTeachers', schoolTeachers);
 router.post('/myClassVClassSpecific', postMyClassVClassSpecific)
 router.post('/classesStudents', postClassesStudents);
 router.post('/statsStudent', postStatsStudent);
 router.put('/createSubject', putCreateSubject);
 router.get('/getMatiere', getMatiere);
+router.get('/getAllMatiere',getAllMatiere);
 router.get('/getSubject', getSubject);
 router.get('/getQuizz', getQuizz);
 router.get('/getQuizz/:id', getQuizzById);
@@ -99,6 +109,8 @@ router.post('/inventory', postInventory);
 router.post('/addItem', postAddItem);
 router.get('/getFullQuizz/:id', getFullQuizzById);
 router.post('/savingCharacter', postSavingCharacter);
+router.get('/getAllQuizzByTeacherAndClasses', getAllQuizzByTeacherAndClasses);
+router.put('/sendResult', putResultOfQuizz);
 
 
 /* GET home page. */

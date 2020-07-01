@@ -87,6 +87,16 @@ class quizz {
     });
     return result;
   }
+
+  static async getQuizzByClassLevelAndTeacher (teacherId, classlevel) {
+    const result = await PostgresStore.pool.query({
+      text: `SELECT * FROM ${quizz.tableName} 
+      WHERE idteacher = $1 AND classlevel = $2`,
+      values: [teacherId, classlevel]
+    });
+    return result.rows;
+  }
+
 }
 quizz.tableName = 'quizz';
 
