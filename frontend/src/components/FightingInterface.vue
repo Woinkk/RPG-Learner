@@ -127,7 +127,7 @@ export default {
               this.xPerso += 2;
           } else if(this.characterState === "walkL") {
               this.xPerso -= 2;
-          } else if(this.characterState === "attack") {
+          } else if(this.characterState === "attack" && (this.weapon !== "bow" && this.weapon !== "greatbow" && this.weapon !== "recurvebow")) {
               this.xPerso = 50;
           }
 
@@ -187,7 +187,7 @@ export default {
         }
     },
     goodAnswer: async function() {
-        if(this.weapon === "bow" || this.weapon === "greatbow" || this.weapon === "recurvebo") {
+        if(this.weapon === "bow" || this.weapon === "greatbow" || this.weapon === "recurvebow") {
             this.attack();
             this.characterState = "attack";
             setTimeout(() => {
