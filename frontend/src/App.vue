@@ -19,12 +19,12 @@
           <span>Menu</span>
         </v-tooltip>
       </router-link>
-      <router-link to="/newStudent">
+      <router-link class="d-flex pa-2" to="/newStudent">
         <v-btn v-if="whoIsConnected ==='teacher' " color="primary">
           <v-icon>mdi-account-plus-outline</v-icon>
         </v-btn>
       </router-link>
-      <router-link to="/stats">
+      <router-link class="d-flex pa-2" to="/stats">
         <v-btn v-if="whoIsConnected ==='teacher'" color="primary">
           <v-icon>mdi-chart-line</v-icon>
         </v-btn>
@@ -75,12 +75,12 @@ export default {
           if (req.data.user === "teacher") {
             this.$router.push({ name: "home" });
             this.whoIsConnected = "teacher";
-          } else if (req.data.type === null) {
+          } else if (req.data.type !== null) {
             this.$router.push({ name: "AccueilEleve" });
             this.whoIsConnected = "student";
           } else {
             this.$router.push({name: "CharacterCreator"})
-            this.whoIsConnected = "student";
+            //this.whoIsConnected = "student";
           }
         }, 2000);
       } catch (error) {

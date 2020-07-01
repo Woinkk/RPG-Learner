@@ -11,19 +11,24 @@
       </template>
       <span>Inventaire</span>
     </v-tooltip>
-
+    <v-dialog  v-for="(item,g) in gif" :key="g" v-model="gif" max-width="290">
+        <img :src="item" />
+    </v-dialog>
     <v-dialog v-model="inventory" max-width="290">
       <v-card>
         <v-card-title class="headline">Inventaire</v-card-title>
 
         <v-card-text>
-          <v-list v-for="(item,i) in listInventory" :key="i">
+          <v-list v-for="(item,i) in computeInventory" :key="i">
             <v-tooltip bottom>
               <template v-slot:activator="{on}">
                 <img v-on="on" :src="item.img" width="15%" height="15%" />
                 <v-tooltip bottom>
                   <template v-slot:activator="{on}">
-                    <v-icon v-on="on" @click="useItem(item.name)">mdi-alpha-u-circle-outline</v-icon>
+                    <v-icon
+                      v-on="on"
+                      @click="useItem(item.name);gif=true"
+                    >mdi-alpha-u-circle-outline</v-icon>
                   </template>
                   Utiliser
                 </v-tooltip>
@@ -35,7 +40,6 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-
           <v-btn color="green darken-1" text @click="inventory = false">Close</v-btn>
         </v-card-actions>
       </v-card>
@@ -50,16 +54,74 @@ export default {
   data() {
     return {
       inventory: false,
-      listInventory: [],
+      listInventory: null,
+      listRemove: [],
       icon: {},
-      itemProp: { name: null, img: null }
+      itemProp: { name: null, img: null },
+      gif: []
+      // used:false,
     };
+  },
+  computed: {
+    computeInventory: function() {
+      if (this.listInventory !== null) {
+        var list = [];
+        var verif = false;
+        if (this.listRemove.length === 0)
+          for (let i = 0; i < this.listInventory.length; i++)
+            list.push(this.listInventory[i]);
+        else {
+          for (let i = 0; i < this.listInventory.length; i++) {
+            for (let j = 0; j < this.listRemove.length; j++) {
+              if (this.listRemove[j] === this.listInventory[i].name)
+                verif = true;
+            }
+            if (!verif) list.push(this.listInventory[i]);
+            verif = false;
+          }
+        }
+        console.log("cleconole", list);
+        return list;
+      } else {
+        console.log("cleconoleelse");
+        return [];
+      }
+    }
+
+    /* if(this.listInventory !== []) {
+        return this.listInventory.filter(i => i.name !== this.listRemove);
+      } else {
+        return[];
+      }
+    }*/
   },
   methods: {
     useItem: async function(itemName) {
       try {
-        const req = await useItem();
-        console.log("req", req);
+        const req = await useItem({ itemName: itemName });
+        switch (itemName) {
+          case "Heal Potion":
+            this.gif.push(this.getGif("heal"));
+            break;
+          case "Resurection Potion":
+            this.gif.push(this.getGif("resu"));
+            break;
+          case "Strength Potion":
+            this.gif.push(this.getGif("force"));
+            break;
+          case "XP Potion":
+            this.gif.push(this.getGif("xp"));
+            break;
+          default:
+        }
+        if (req.command === "DELETE") {
+          for (let i = 0; i < this.listInventory.length; i++) {
+            if (this.listInventory[i].name === itemName) {
+              this.listRemove.push(itemName);
+            }
+          }
+          console.log("listRemove", this.listRemove);
+        }
       } catch (error) {
         console.log("error");
       }
@@ -68,47 +130,59 @@ export default {
     },
     showInventory: async function() {
       try {
+        let tempList = [];
         const req = await inventory();
         for (let i = 0; i < req.length; i++) {
           switch (req[i].result) {
             case "Heal Potion":
-              this.listInventory.push( this.createItemProp(req[i].result,this.getImg("heal")));
+              tempList.push(
+                this.createItemProp(req[i].result, this.getImg("heal"))
+              );
+              /*this.listInventory.push(
+                this.createItemProp(req[i].result, this.getImg("heal"))
+              );*/
               break;
             case "Resurection Potion":
-               this.listInventory.push( this.createItemProp(req[i].result,this.getImg("resu")));
+              tempList.push(
+                this.createItemProp(req[i].result, this.getImg("resu"))
+              );
               break;
-            case "Force Potion":
-              this.listInventory.push( this.createItemProp(req[i].result,this.getImg("force")));
+            case "Strength Potion":
+              tempList.push(
+                this.createItemProp(req[i].result, this.getImg("force"))
+              );
               break;
             case "XP Potion":
-              this.listInventory.push( this.createItemProp(req[i].result,this.getImg("xp")));
+              tempList.push(
+                this.createItemProp(req[i].result, this.getImg("xp"))
+              );
               break;
             default:
               console.log("default error");
           }
         }
+        this.listInventory = tempList;
         console.log("listInventory", this.listInventory);
       } catch (error) {
         console.log("error , try echec");
       }
-
-      //console.log("invent", req);
-      /* if (req !== null){
-        for (let i = 0; i < req.lenght;i++){
-          this.listInventory.push(req[i])
-        }
-      }else {
-        this.listInventory.push("Vous n'avez aucun item")
-      }*/
     },
     getImg: function(img) {
       var images = require.context("../assets/", false, /\.png$/);
       console.log(images);
       return images("./" + img + ".png");
     },
-    createItemProp: function (name,img){
-      let itemProp= {name :name,img:img}
-      return itemProp
+    getGif: function(gif) {
+      var images = require.context("../assets/", false, /\.gif$/);
+      console.log(images);
+      return images("./" + gif + ".gif");
+    },
+    createItemProp: function(name, img) {
+      let itemProp = { name: name, img: img };
+      return itemProp;
+    },
+    consoleLogLOL: function() {
+      console.log(this.listRemove);
     }
   },
   created() {

@@ -500,8 +500,7 @@ import {savingCharacter} from '../../services/api.js';
 </script>
 <style scoped>
 
-:root{
-}
+
 .character{
   position: absolute;
   top: 0;
@@ -542,6 +541,11 @@ import {savingCharacter} from '../../services/api.js';
 .character-container{
   position: relative;
   left: 45%;
-  zoom: 200%;
+  
+    -moz-transform: scale(2.5);
+  -o-transform: scale(2.5);
+  -webkit-transform: scale(2.5);
+  transform: scale(2.5); /* Standard Property */
+  transform-origin: 0 0;
 }
 </style>    

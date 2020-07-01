@@ -143,8 +143,9 @@ function statsStudent(content) {
     .then(response => response.data);
 }
 
-function useItem() {
-  return axios.put(`${SERVER_URL}/useItem`)
+function useItem(itemName) {
+  console.log(itemName)
+  return axios.put(`${SERVER_URL}/useItem`,itemName)
     .then(response => response.data);
 }
 function inventory() {

@@ -82,7 +82,16 @@ class inventory {
       WHERE idstudent = $2 and iditem = $3 `,
       values:[quantity,idStudent,idItem]
     })
+    return result;
 
+  }
+  static async deleteItem(idStudent,idItem){
+    const result =await PostgresStore.pool.query({
+      text:`DELETE FROM ${inventory.tableName}
+      WHERE idstudent = $1 and iditem = $2`,
+      values:[idStudent,idItem]
+    })
+    return result;
   }
 }
 inventory.tableName = 'inventory';
