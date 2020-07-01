@@ -90,14 +90,14 @@ export default {
   name: "AccueilEleve",
   components: {
     CardsStudent,
-    inventory
+    inventory,
       DungeonSelection,
   },
   data: () => ({
     image: "",
     currentCharacterSpriteX: 0,
-    currentCharacterSpriteY: 0
-      selected: null,
+    currentCharacterSpriteY: 0,
+    selected: null,
   }),
   computed: {
     characterStyle: function() {
