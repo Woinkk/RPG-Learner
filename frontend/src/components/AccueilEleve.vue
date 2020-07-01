@@ -187,9 +187,16 @@ export default {
     background-image: url(../assets/SpriteCharacter/male/weapon/bow.png);
 }
 .character-container{
-  position: relative;
-  left: -15%;
-  zoom: 350%;
+    position: relative;
+    left: -15%;
+    -moz-transform: scale(3);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(3);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(3);
+    -webkit-transform-origin: 0 0;
+    transform: scale(3); /* Standard Property */
+    transform-origin: 0 0;  /* Standard Property */
 }
 @keyframes rotation {
 		from {
@@ -201,7 +208,7 @@ export default {
 }
 .earth{
     position: absolute;
-    top: 12%;
+    top: 9%;
     animation: rotation 20s infinite linear;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-        <FightingInterface :Question="questions[index].question" 
+        <FightingInterface ref="FI" :Question="questions[index].question" 
         :Reponse1="questions[index].reponse1" 
         :Reponse2="questions[index].reponse2" 
         :Reponse3="questions[index].reponse3"
@@ -43,13 +43,20 @@ export default {
       console.log(this.answer);
     },
     nextQuetion: async function () {
+      if(this.questions[this.index].good === this.answer[this.index]) {
+        this.$refs.FI.goodAnswer();
+      } else {
+        this.$refs.FI.badAnswer();
+      }
       this.index++;
     },
     endOfQuizz: function () {
-      if (this.index > this.questions.length - 1) {
-        //C'est la fin du quizz faire une page de résultat
-        this.$router.push({name: "DungeonResult", params: {quizz: {quizz: this.quizz, question: this.questions, answer: this.answer}}});
-      }
+      setTimeout(() => {
+            if (this.index > this.questions.length - 1) {
+              //C'est la fin du quizz faire une page de résultat
+              this.$router.push({name: "DungeonResult", params: {quizz: {quizz: this.quizz, question: this.questions, answer: this.answer}}});
+            }
+        }, 9000);
     },
   },
   mounted: {
