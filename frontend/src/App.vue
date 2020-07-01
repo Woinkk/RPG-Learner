@@ -35,7 +35,7 @@
       <v-navigation-drawer right v-model="drawer" absolute temporary>
         <v-divider></v-divider>
         <v-list-item v-for="item in items" :key="item.title">
-          <v-btn  text @click="moveTo(item.path)">
+          <v-btn text @click="moveTo(item.path)">
             <v-list-item-content>
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
@@ -61,7 +61,10 @@
 <script>
 import Navbar from "./components/Navbar";
 import { login, createSubject, createQuizz, logout } from "../services/api.js";
-import { insertAccountNewStudent, insertAccountNewTeacher } from "../services/api.js";
+import {
+  insertAccountNewStudent,
+  insertAccountNewTeacher
+} from "../services/api.js";
 
 export default {
   methods: {
@@ -73,20 +76,18 @@ export default {
         this.connected = true;
         console.log(this.connected);
         setTimeout(() => {
-          console.log(req.data.user)
+          console.log(req.data.user);
           if (req.data.user === "teacher") {
             this.$router.push({ name: "home" });
             this.whoIsConnected = "teacher";
           } else if (req.data.type !== null) {
             this.$router.push({ name: "AccueilEleve" });
-            this.$router.push({name: "CharacterCreator"})
             this.whoIsConnected = "student";
-            }else if(req.data.user === "school"){
-            this.$router.push({ name:"newTeacher"})
-            } else {
-            this.$router.push({name: "CharacterCreator"})
+          } else if (req.data.user === "school") {
+            this.$router.push({ name: "newTeacher" });
+          } else {
+            this.$router.push({ name: "CharacterCreator" });
             //this.whoIsConnected = "student";
-          }
           }
         }, 2000);
       } catch (error) {

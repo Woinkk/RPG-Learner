@@ -11,8 +11,8 @@
       </template>
       <span>Inventaire</span>
     </v-tooltip>
-    <v-dialog  v-for="(item,g) in gif" :key="g" v-model="gif" max-width="290">
-        <img :src="item" />
+    <v-dialog v-model="gif" max-width="290">
+      <img :src="gifs" />
     </v-dialog>
     <v-dialog v-model="inventory" max-width="290">
       <v-card>
@@ -25,10 +25,7 @@
                 <img v-on="on" :src="item.img" width="15%" height="15%" />
                 <v-tooltip bottom>
                   <template v-slot:activator="{on}">
-                    <v-icon
-                      v-on="on"
-                      @click="useItem(item.name);gif=true"
-                    >mdi-alpha-u-circle-outline</v-icon>
+                    <v-icon v-on="on" @click="useItem(item.name)">mdi-alpha-u-circle-outline</v-icon>
                   </template>
                   Utiliser
                 </v-tooltip>
@@ -58,7 +55,8 @@ export default {
       listRemove: [],
       icon: {},
       itemProp: { name: null, img: null },
-      gif: []
+      gifList: null,
+      gif: false
       // used:false,
     };
   },
@@ -99,21 +97,29 @@ export default {
     useItem: async function(itemName) {
       try {
         const req = await useItem({ itemName: itemName });
+
         switch (itemName) {
           case "Heal Potion":
-            this.gif.push(this.getGif("heal"));
+            this.gifS = this.getGif("heal");
             break;
           case "Resurection Potion":
-            this.gif.push(this.getGif("resu"));
+            this.gifs = this.getGif("resu");
             break;
           case "Strength Potion":
-            this.gif.push(this.getGif("force"));
+            this.gifs = this.getGif("force");
             break;
           case "XP Potion":
-            this.gif.push(this.getGif("xp"));
+            this.gifs = this.getGif("xp");
             break;
           default:
         }
+        this.gif = true;
+        this.inventory = false;
+        setTimeout(() => {
+          this.gif = false;
+          this.inventory = true;
+        }, 2000);
+
         if (req.command === "DELETE") {
           for (let i = 0; i < this.listInventory.length; i++) {
             if (this.listInventory[i].name === itemName) {
