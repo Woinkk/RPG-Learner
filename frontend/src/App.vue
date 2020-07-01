@@ -168,6 +168,7 @@ export default {
     },
     Logout: async function() {
       await logout();
+      this.whoIsConnected = "";
       this.connected = false;
     }
   },
