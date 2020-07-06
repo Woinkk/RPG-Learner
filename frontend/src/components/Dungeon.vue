@@ -6,7 +6,7 @@
         :Reponse4="questions[index].reponse4"
         @getAnswer="getAnswer"
         >
-        
+
         </FightingInterface>
 </template>
 
@@ -33,7 +33,6 @@ export default {
       const fullQuizz = await GetFullQuizzById(idQuizz);
       this.quizz = fullQuizz.Quizz;
       this.questions = fullQuizz.Questions;
-
       console.log(fullQuizz);
     },
     getAnswer: async function (answer) {
@@ -56,7 +55,7 @@ export default {
               //C'est la fin du quizz faire une page de résultat
               this.$router.push({name: "DungeonResult", params: {quizz: {quizz: this.quizz, question: this.questions, answer: this.answer}}});
             }
-        }, 9000);
+        }, 7500);
     },
   },
   mounted: {
