@@ -66,7 +66,7 @@
           <tr>
             <th class="text-left">Nom</th>
             <th class="text-left">Prénom</th>
-            <th class="text-left">Classe</th>
+            <th class="text-left">matiere</th>
             <th class="text-left">Actions</th>
           </tr>
         </thead>
@@ -79,7 +79,7 @@
               {{item.firstname}}
             </td>
             <td>
-              {{item.class}}
+              {{item.idmatiere}}
             </td>
             <td>
               <v-tooltip bottom>
@@ -108,7 +108,7 @@
 
 <script>
 import { getAllMatiere } from "../../services/api.js";
-// import { schoolTeachers } from "../../services/api.js";
+import { schoolTeachers } from "../../services/api.js";
 
 export default {
   name: "NewTeacher",
@@ -136,7 +136,7 @@ export default {
   computed: {
     computeClass: function() {
       if(this.allTeacher !== null) {
-        if(this.search !== null && this.search !== "") return this.allTeacher.filter(i => i.class === this.search);
+        if(this.search !== null && this.search !== "") return this.allTeacher.filter(i => i.idmatiere === this.search);
         else return this.allTeacher;
       } else {
         return[];
@@ -157,7 +157,17 @@ export default {
     MyMatiere: async function() {
       console.log("lemyclasses");
       const req = await getAllMatiere();
-      // this.allTeacher = await schoolTeachers();
+      console.log("c lo")
+      console.log(req)
+      this.allTeacher = await schoolTeachers();
+      console.log(this.allTeacher)
+      for(let i = 0;i<this.allTeacher.length;i++){
+        for(let y =0;y<req.length;y++){
+          if(req[y].id === this.allTeacher[i].idmatiere){
+            this.allTeacher[i].idmatiere = req[y].name;
+          }
+        }
+      }
       if (req !== null) {
         this.myMatieres = req;
       }
