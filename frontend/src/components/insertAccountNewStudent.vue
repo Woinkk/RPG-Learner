@@ -147,6 +147,7 @@ export default {
     insertAccountNewStudent(newStudent) {
 
         this.$emit("insertAccountNewStudent", newStudent);
+        this.allStudent.push(newStudent);
       
     },
     selectMyClasses: function(myClass) {
