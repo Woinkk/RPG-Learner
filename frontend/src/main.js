@@ -161,17 +161,17 @@ const routes = [
     }
   },
   {
-    path: '/LootChest', component: LootChest,
+    name: "LootChest", path: '/LootChest/:quizz', component: LootChest,
     beforeEnter: async (to, from, next) => {
-      try {
+      //try {
         const req = await isConnected();
         if (req.status === 200 && req.connected === "student") {
           next();
           return
         }
-      } catch (error) {
+      /*} catch (error) {
         router.push("login")
-      }
+      }*/
     }
   },
   {

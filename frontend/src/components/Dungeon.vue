@@ -53,7 +53,7 @@ export default {
       setTimeout(() => {
             if (this.index > this.questions.length - 1) {
               //C'est la fin du quizz faire une page de résultat
-              this.$router.push({name: "DungeonResult", params: {quizz: {quizz: this.quizz, question: this.questions, answer: this.answer}}});
+              this.$router.push({name: "DungeonResult", params: {quizz: {quizz: this.quizz, question: this.questions, answer: this.answer, loot: true}}});
             }
         }, 7500);
     },

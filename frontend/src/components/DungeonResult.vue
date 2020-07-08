@@ -85,8 +85,13 @@ export default {
       }
     }
 
-    sendResult({GoodAnswer: this.goodAnswer, IdQuizz: this.quizz[0].id})
-
+    if (this.goodAnswer === this.answer.length && this.$route.params.quizz.loot === true) {
+      console.log("HOHO");
+      this.$router.push({name: "LootChest", params: this.$route.params.quizz});
+    } else {
+      sendResult({GoodAnswer: this.goodAnswer, IdQuizz: this.quizz[0].id});
+    }
+    
   }
 };
 </script>

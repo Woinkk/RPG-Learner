@@ -41,7 +41,7 @@
                                     @click="playDungeon(item.id)"
                                     v-on="on"
                                 >
-                                    mdi-pencil
+                                    mdi-play
                                 </v-icon>
                                 </template>
                                 <span>Lancer ce donjon</span>
