@@ -28,6 +28,7 @@ Vue.use(VueAxios, axios);
 axios.defaults.withCredentials = true;
 Vue.use(VueRouter);
 Vue.config.productionTip = false;
+Vue.prototype.$bus = new Vue(); // Global event bus
 
 Vue.component('apexchart', VueApexCharts);
 

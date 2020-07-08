@@ -6,7 +6,7 @@
         :Reponse4="questions[index].reponse4"
         @getAnswer="getAnswer"
         >
-        
+
         </FightingInterface>
 </template>
 
@@ -33,20 +33,19 @@ export default {
       const fullQuizz = await GetFullQuizzById(idQuizz);
       this.quizz = fullQuizz.Quizz;
       this.questions = fullQuizz.Questions;
-
       console.log(fullQuizz);
     },
     getAnswer: async function (answer) {
       this.answer = [...this.answer, answer];
-      this.nextQuetion();
+      this.nextQuetion(answer.Index);
       this.endOfQuizz();
       console.log(this.answer);
     },
-    nextQuetion: async function () {
-      if(this.questions[this.index].good === this.answer[this.index]) {
-        this.$refs.FI.goodAnswer();
+    nextQuetion: async function (answer) {
+      if(this.questions[this.index].good === answer) {
+        this.$refs.FI.goodAnswer(100/this.questions.length);
       } else {
-        this.$refs.FI.badAnswer();
+        this.$refs.FI.badAnswer((100/this.questions.length) + Math.floor(Math.random() * 5));
       }
       this.index++;
     },
@@ -56,13 +55,14 @@ export default {
               //C'est la fin du quizz faire une page de résultat
               this.$router.push({name: "DungeonResult", params: {quizz: {quizz: this.quizz, question: this.questions, answer: this.answer, loot: true}}});
             }
-        }, 9000);
+        }, 7500);
     },
   },
   mounted: {
       
   },
   created() {
+    //this.$refs.FI.SkinsDungeon();
     this.getQuizz(this.$route.params.id);
   }
 };

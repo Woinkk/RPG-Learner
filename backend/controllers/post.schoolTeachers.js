@@ -7,11 +7,7 @@ const Teacher = require('../models/teacher.js');
  */
 
 async function schoolTeachers (req, res) {
-    console.log("c ici")
-    console.log(req.body.name)
-    const school = await School.getIdSchoolByemail(req.body.email);
-    console.log(school)
-    const response = await Teacher.getTeacherBySchool(school.rows[0].id);
+    const response = await Teacher.getTeacherBySchool(req.session.userId);
     if(response.rows.length > 0) res.json(response.rows);
     else res.json(null);
 }
