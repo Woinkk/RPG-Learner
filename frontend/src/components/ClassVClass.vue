@@ -4,7 +4,7 @@
     <v-stepper-content step="1">
       <v-card color="grey lighten-1">
       <v-card-actions align="center">
-        <v-date-picker v-model="savings.pickerDate" landscape=true locale="fr"></v-date-picker>
+        <v-date-picker v-model="savings.pickerDate" :min="todayDate" landscape=true locale="fr"></v-date-picker>
         <v-time-picker v-model="savings.pickerTime" format=24hr landscape=true></v-time-picker>
       </v-card-actions>
       </v-card>
@@ -184,6 +184,7 @@ export default {
               if(this.savings.quizzList[j].id === this.myQuizzes[i].id) verif = true;
             }
             if(!verif) list.push(this.myQuizzes[i]);
+            verif = false;
           }
         }
         return list;
@@ -202,6 +203,7 @@ export default {
               if(this.savings.quizzList[j].id === this.otherQuizzes[i].id) verif = true;
             }
             if(!verif) list.push(this.otherQuizzes[i]);
+            verif = false;
           }
         }
         return list;
@@ -323,6 +325,7 @@ export default {
     this.loader();
     this.allQuizz();
     this.MyClassVClass();
+    this.todayDate = new Date().toISOString();
   },
   
   name: 'App',
@@ -341,6 +344,7 @@ export default {
         classe1: null,
         classe2: null,
         e6: 1,
+        todayDate: null,
       }
     },
 };
