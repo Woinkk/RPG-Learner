@@ -44,6 +44,38 @@ export default {
     computed: {
     
     },
+    watch: {
+        potion1: function () {
+            if (this.gif === false && 
+                this.gif2 === false &&
+                this.potion1 === null &&
+                this.potion2 === null &&
+                this.potion3 === null) {
+                    this.$route.params.loot = false;
+                    this.$router.push({name : "DungeonResult", params: {quizz: this.$route.params}});
+            }
+        },
+        potion2: function () {
+            if (this.gif === false && 
+                this.gif2 === false &&
+                this.potion1 === null &&
+                this.potion2 === null &&
+                this.potion3 === null) {
+                    this.$route.params.loot = false;
+                    this.$router.push({name : "DungeonResult", params: {quizz: this.$route.params}});
+            }
+        },
+        potion3: function () {
+            if (this.gif === false && 
+                this.gif2 === false &&
+                this.potion1 === null &&
+                this.potion2 === null &&
+                this.potion3 === null) {
+                    this.$route.params.loot = false;
+                    this.$router.push({name : `DungeonResult`, params: {quizz: this.$route.params}});
+            }
+        },
+    },
     methods: {
         addPotion: async function(potion) {
             if(potion === "heal1") {
@@ -124,6 +156,7 @@ export default {
         
     },
     created() {
+        console.log("YEAAAAAH YEAH");
         setTimeout(() => {
           this.gif = false;
           this.gif2 = true;
