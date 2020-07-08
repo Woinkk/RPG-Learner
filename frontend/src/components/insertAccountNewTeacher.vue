@@ -148,6 +148,7 @@ export default {
     insertAccountNewTeacher(newTeacher) {
 
         this.$emit("insertAccountNewTeacher", newTeacher);
+        this.allTeacher.push(newTeacher);
       
     },
     selectMyTeacher: function(myMatiere) {
