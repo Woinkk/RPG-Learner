@@ -37,6 +37,7 @@
                     </div>
                 </v-card-text>
                 <v-img style="z-index:0;" :src="this.background[this.index]"></v-img>
+                <v-progress-linear :buffer-value="buffer" v-model="persoHealth" color="green" class="character-container" style="width:2%" :style="{'left': (xPerso + 5) +'%'}"></v-progress-linear>
                 <div class="character-container justify-center" :style="{'left': xPerso+'%'}">
                     <div :style="characterStyle" class="character character-body" id="character-body"></div>
                     <div :style="characterStyle" class="character character-ears" id="character-ears"></div>
@@ -49,6 +50,7 @@
                     <div :style="characterStyle" class="character character-hair" id="character-hair"></div>
                     <div :style="characterStyle" class="character character-weapon" id="character-weapon"></div>
                 </div>
+                <v-progress-linear :buffer-value="buffer" v-model="persoHealthE" color="red" class="character-containerE" style="width:2%" :style="{'left': (xPersoE + 5) +'%'}"></v-progress-linear>
                 <div class="character-containerE justify-center" :style="{'left': xPersoE+'%'}">
                     <div :style="characterStyleE" class="characterE character-bodyE" id="character-bodyE"></div>
                     <div :style="characterStyleE" class="characterE character-earsE" id="character-earsE"></div>
@@ -100,13 +102,16 @@ export default {
     weapon: null,
     animation: "walk",
     xPerso:20,
+    persoHealth: 100,
     imageE: "",
     currentCharacterSpriteXE:0,
     currentCharacterSpriteYE:0,
     characterStateE: "stand",
     weaponE: null,
     animationE: "walk",
-    xPersoE:70,
+    xPersoE:65,
+    persoHealthE: 100,
+    buffer: 100,
   }),
   computed: {
       characterStyle: function(){
@@ -141,28 +146,28 @@ export default {
           this.mooveE();
           if(this.characterStateE === "stand") {
             return {
-            backgroundPositionXE:(-64*0)+"px",
-            backgroundPositionYE:(-64*11)+"px",            
+            backgroundPositionX:(-64*0)+"px",
+            backgroundPositionY:(-64*9)+"px",            
             };
           } else if(this.characterStateE === "walkR") {
             return {
-            backgroundPositionXE:(-64*this.currentCharacterSpriteX)+"px",
-            backgroundPositionYE:(-64*11)+"px",            
+            backgroundPositionX:(-64*this.currentCharacterSpriteXE)+"px",
+            backgroundPositionY:(-64*11)+"px",            
             };
           } else if(this.characterStateE === "walkL") {
             return {
-            backgroundPositionXE:(-64*this.currentCharacterSpriteXE)+"px",
-            backgroundPositionYE:(-64*9)+"px",            
+            backgroundPositionX:(-64*this.currentCharacterSpriteXE)+"px",
+            backgroundPositionY:(-64*9)+"px",            
             };
           } else if(this.characterStateE === "attack") {
             return {
-            backgroundPositionXE:(-64*this.currentCharacterSpriteXE)+"px",
-            backgroundPositionYE:(-64*this.currentCharacterSpriteYE)+"px",            
+            backgroundPositionX:(-64*this.currentCharacterSpriteXE)+"px",
+            backgroundPositionY:(-64*this.currentCharacterSpriteYE)+"px",            
             };
           }
           return {
-          backgroundPositionXE:(-64*0)+"px",
-          backgroundPositionYE:(-64*11)+"px",            
+          backgroundPositionX:(-64*0)+"px",
+          backgroundPositionY:(-64*9)+"px",            
           };
         }
   },
@@ -175,12 +180,12 @@ export default {
           } else if(this.characterState === "walkL") {
               this.xPerso -= 2;
           } else if(this.characterState === "attack" && (this.weapon !== "bow" && this.weapon !== "greatbow" && this.weapon !== "recurvebow")) {
-              this.xPerso = 60;
+              this.xPerso = 55;
           }
     },
     mooveE: async function() {
         if(this.characterStateE === "stand") {
-            this.xPersoE = 70;
+            this.xPersoE = 64;
           } else if(this.characterStateE === "walkR") {
               this.xPersoE += 2;
           } else if(this.characterStateE === "walkL") {
@@ -258,12 +263,12 @@ export default {
           case "woodwand":
               this.animationE = "slash"
             this.currentCharacterSpriteXE = 0;
-            this.currentCharacterSpriteYE = 13;
+            this.currentCharacterSpriteYE = 12;
           break;
           case "steelwand":
             this.animationE = "slash"
             this.currentCharacterSpriteXE = 0;
-            this.currentCharacterSpriteYE = 13;
+            this.currentCharacterSpriteYE = 12;
           break;
           case "bow":
               this.animationE = "shoot"
@@ -288,50 +293,48 @@ export default {
           default:
         }
     },
-    goodAnswer: async function() {
+    goodAnswer: async function(damage) {
         if(this.weapon === "bow" || this.weapon === "greatbow" || this.weapon === "recurvebow") {
             this.attack();
             this.characterState = "attack";
             setTimeout(() => {
+                this.persoHealthE -= damage;
                 this.characterState = "stand";
             }, 2000);
         } else {
             this.characterState = "walkR";
             setTimeout(() => {
-                this.xPerso = 60;
                 this.attack();
-                //this.currentCharacterSpriteY = 19;
                 this.characterState = "attack";
             }, 3000);
             setTimeout(() => {
+                this.persoHealthE -= damage;
                 this.characterState = "walkL";
             }, 4000);
             setTimeout(() => {
-                this.xPerso = 20;
                 this.characterState = "stand";
             }, 7000);
         }
     },
-    badAnswer: async function() {
+    badAnswer: async function(damage) {
         if(this.weaponE === "bow" || this.weaponE === "greatbow" || this.weaponE === "recurvebow") {
             this.attackE();
             this.characterStateE = "attack";
             setTimeout(() => {
+                this.persoHealth -= damage;
                 this.characterStateE = "stand";
             }, 2000);
         } else {
             this.characterStateE = "walkL";
             setTimeout(() => {
-                this.xPersoE = 30;
                 this.attackE();
-                //this.currentCharacterSpriteY = 19;
                 this.characterStateE = "attack";
             }, 3000);
             setTimeout(() => {
+                this.persoHealth -= damage;
                 this.characterStateE = "walkR";
             }, 4000);
             setTimeout(() => {
-                this.xPersoE = 70;
                 this.characterStateE = "stand";
             }, 7000);
         }
@@ -366,16 +369,15 @@ export default {
     Dungeon: async function () {
       console.log("DUNGEON");
         const perso = {
-            "genre":"male", "hairColor":"blonde", "hairStyle":"bedhead", "race":"red_orc", "ears":"bigears_light",
-            "eyes":"red", "nose":"bignose_light", "pants":"magenta_pants", "shirt":"brown_longsleeve", "facialHairColor":"red",
-            "facialHairStyle":"beard", "shoes":"black_shoes", "weapon":"steelwand"
+            "genre":"male", "hairColor":"redhead", "hairStyle":"bedhead", "race":"red_orc", "ears":"bigears_light",
+            "eyes":"red", "nose":"bignose_light", "pants":"magenta_pants", "shirt":"brown_longsleeve", "facialHairColor":"redhead",
+            "facialHairStyle":"beard", "shoes":"black_shoes", "weapon":"dagger"
           };
           this.imageE = require.context('../assets/',true, /\.png$/);
-          document.getElementById("character-hairE").style.backgroundImage= "url("+this.imageE("./SpriteCharacter/hair/bedhead/"+perso.hairColor+".png")+")";
+          document.getElementById("character-hairE").style.backgroundImage= "url("+this.imageE("./SpriteCharacter/hair/"+perso.hairStyle+"/"+perso.hairColor+".png")+")";
           document.getElementById("character-earsE").style.backgroundImage= "url("+this.imageE("./SpriteCharacter/ears/"+perso.ears+".png")+")";
           document.getElementById("character-eyesE").style.backgroundImage= "url("+this.imageE("./SpriteCharacter/eyes/"+perso.eyes+".png")+")";
           document.getElementById("character-noseE").style.backgroundImage= "url("+this.imageE("./SpriteCharacter/nose/"+perso.nose+".png")+")";
-          document.getElementById("character-facialHairE").style.backgroundImage = "url("+this.imageE("./SpriteCharacter/facialHair/" + perso.facialHairStyle +"/"+ perso.facialHairColor+ ".png")+")";
           document.getElementById("character-facialHairE").style.backgroundImage = "url("+this.imageE("./SpriteCharacter/facialHair/" + perso.facialHairStyle +"/"+ perso.facialHairColor+ ".png")+")";
           if(perso.genre === "male") {
             document.getElementById("character-pantsE").style.backgroundImage = "url("+this.imageE("./SpriteCharacter/male/pants/" + perso.pants + ".png")+")";
@@ -395,7 +397,7 @@ export default {
           this.weaponE = perso.weapon;
           return true;
     },
-    createSkins: async function() {
+    SkinsDungeon: async function() {
       const req = await this.skinPerso();
       if(req) await this.Dungeon();
     },
@@ -404,7 +406,7 @@ export default {
       document.documentElement.style.overflow = "hidden";
       this.index =  Math.floor(Math.random() * this.background.length);
       console.log("INDEX IMAGE",this.index);
-      this.createSkins();
+      this.SkinsDungeon();
       this.animationE = "walk";
       this.animation = "walk";
       setInterval(()=>{

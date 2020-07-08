@@ -43,9 +43,9 @@ export default {
     },
     nextQuetion: async function (answer) {
       if(this.questions[this.index].good === answer) {
-        this.$refs.FI.goodAnswer();
+        this.$refs.FI.goodAnswer(100/this.questions.length);
       } else {
-        this.$refs.FI.badAnswer();
+        this.$refs.FI.badAnswer((100/this.questions.length) + Math.floor(Math.random() * 5));
       }
       this.index++;
     },
@@ -62,6 +62,7 @@ export default {
       
   },
   created() {
+    //this.$refs.FI.SkinsDungeon();
     this.getQuizz(this.$route.params.id);
   }
 };
